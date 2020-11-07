@@ -15,7 +15,7 @@ namespace Database_SEP3.Networking
 
         public SocketServer()
         {
-            _componentsDao = ComponentsDAOImpl.GetInstance();
+            //_componentsDao = ComponentsDAOImpl.GetInstance();
             connectedClients = new List<TcpClient>();
         }
 

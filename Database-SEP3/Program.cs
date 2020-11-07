@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Database_SEP3.Persistence.Model;
+using Database_SEP3.Persistence.Repositories;
 
 namespace Database_SEP3
 {
@@ -6,7 +9,9 @@ namespace Database_SEP3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ComponentRepo c1 = new ComponentRepo();
+            //c1.createComponent();
+            c1.readComponent();
         }
     }
 }
