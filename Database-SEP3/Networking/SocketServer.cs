@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using Database_SEP3.DAO.ComponentsDAO;
+using Database_SEP3.Networking.Util;
 
 namespace Database_SEP3.Networking
 {
@@ -60,12 +62,12 @@ namespace Database_SEP3.Networking
             {
                 NetworkStream stream = tcpClient.GetStream();
                 //read
+                
                 byte[] data = new byte[1024];
                 int bytesRead = stream.Read(data, 0, data.Length);
                 string s = Encoding.ASCII.GetString(data, 0, bytesRead);
+                ComponentList componentList = JsonSerializer.Deserialize<ComponentList>(s);
                 Console.WriteLine(s);
-                if(s.Equals("Exit"))
-                    break;
 
                 //respond
                 for (int i = 0; i < connectedClients.Count; i++)
