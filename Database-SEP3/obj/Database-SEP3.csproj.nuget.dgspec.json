@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\eatcl\\RiderProjects\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj": {}
+    "C:\\University\\DNP\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\eatcl\\RiderProjects\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj": {
+    "C:\\University\\DNP\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\eatcl\\RiderProjects\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj",
+        "projectUniqueName": "C:\\University\\DNP\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj",
         "projectName": "Database-SEP3",
-        "projectPath": "C:\\Users\\eatcl\\RiderProjects\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj",
-        "packagesPath": "C:\\Users\\eatcl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\eatcl\\RiderProjects\\Database-SEP3\\Database-SEP3\\obj\\",
+        "projectPath": "C:\\University\\DNP\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj",
+        "packagesPath": "C:\\Users\\Windows 10\\.nuget\\packages\\",
+        "outputPath": "C:\\University\\DNP\\Database-SEP3\\Database-SEP3\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\eatcl\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Windows 10\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -50,7 +50,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Windows 10\\.dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
