@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Repositories;
@@ -11,7 +13,11 @@ namespace Database_SEP3
         {
             ComponentRepo c1 = new ComponentRepo();
             //c1.createComponent();
-            c1.readComponent();
+            List<Component> list = c1.readComponent().Result.ToList();
+            foreach (var component in list)
+            {
+               Console.WriteLine(component.ToString());
+            }
         }
     }
 }

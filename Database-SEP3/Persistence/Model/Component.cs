@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Database_SEP3.Persistence.Model
@@ -18,5 +19,12 @@ namespace Database_SEP3.Persistence.Model
         public String Brand { get; set; }
         public String AdditionalInfo { get; set; }
 
+        public override string ToString()
+        {
+            return JsonSerializer.Serialize(this, new JsonSerializerOptions
+            {
+                WriteIndented = true
+            });
+        }
     }
 }
