@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
+using Database_SEP3.Networking.Util;
 using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model;
 using Microsoft.EntityFrameworkCore;
@@ -9,10 +11,11 @@ namespace Database_SEP3.Persistence.Repositories
 public class ComponentRepo : IComponentRepo
 {
     private Sep3DBContext _context;
+    private ComponentList componentList;
         
     public async Task createComponent()
     {
-        Component c1 = new Component
+        ComponentModel c1 = new ComponentModel
         {
             Id = 2,
             Type = "CPU",
@@ -28,7 +31,7 @@ public class ComponentRepo : IComponentRepo
         }
     }
 
-    public Task<List<Component>> readComponent()
+    public Task<List<ComponentModel>> readComponents()
     {
         using (_context = new Sep3DBContext())
         {

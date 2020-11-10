@@ -15,4 +15,8 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0-rc.2.20475.6" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="DAO\ComponentsDAO" />
+    </ItemGroup>
+
 </Project>
