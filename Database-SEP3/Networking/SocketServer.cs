@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
+using System.Threading.Tasks;
 using Database_SEP3.Networking.Util;
 using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Repositories;
@@ -19,15 +20,12 @@ namespace Database_SEP3.Networking
     {
         private IComponentRepo _componentRepo;
         private static List<TcpClient> connectedClients;
-
         private ComponentList componentList;
-        private List<ComponentModel> _arrayComponent;
 
         public SocketServer()
         {
             connectedClients = new List<TcpClient>();
             _componentRepo = new ComponentRepo();
-            _arrayComponent = new List<ComponentModel>();
             componentList = new ComponentList();
         }
 
@@ -50,64 +48,41 @@ namespace Database_SEP3.Networking
         }
         
 
-        public async void Handler(TcpClient tcpClient)
+        public void Handler(TcpClient tcpClient)
         {
             NetworkStream stream = tcpClient.GetStream();
 
             while (true)
             {
-                byte[] data = new byte[1024];
-                int bytesToRead = stream.Read(data, 0, data.Length);
-                string req = Encoding.ASCII.GetString(data, 0, bytesToRead);
-                Console.WriteLine(req);
-                switch (req)
+                try
                 {
-                    case "\"COMPONENTS\"":
-                        _arrayComponent = await _componentRepo.readComponents();
-                        
-                        
-                        foreach (var VARIABLE in _arrayComponent)
-                        {
-                            Console.WriteLine(VARIABLE);
-                            componentList.
-                                AddComponent(VARIABLE);
-                        }
-                        // componentList = await _componentRepo.readComponents();
-                        // Componentaaaaaaaaaa componentaaaaaaaaaa = new Componentaaaaaaaaaa
-                        // {
-                        //     Id = 99,
-                        //     Name = "zz",
-                        //     Brand = "zz",
-                        //     AdditionalInfo = "zzz",
-                        //     Type = "aaaa",
-                        //     ReleaseYear = "ashjgd"
-                        // };
-                        //
-                        // Componentaaaaaaaaaa componentaaaaaaaaaa1 = new Componentaaaaaaaaaa
-                        // {
-                        //     Id = 66,
-                        //     Name = "zz",
-                        //     Brand = "zz",
-                        //     AdditionalInfo = "zzz",
-                        //     Type = "aaaa",
-                        //     ReleaseYear = "ashjgd"
-                        // };
-                        //
-                        //
-                        // componentList = new ComponentList();
-                        // componentList.AddComponent(componentaaaaaaaaaa);
-                        // componentList.AddComponent(componentaaaaaaaaaa1);
-                        //     
-
-                        string reply = JsonSerializer.Serialize(componentList);
-                        Console.WriteLine(reply);
-                        byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
-                        stream.Write(bytesWrite, 0, bytesWrite.Length);
-                        break;
+                    byte[] data = new byte[64 * 1024];
+                    int bytesToRead = stream.Read(data, 0, data.Length);
+                    string req = Encoding.ASCII.GetString(data, 0, bytesToRead);
+                    Console.WriteLine(req);
+                    switch (req)
+                    {
+                        case "\"COMPONENTS\"":
+                            ReadComponentFromDatabase(stream);
+                            break;
+                    }
                 }
-                
-                
+                catch (IOException e)
+                {
+                    connectedClients.Remove(tcpClient);
+                }
             }
+        }
+
+
+        private async void ReadComponentFromDatabase(NetworkStream stream)
+        {
+            componentList = await _componentRepo.readComponents();
+
+            string reply = JsonSerializer.Serialize(componentList);
+            Console.WriteLine(reply);
+            byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
+            stream.Write(bytesWrite, 0, bytesWrite.Length);
         }
     }
 }

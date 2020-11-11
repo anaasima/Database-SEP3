@@ -12,10 +12,15 @@ public class ComponentRepo : IComponentRepo
 {
     private Sep3DBContext _context;
     private ComponentList componentList;
-        
+
+
+    public ComponentRepo()
+    {
+        componentList = new ComponentList();
+    }
     public async Task createComponent()
     {
-        ComponentModel c1 = new ComponentModel
+        ComponentModel c1 = new ComponentModel  //TODO: this will later woosh
         {
             Id = 2,
             Type = "CPU",
@@ -31,11 +36,17 @@ public class ComponentRepo : IComponentRepo
         }
     }
 
-    public Task<List<ComponentModel>> readComponents()
+    public async Task<ComponentList> readComponents()
     {
+        componentList = new ComponentList();
         using (_context = new Sep3DBContext())
         {
-            return _context.Components.ToListAsync();
+            foreach (var VARIABLE in _context.Components)
+            {
+                componentList.AddComponent(VARIABLE);
+            }
+
+            return componentList;
         }
     }
 
