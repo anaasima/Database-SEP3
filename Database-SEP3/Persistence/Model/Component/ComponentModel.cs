@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -25,6 +27,7 @@ namespace Database_SEP3.Persistence.Model
         public String Brand { get; set; }
         [JsonPropertyName("additionalInformation")]
         public String AdditionalInfo { get; set; }
+        public IList<BuildComponent> BuildComponents { get; set; }
 
         public override string ToString()
         {

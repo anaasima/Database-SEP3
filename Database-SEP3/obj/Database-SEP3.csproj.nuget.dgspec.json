@@ -1,25 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\University\\DNP\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj": {}
+    "C:\\Users\\ajurj\\RiderProjects\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj": {}
   },
   "projects": {
-    "C:\\University\\DNP\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj": {
+    "C:\\Users\\ajurj\\RiderProjects\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\University\\DNP\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj",
+        "projectUniqueName": "C:\\Users\\ajurj\\RiderProjects\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj",
         "projectName": "Database-SEP3",
-        "projectPath": "C:\\University\\DNP\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj",
-        "packagesPath": "C:\\Users\\Windows 10\\.nuget\\packages\\",
-        "outputPath": "C:\\University\\DNP\\Database-SEP3\\Database-SEP3\\obj\\",
+        "projectPath": "C:\\Users\\ajurj\\RiderProjects\\Database-SEP3\\Database-SEP3\\Database-SEP3.csproj",
+        "packagesPath": "C:\\Users\\ajurj\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ajurj\\RiderProjects\\Database-SEP3\\Database-SEP3\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Windows 10\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ajurj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -66,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\Windows 10\\.dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
