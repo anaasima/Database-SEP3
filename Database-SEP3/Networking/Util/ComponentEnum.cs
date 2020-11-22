@@ -1,16 +1,12 @@
-namespace Database_SEP3.Networking.Util
-{
-    public class ComponentEnum : NetworkPackage
-    {
-        
-        public string toString()
-        {
-            return getType() + "";
-        }
-
-        public ComponentEnum(NetworkType type) : base(type)
-        {
-            base.getType();
-        }
-    }
-}
+// using System;
+//
+// namespace Database_SEP3.Networking.Util
+// {
+//     public class ComponentEnum : NetworkPackage
+//     {
+//         public ComponentEnum(NetworkType type, Object content) : base(type, content)
+//         {
+//             
+//         }
+//     }
+// }

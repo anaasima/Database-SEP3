@@ -5,7 +5,7 @@ namespace Database_SEP3.Persistence.Repositories
 {
     public interface IAccountRepo
     {
-        public void createAccount(AccountModel accountModel);
-        public Task<AccountModel> readAccount(int id);
+        public Task CreateAccount(AccountModel accountModel);
+        public Task<AccountModel> ReadAccount(string username, string password);
     }
 }

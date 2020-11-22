@@ -1,17 +1,20 @@
+using System;
+using System.Text.Json.Serialization;
+
 namespace Database_SEP3.Networking.Util
 {
     public class NetworkPackage
     {
-        private NetworkType type;
+        [JsonPropertyName("type")]
+        public string NetworkType { get; set; }
+        [JsonPropertyName("content")]
+        public  Object Content { get; set; }
 
-        public NetworkPackage(NetworkType type)
-        {
-            this.type = type;
-        }
-
-        public NetworkType getType()
-        {
-            return type;
-        }
+        // public NetworkPackage(NetworkType type, Object content)
+        // {
+        //     NetworkType = type;
+        //     Content = content;
+        // }
+       
     }
 }

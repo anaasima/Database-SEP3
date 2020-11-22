@@ -15,9 +15,9 @@ namespace Database_SEP3.Persistence.Repositories.Build
             _list = new BuildList();
             await using (_context = new Sep3DBContext())
             {
-                foreach (var VARIABLE in _context.Builds)
+                foreach (var variable in _context.Builds)
                 { 
-                    _list.AddBuild(VARIABLE);
+                    _list.AddBuild(variable);
                 }
 
                 return _list;

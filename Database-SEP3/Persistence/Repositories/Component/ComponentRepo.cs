@@ -11,14 +11,14 @@ namespace Database_SEP3.Persistence.Repositories
 public class ComponentRepo : IComponentRepo
 {
     private Sep3DBContext _context;
-    private ComponentList componentList;
+    private ComponentList _componentList;
 
 
     public ComponentRepo()
     {
-        componentList = new ComponentList();
+        _componentList = new ComponentList();
     }
-    public async Task createComponent()
+    public async Task CreateComponent()
     {
         ComponentModel c1 = new ComponentModel  //TODO: this will later woosh
         {
@@ -36,26 +36,26 @@ public class ComponentRepo : IComponentRepo
         }
     }
 
-    public async Task<ComponentList> readComponents()
+    public async Task<ComponentList> ReadComponents()
     {
-        componentList = new ComponentList();
-        using (_context = new Sep3DBContext())
+        _componentList = new ComponentList();
+        await using (_context = new Sep3DBContext())
         {
-            foreach (var VARIABLE in _context.Components)
+            foreach (var variable in _context.Components)
             {
-                componentList.AddComponent(VARIABLE);
+                _componentList.AddComponent(variable);
             }
 
-            return componentList;
+            return _componentList;
         }
     }
 
-    public Task updateComponent()
+    public Task UpdateComponent()
     {
         throw new System.NotImplementedException();
     }
 
-    public Task deleteComponent()
+    public Task DeleteComponent()
     {
         throw new System.NotImplementedException();
     }

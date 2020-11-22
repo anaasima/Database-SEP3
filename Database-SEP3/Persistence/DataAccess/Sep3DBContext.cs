@@ -14,7 +14,7 @@ namespace Database_SEP3.Persistence.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source = C:\Users\ajurj\RiderProjects\Database-SEP3\Database-SEP3\SEP3Database");
+            optionsBuilder.UseSqlite(@"Data Source = C:\University\DNP\Database-SEP3\Database-SEP3\databaseTier3");
         }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)

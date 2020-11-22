@@ -6,9 +6,9 @@ namespace Database_SEP3.Persistence.Repositories
 {
     public interface IComponentRepo
     {
-        public Task createComponent();
-        public Task<ComponentList> readComponents();
-        public Task updateComponent();
-        public Task deleteComponent();
+        public Task CreateComponent();
+        public Task<ComponentList> ReadComponents();
+        public Task UpdateComponent();
+        public Task DeleteComponent();
     }
 }
