@@ -31,12 +31,15 @@ namespace Database_SEP3.Networking.Account
             stream.Write(bytesWrite, 0, bytesWrite.Length);
         }
 
-        public async void Register(NetworkStream stream, object content)
+        public async void Register(NetworkStream stream, string content)
         {
-            AccountModel dummy = (AccountModel) content;
-            await _accountRepo.CreateAccount(dummy);
+            Console.WriteLine("OBJ is: " + content);
+            AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
             
-            // string reply = JsonSerializer.Serialize("Your account has been created");
+            Console.WriteLine(dummy);
+                await _accountRepo.CreateAccount(dummy);
+
+                // string reply = JsonSerializer.Serialize("Your account has been created");
             // Console.WriteLine(reply);
             // byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
             // stream.Write(bytesWrite, 0, bytesWrite.Length);

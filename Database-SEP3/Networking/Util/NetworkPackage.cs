@@ -8,7 +8,7 @@ namespace Database_SEP3.Networking.Util
         [JsonPropertyName("type")]
         public string NetworkType { get; set; }
         [JsonPropertyName("content")]
-        public  Object Content { get; set; }
+        public string Content { get; set; }
 
         // public NetworkPackage(NetworkType type, Object content)
         // {

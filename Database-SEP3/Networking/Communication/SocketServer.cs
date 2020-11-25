@@ -88,7 +88,7 @@ namespace Database_SEP3.Networking        //TODO: here make the connection, chec
                             _accountHandler.Register(stream, req1.Content);
                             break;
                         default: 
-                            string reply = JsonSerializer.Serialize("con");
+                            string reply = JsonSerializer.Serialize("conFromTier3");
                             Console.WriteLine(reply);
                             byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
                             stream.Write(bytesWrite, 0, bytesWrite.Length);
