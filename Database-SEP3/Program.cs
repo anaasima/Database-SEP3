@@ -16,8 +16,11 @@ namespace Database_SEP3
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
+            
+            SocketServer socketServer = new SocketServer();
+            socketServer.StartServer();
             // ComponentRepo c1 = new ComponentRepo();
             // c1.CreateComponent();
             // List<Component> list = c1.readComponent().Result.ToList();
@@ -25,11 +28,27 @@ namespace Database_SEP3
             // {
             //    Console.WriteLine(component.ToString());
             // }
-            
-            SocketServer socketServer = new SocketServer();
-            socketServer.StartServer();
-            
             // Sep3DBContext context = new Sep3DBContext();
+            // BuildModel buildModel = await context.Builds.FirstAsync(b => b.Id == 1);
+            // ComponentModel componentModel = await context.Components.FirstAsync(c => c.Id == 2);
+            // BuildComponent buildComponent = new BuildComponent()
+            // {
+            //     BuildModel = buildModel,
+            //     ComponentModel = componentModel
+            // };
+            // buildModel.BuildComponents = new List<BuildComponent>();
+            // buildModel.BuildComponents.Add(buildComponent);
+            // context.Update(buildModel);
+            // await context.SaveChangesAsync();
+
+            // AccountModel accountModel = await context.Accounts.FirstAsync(a => a.UserId == 3);
+            // BuildModel buildModel = await context.Builds.FirstAsync(b => b.Id == 1);
+            // accountModel.Builds = new List<BuildModel>();
+            // accountModel.Builds.Add(buildModel);
+            // context.Update(accountModel);
+            // await context.SaveChangesAsync();
+
+
             // AccountRepo _accountRepo = new AccountRepo();
             // ComponentRepo componentRepo = new ComponentRepo();
             // BuildRepo buildRepo = new BuildRepo();
@@ -40,9 +59,8 @@ namespace Database_SEP3
             // accountModel.Password = "123";
             // accountModel.Name = "BOB";
             //
-            // BuildModel buildModel = new BuildModel();
-            // buildModel.Id = 1;
-            // buildModel.Name = "firstbuild";
+
+
             //
             // // ComponentModel component = context.Components.First(c => c.Id == 1);
             // // Console.WriteLine(component.ToString());

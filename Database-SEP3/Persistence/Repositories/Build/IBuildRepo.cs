@@ -5,6 +5,6 @@ namespace Database_SEP3.Persistence.Repositories.Build
 {
     public interface IBuildRepo
     {
-        public Task<BuildList> ReadBuilds();
+        public Task<BuildList> ReadBuilds(int userId);
     }
 }

@@ -18,15 +18,15 @@ namespace Database_SEP3.Networking.Account
             _accountRepo = new AccountRepo();
         }
 
-        public async void GetMyAccount(NetworkStream stream, object content)
+        public async void GetMyAccount(NetworkStream stream, string content)
         {
-            AccountModel dummy = (AccountModel) content;
+            AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
             string username = dummy.Username;
             string password = dummy.Password;
             _account = await _accountRepo.ReadAccount(username, password);
             
             string reply = JsonSerializer.Serialize(_account);
-            Console.WriteLine(reply);
+            Console.WriteLine("AAAAAAAAAAAAAA" + reply);
             byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
             stream.Write(bytesWrite, 0, bytesWrite.Length);
         }

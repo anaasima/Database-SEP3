@@ -4,32 +4,37 @@ namespace Database_SEP3.Persistence.Model.Build
 {
     public class BuildList
     {
-        private List<BuildModel> _list;
+        public List<BuildModel> Builds { get; set; }
         
         public BuildList()
         {
-            _list = new List<BuildModel>();
+            Builds = new List<BuildModel>();
         }
 
         public void AddBuild(BuildModel buildModel)
         {
-            _list.Add(buildModel);
+            Builds.Add(buildModel);
         }
 
         public void RemoveBuild(BuildModel buildModel)
         {
-            _list.Remove(buildModel);
+            Builds.Remove(buildModel);
         }
 
         public int Size()
         {
-            return _list.Count;
+            return Builds.Count;
+        }
+
+        public BuildModel Get(int index)
+        {
+            return Builds[index];
         }
         
         public override string ToString()
         {
             string s = "";
-            foreach (var VARIABLE in _list)
+            foreach (var VARIABLE in Builds)
             {
                 s += VARIABLE.ToString();
             }
