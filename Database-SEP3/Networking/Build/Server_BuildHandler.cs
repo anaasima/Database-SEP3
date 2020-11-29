@@ -21,7 +21,7 @@ namespace Database_SEP3.Networking.Build
 
         public async void ReadAllBuilds(NetworkStream stream)
         {
-            _buildList = await _buildRepo.ReadBuilds(3);
+            _buildList = await _buildRepo.ReadBuilds(3); //TODO: change to variable
 
             for (int i = 0; i < _buildList.Size(); i++)
             {

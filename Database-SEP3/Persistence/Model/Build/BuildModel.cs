@@ -23,7 +23,7 @@ namespace Database_SEP3.Persistence.Model.Build
 
         public override string ToString()
         {
-            return Id + " " + Name + " " + UserId;
+            return Id + " " + Name + " " + UserId + " " + BuildComponents;
         }
     }
 }

@@ -18,7 +18,10 @@ namespace Database_SEP3
     {
         static async Task Main(string[] args)
         {
-            
+            BuildRepo repo = new BuildRepo();
+            await repo.RemoveComponentFromBuild(1, 2);
+            await repo.AddComponentToBuild(1, 2);
+                
             SocketServer socketServer = new SocketServer();
             socketServer.StartServer();
             // ComponentRepo c1 = new ComponentRepo();
