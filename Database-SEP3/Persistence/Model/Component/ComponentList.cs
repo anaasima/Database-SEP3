@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json;
 
-namespace Database_SEP3.Persistence.Model
+namespace Database_SEP3.Persistence.Model.Component
 {
     public class ComponentList
     {

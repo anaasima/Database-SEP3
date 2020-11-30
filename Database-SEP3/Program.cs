@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Database_SEP3.Networking;
 using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
+using Database_SEP3.Persistence.Model.Component;
 using Database_SEP3.Persistence.Repositories;
+using Database_SEP3.Persistence.Repositories.Account;
 using Database_SEP3.Persistence.Repositories.Build;
+using Database_SEP3.Persistence.Repositories.Component;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database_SEP3
@@ -18,12 +22,69 @@ namespace Database_SEP3
     {
         static async Task Main(string[] args)
         {
-            BuildRepo repo = new BuildRepo();
-            await repo.RemoveComponentFromBuild(1, 2);
-            await repo.AddComponentToBuild(1, 2);
+            BuildRepo buildRepo = new BuildRepo();
+            AccountRepo accountRepo = new AccountRepo();
+            ComponentRepo componentRepo = new ComponentRepo();
+            ComponentList componentList =  await componentRepo.ReadComponents();
+            AccountModel accountModel = new AccountModel
+            {
+                Name = "asfd",
+                Password = "12345",
+                Username = "Bib",
+                Builds = null
+            };
+            // await accountRepo.CreateAccount(accountModel);
+            // Thread.Sleep(1000);
+            
+            BuildModel buildModel = new BuildModel()
+            {
                 
-            SocketServer socketServer = new SocketServer();
-            socketServer.StartServer();
+                Name = "test1",
+                BuildComponents = null
+            };
+            ComponentModel c1 = new ComponentModel
+            {
+                Id = 1
+            };
+            ComponentModel c2 = new ComponentModel
+            {
+                Id = 2
+            };
+            List<ComponentModel> componentModels = new List<ComponentModel>();
+            componentModels.Add(c1);
+            componentModels.Add(c2);
+
+            await buildRepo.ReadBuilds(3);
+            // Console.WriteLine(componentModels.Count);
+            // await buildRepo.CreateBuild(buildModel, componentModels);
+            //
+            // BuildList list = await buildRepo.ReadBuilds(0);
+            // Console.WriteLine(list);
+            // Thread.Sleep(1000);
+            // for (int i = 0; i < list.Size(); i++)
+            // {
+            //     Console.WriteLine(list.Get(1).Id);
+            //     ComponentList dummyList = await componentRepo.GetComponentsFromBuild(list.Get(1).Id);
+            //     Console.WriteLine(dummyList.ToString());
+            // }
+            // Thread.Sleep(1000);
+            // Console.WriteLine(list.Get(0) + "\n" + list.Get(1));
+            // Console.WriteLine(list.Get(1).BuildComponents[1] );
+
+
+            // await buildRepo.CreateBuild(buildModel, componentModels);
+            //Clase diferite in tier 1 si tier 2, slideurile lui Troels; Build sa aiba lista de Componente si Component lista de Builds,
+            //in loc de BuildComponents; Probleme networking la castare?
+            //lista de componentId ca parametru la CreateBuild
+
+
+
+            // await accountRepo.CreateAccount(accountModel);
+            // await repo.RemoveComponentFromBuild(1, 2);
+            // await repo.AddComponentToBuild(1, 2);
+
+            // SocketServer socketServer = new SocketServer();
+            // socketServer.StartServer();
             // ComponentRepo c1 = new ComponentRepo();
             // c1.CreateComponent();
             // List<Component> list = c1.readComponent().Result.ToList();

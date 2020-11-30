@@ -27,6 +27,7 @@ namespace Database_SEP3.Persistence.Model
         public String Brand { get; set; }
         [JsonPropertyName("additionalInformation")]
         public String AdditionalInfo { get; set; }
+        [JsonIgnore]
         public IList<BuildComponent> BuildComponents { get; set; }
 
         public override string ToString()

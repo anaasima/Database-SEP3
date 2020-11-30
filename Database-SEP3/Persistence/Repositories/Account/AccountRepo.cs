@@ -5,7 +5,7 @@ using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model.Account;
 using Microsoft.EntityFrameworkCore;
 
-namespace Database_SEP3.Persistence.Repositories
+namespace Database_SEP3.Persistence.Repositories.Account
 {
     public class AccountRepo : IAccountRepo
     {

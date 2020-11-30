@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Database_SEP3.Persistence.Model.Account;
 
-namespace Database_SEP3.Persistence.Repositories
+namespace Database_SEP3.Persistence.Repositories.Account
 {
     public interface IAccountRepo
     {

@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using Database_SEP3.Persistence.Model.Account;
-using Database_SEP3.Persistence.Repositories;
+using Database_SEP3.Persistence.Repositories.Account;
 
 namespace Database_SEP3.Networking.Account
 {
