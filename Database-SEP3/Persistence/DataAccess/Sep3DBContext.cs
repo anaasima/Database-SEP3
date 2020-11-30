@@ -1,6 +1,8 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
+using Database_SEP3.Persistence.Model.Component;
 using Database_SEP3.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +13,9 @@ namespace Database_SEP3.Persistence.DataAccess
         public DbSet<ComponentModel> Components { get; set; }
         public DbSet<BuildModel> Builds { get; set; }
         public DbSet<AccountModel> Accounts { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source = C:\Users\ajurj\RiderProjects\Database-SEP3\Database-SEP3\SEP3Database");
+            optionsBuilder.UseSqlite(@"Data Source = C:\University\DNP\Database-SEP3\Database-SEP3\luckyDatabaseTier3");
         }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)

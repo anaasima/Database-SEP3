@@ -34,6 +34,15 @@ public class ComponentRepo : IComponentRepo
             ReleaseYear = "2019",
             AdditionalInfo = "sdf"
         };
+        ComponentModel c2 = new ComponentModel  //TODO: this will later woosh
+        {
+            Id = 3,
+            Type = "BLABLA",
+            Name = "Intel i5",
+            Brand = "Gigabyte",
+            ReleaseYear = "2019",
+            AdditionalInfo = "sdf"
+        };
         await using (_context = new Sep3DBContext())
         {
             await _context.Components.AddAsync(c1);
@@ -79,6 +88,12 @@ public class ComponentRepo : IComponentRepo
                 ComponentModel componentModel = await _context.Components.FirstAsync(c => c.Id == id);
                 _componentList.AddComponent(componentModel);
             }
+
+            for (int i = 0; i < _componentList.Size(); i++)
+            {
+                Console.WriteLine(_componentList.GetComponent(i));
+            }
+            
             return _componentList;
         }
     }

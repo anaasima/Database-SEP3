@@ -15,6 +15,11 @@ namespace Database_SEP3.Persistence.Model.Component
             Components = new List<ComponentModel>();
         }
 
+        public ComponentModel GetComponent(int index)
+        {
+            return Components[index];
+        }
+
         public void AddComponent(ComponentModel component)
         {
             Components.Add(component);

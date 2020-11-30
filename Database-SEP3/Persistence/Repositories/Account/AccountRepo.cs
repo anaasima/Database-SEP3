@@ -1,8 +1,11 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model.Account;
+using Database_SEP3.Persistence.Model.Build;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database_SEP3.Persistence.Repositories.Account
@@ -35,6 +38,27 @@ namespace Database_SEP3.Persistence.Repositories.Account
             await using (_context = new Sep3DBContext())
             {
                 return _context.Accounts.First(a => a.Username.Equals(username) && a.Password.Equals(password));
+            }
+        }
+
+        public async Task AddBuilds(IList<BuildModel> builds, int userId)
+        {
+            await using (_context = new Sep3DBContext())
+            {
+                AccountModel account = _context.Accounts.First(a => a.UserId ==
+                                             userId);
+                Console.WriteLine(account.Username);
+                foreach (var VARIABLE in builds)
+                {
+                    if (account.Builds == null)
+                    {
+                        account.Builds = new List<BuildModel>();
+                    }
+                    account.Builds.Add(VARIABLE);
+                }
+
+                _context.Accounts.Update(account);
+                await _context.SaveChangesAsync();
             }
         }
     }

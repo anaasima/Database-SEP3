@@ -79,7 +79,7 @@ namespace Database_SEP3.Networking        //TODO: here make the connection, chec
                             _componentHandler.ReadAllComponents(stream);
                             break;
                         case "BUILDS":
-                            _buildHandler.ReadAllBuilds(stream);
+                            _buildHandler.ReadAllBuilds(stream, req1.Content);
                             break;
                         case "LOGIN":
                             _accountHandler.GetMyAccount(stream, req1.Content);

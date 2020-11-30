@@ -25,14 +25,19 @@ namespace Database_SEP3.Persistence.Repositories.Build
                 AccountModel accountModel = new AccountModel();
                 accountModel = await _context.Accounts.Include(account => account.Builds).FirstAsync(a => a.UserId == userId);
                 array = accountModel.Builds.ToList();
-                Console.WriteLine(array[0].Id);
                 foreach (var VARIABLE in array)
                 {
                     _list.AddBuild(VARIABLE);
                 }
 
                 Console.WriteLine(_list.ToString());
-                
+
+                for (int i = 0; i < _list.Size(); i++)
+                {
+                    Console.WriteLine(_list.Get(i).BuildComponents);
+                }
+
+
                 return _list;
             }
         }

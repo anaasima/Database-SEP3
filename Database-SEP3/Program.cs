@@ -22,39 +22,45 @@ namespace Database_SEP3
     {
         static async Task Main(string[] args)
         {
-            BuildRepo buildRepo = new BuildRepo();
-            AccountRepo accountRepo = new AccountRepo();
-            ComponentRepo componentRepo = new ComponentRepo();
-            ComponentList componentList =  await componentRepo.ReadComponents();
-            AccountModel accountModel = new AccountModel
-            {
-                Name = "asfd",
-                Password = "12345",
-                Username = "Bib",
-                Builds = null
-            };
+            SocketServer socketServer = new SocketServer();
+            socketServer.StartServer();
+            //
+            // BuildRepo buildRepo = new BuildRepo();
+            // AccountRepo accountRepo = new AccountRepo();
+            // ComponentRepo componentRepo = new ComponentRepo();
+            //
+            //
+            // ComponentList componentList =  await componentRepo.ReadComponents();
+            // AccountModel accountModel = new AccountModel
+            // {
+            //     Name = "asfd",
+            //     Password = "12345",
+            //     Username = "Bib",
+            //     Builds = null
+            // };
             // await accountRepo.CreateAccount(accountModel);
             // Thread.Sleep(1000);
-            
-            BuildModel buildModel = new BuildModel()
-            {
-                
-                Name = "test1",
-                BuildComponents = null
-            };
-            ComponentModel c1 = new ComponentModel
-            {
-                Id = 1
-            };
-            ComponentModel c2 = new ComponentModel
-            {
-                Id = 2
-            };
-            List<ComponentModel> componentModels = new List<ComponentModel>();
-            componentModels.Add(c1);
-            componentModels.Add(c2);
-
-            await buildRepo.ReadBuilds(3);
+            //
+            // BuildModel buildModel = new BuildModel()
+            // {
+            //     
+            //     Name = "test1",
+            //     BuildComponents = null
+            // };
+            // ComponentModel c1 = new ComponentModel
+            // {
+            //     Id = 2
+            // };
+            // ComponentModel c2 = new ComponentModel
+            // {
+            //     Id = 3
+            // };
+            // List<ComponentModel> componentModels = new List<ComponentModel>();
+            // componentModels.Add(c1);
+            // componentModels.Add(c2);
+            // // await componentRepo.GetComponentsFromBuild(1);
+            //
+            // // await buildRepo.ReadBuilds(3);
             // Console.WriteLine(componentModels.Count);
             // await buildRepo.CreateBuild(buildModel, componentModels);
             //
@@ -92,6 +98,7 @@ namespace Database_SEP3
             // {
             //    Console.WriteLine(component.ToString());
             // }
+            
             // Sep3DBContext context = new Sep3DBContext();
             // BuildModel buildModel = await context.Builds.FirstAsync(b => b.Id == 1);
             // ComponentModel componentModel = await context.Components.FirstAsync(c => c.Id == 2);
@@ -104,11 +111,9 @@ namespace Database_SEP3
             // buildModel.BuildComponents.Add(buildComponent);
             // context.Update(buildModel);
             // await context.SaveChangesAsync();
-
-            // AccountModel accountModel = await context.Accounts.FirstAsync(a => a.UserId == 3);
-            // BuildModel buildModel = await context.Builds.FirstAsync(b => b.Id == 1);
-            // accountModel.Builds = new List<BuildModel>();
-            // accountModel.Builds.Add(buildModel);
+            //
+            // IList<BuildModel> list = context.Builds.ToList();
+            // await accountRepo.AddBuilds(list, 1);
             // context.Update(accountModel);
             // await context.SaveChangesAsync();
 
