@@ -9,11 +9,15 @@ using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
+using Database_SEP3.Persistence.Model.Comment;
 using Database_SEP3.Persistence.Model.Component;
+using Database_SEP3.Persistence.Model.Post;
 using Database_SEP3.Persistence.Repositories;
 using Database_SEP3.Persistence.Repositories.Account;
 using Database_SEP3.Persistence.Repositories.Build;
+using Database_SEP3.Persistence.Repositories.Comment;
 using Database_SEP3.Persistence.Repositories.Component;
+using Database_SEP3.Persistence.Repositories.Post;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database_SEP3
@@ -22,31 +26,90 @@ namespace Database_SEP3
     {
         static async Task Main(string[] args)
         {
-            SocketServer socketServer = new SocketServer();
-            socketServer.StartServer();
-            //
-            // BuildRepo buildRepo = new BuildRepo();
-            // AccountRepo accountRepo = new AccountRepo();
-            // ComponentRepo componentRepo = new ComponentRepo();
-            //
-            //
-            // ComponentList componentList =  await componentRepo.ReadComponents();
-            // AccountModel accountModel = new AccountModel
+            // SocketServer socketServer = new SocketServer();
+            // socketServer.StartServer();
+            
+            CommentRepo commentRepo = new CommentRepo();
+            PostRepo postRepo = new PostRepo();
+            AccountRepo accountRepo = new AccountRepo();
+            ComponentRepo componentRepo = new ComponentRepo();
+            BuildRepo buildRepo = new BuildRepo();
+            ComponentModel c1 = new ComponentModel  //TODO: this will later woosh
+            {
+                Id = 2,
+                Type = "CPU",
+                Name = "Intel i5",
+                Brand = "Gigabyte",
+                ReleaseYear = "2019",
+                AdditionalInfo = "sdf"
+            };
+            ComponentModel c2 = new ComponentModel  //TODO: this will later woosh
+            {
+                Id = 3,
+                Type = "BLABLA",
+                Name = "Intel i5",
+                Brand = "Gigabyte",
+                ReleaseYear = "2019",
+                AdditionalInfo = "sdf"
+            };
+            // await componentRepo.CreateComponent(c1);
+            // await componentRepo.CreateComponent(c2);
+            AccountModel accountModel = new AccountModel
+            {
+                UserId = 2,
+                Name = "bonk",
+                Password = "98765",
+                Username = "MiauMiau",
+            };
+            await accountRepo.UpdateAccount(accountModel);
+            // await accountRepo.CreateAccount(accountModel);
+            
+            // ComponentList componentList =new ComponentList();
+            // componentList.AddComponent(c1);
+            // componentList.AddComponent(c2);
+            // BuildModel buildModel = new BuildModel()
             // {
-            //     Name = "asfd",
-            //     Password = "12345",
-            //     Username = "Bib",
-            //     Builds = null
+            //     Name = "test1",
             // };
+            // await buildRepo.CreateBuild(buildModel, componentList, 1);
+
+            // await componentRepo.GetComponentsFromBuild(3);
+            // await buildRepo.GetBuildsFromAccount(1);
+            // await accountRepo.DeleteAccount(1);
+            // await accountRepo.CreateAccount(accountModel);
+
+            PostModel postModel = new PostModel
+            {
+                UpVote = 10,
+                DownVote = 3,
+                Content = "adasdasda"
+            };
+            // await postRepo.CreatePost(postModel,2);
+
+            CommentModel com1 = new CommentModel
+            {
+                UpVote = 14,
+                DownVote = 1,
+                Content = "adasdasda"
+            };
+            CommentModel com2 = new CommentModel
+            {
+                UpVote = 8,
+                DownVote = 3,
+                Content = "adasdasda"
+            };
+
+            // await commentRepo.GetCommentsFromPost(1);
+
+            // await postRepo.GetPostsFromAccount(2);
+
+            // await commentRepo.CreateComment(com1,1);
+            // await commentRepo.CreateComment(com2,1);
+            // ComponentList componentList =  await componentRepo.ReadComponents();
+
             // await accountRepo.CreateAccount(accountModel);
             // Thread.Sleep(1000);
             //
-            // BuildModel buildModel = new BuildModel()
-            // {
-            //     
-            //     Name = "test1",
-            //     BuildComponents = null
-            // };
             // ComponentModel c1 = new ComponentModel
             // {
             //     Id = 2
@@ -98,7 +161,7 @@ namespace Database_SEP3
             // {
             //    Console.WriteLine(component.ToString());
             // }
-            
+
             // Sep3DBContext context = new Sep3DBContext();
             // BuildModel buildModel = await context.Builds.FirstAsync(b => b.Id == 1);
             // ComponentModel componentModel = await context.Components.FirstAsync(c => c.Id == 2);

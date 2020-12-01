@@ -7,6 +7,7 @@ using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
+using Database_SEP3.Persistence.Model.Component;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database_SEP3.Persistence.Repositories.Build
@@ -14,51 +15,51 @@ namespace Database_SEP3.Persistence.Repositories.Build
     public class BuildRepo : IBuildRepo
     {
         private Sep3DBContext _context;
-        private BuildList _list;
         
-        public async Task<BuildList> ReadBuilds(int userId)
+        public async Task<BuildModel> ReadBuild(int buildId)
         {
-            _list = new BuildList();
             await using (_context = new Sep3DBContext())
             {
-                IList<BuildModel> array = new List<BuildModel>();
-                AccountModel accountModel = new AccountModel();
-                accountModel = await _context.Accounts.Include(account => account.Builds).FirstAsync(a => a.UserId == userId);
-                array = accountModel.Builds.ToList();
-                foreach (var VARIABLE in array)
-                {
-                    _list.AddBuild(VARIABLE);
-                }
-
-                Console.WriteLine(_list.ToString());
-
-                for (int i = 0; i < _list.Size(); i++)
-                {
-                    Console.WriteLine(_list.Get(i).BuildComponents);
-                }
-
-
-                return _list;
+                return await _context.Builds.Include(b => b.BuildComponents)
+                    .ThenInclude(bld => bld.ComponentModel).FirstAsync(build => build.Id == buildId);
             }
         }
         
         // parametri build model si lista cu componentele lui
-        public async Task CreateBuild(BuildModel buildModel, List<ComponentModel> componentModels)
+        public async Task CreateBuild(BuildModel buildModel, ComponentList componentModels, int userId)
         {
             await using (_context = new Sep3DBContext())
             {
-                //adaug buildu in database si salvez;
+                //adaug buildu in database
                 await _context.Builds.AddAsync(buildModel);
                 await _context.SaveChangesAsync();
-                Console.WriteLine("build creat si pus in database");
-                //iau buildu din database
-                BuildModel databaseBuild = await _context.Builds.FirstAsync(b => b.Id == buildModel.Id);
+                // iau contul din database
+                AccountModel accountModel = await _context.Accounts
+                    .Include(a => a.Builds)
+                    .FirstAsync(account => account.UserId == userId);
+                // iau buildu din database
+
+                BuildModel databaseBuild = await _context.Builds.OrderBy(b => b.Id).LastAsync();
                 Console.WriteLine("build citit din database");
-                //iau fiecare component din database si ii adaug buildului
-                Console.WriteLine(componentModels.Count);
-                foreach (var variable in componentModels)
+                //adaug buildu in cont si dau update
+                if (accountModel.Builds == null)
                 {
-                    ComponentModel arg = await _context.Components.FirstAsync(c => c.Id == variable.Id);
+                    accountModel.Builds = new List<BuildModel>();
+                }
+                accountModel.Builds.Add(databaseBuild);
+                Console.WriteLine("build pus in cont");
+                _context.Update(accountModel);
+                Console.WriteLine("cont updatat");
+                //iau fiecare component din database si ii adaug buildului
+                Console.WriteLine(componentModels.Size());
+                if (databaseBuild.BuildComponents == null)
+                {
+                    databaseBuild.BuildComponents = new List<BuildComponent>();
+                    Console.WriteLine("initialized buildComponent list");
+                }
+                for(var i = 0; i < componentModels.Size(); i++)
+                {
+                    ComponentModel arg = await _context.Components.FirstAsync(c => c.Id == componentModels.GetComponent(i).Id);
                     Console.WriteLine("component luat din database");
                     BuildComponent buildComponent = new BuildComponent
                     {
@@ -67,17 +68,7 @@ namespace Database_SEP3.Persistence.Repositories.Build
                         ComponentId = arg.Id,
                         ComponentModel = arg
                     };
-                    if (databaseBuild.BuildComponents == null)
-                    {
-                        databaseBuild.BuildComponents = new List<BuildComponent>();
-                        databaseBuild.BuildComponents.Add(buildComponent);
-                        Console.WriteLine("added from null");
-                    }
-                    else
-                    {
-                        databaseBuild.BuildComponents.Add(buildComponent);
-                        Console.WriteLine("added from existed");
-                    }
+                    databaseBuild.BuildComponents.Add(buildComponent);
                 }
                 // dau update la build si salvez databazu
                 _context.Update(databaseBuild);
@@ -86,52 +77,46 @@ namespace Database_SEP3.Persistence.Repositories.Build
             }
         }
 
-
-        public async Task AddComponentToBuild(int buildId, int componentId)
+        public async Task AddBuilds(IList<BuildModel> builds, int userId) //Whats with this?
         {
             await using (_context = new Sep3DBContext())
             {
-                BuildModel buildModel = await _context.Builds.FirstAsync(b => b.Id == buildId);
-                ComponentModel componentModel = await _context.Components.FirstAsync(c => c.Id == componentId);
-                BuildComponent buildComponent = new BuildComponent
+                AccountModel account = _context.Accounts.First(a => a.UserId ==
+                                                                    userId);
+                Console.WriteLine(account.Username + " took from database to put builds in");
+                if (account.Builds == null)
                 {
-                    BuildModel = buildModel,
-                    ComponentModel = componentModel
-                };
-                if (buildModel.BuildComponents == null)
-                {
-                    buildModel.BuildComponents = new List<BuildComponent>();
-                    buildModel.BuildComponents.Add(buildComponent);
-                    Console.WriteLine("added from null");
+                    account.Builds = new List<BuildModel>();
                 }
-                else
+                foreach (var VARIABLE in builds)
                 {
-                    buildModel.BuildComponents.Add(buildComponent);
-                    Console.WriteLine("added from existed");
+                    account.Builds.Add(VARIABLE);
                 }
 
-                foreach (var VARIABLE in buildModel.BuildComponents)
-                {
-                    Console.WriteLine("buildId= " + VARIABLE.BuildId + "\n Build model= " + VARIABLE.BuildModel.ToString() + "componentId= " + VARIABLE.ComponentId + "\n Component model= " + VARIABLE.ComponentModel.ToString());
-                }
-                
-                _context.Update(buildModel);
+                _context.Accounts.Update(account);
                 await _context.SaveChangesAsync();
             }
         }
-
-        public async Task RemoveComponentFromBuild(int buildId, int componentId)
+        
+        public async Task<BuildList> GetBuildsFromAccount(int userId)
         {
             await using (_context = new Sep3DBContext())
             {
-                BuildComponent buildComponent = _context.Builds
-                    .Where(b => b.Id == buildId)
-                    .SelectMany(build => build.BuildComponents)
-                    .First(buildcomp => buildcomp.ComponentModel.Id == componentId);
-                _context.Remove(buildComponent);
-                Console.WriteLine("removed component");
-                await _context.SaveChangesAsync();
+                AccountModel account = _context.Accounts.Include(acc => acc.Builds).First(a => a.UserId ==
+                    userId);
+                Console.WriteLine(account.ToString() + " took from database to get builds from");
+                BuildList buildList = new BuildList();
+                foreach (var build in account.Builds)
+                {
+                    buildList.AddBuild(build);
+                    Console.WriteLine(build.ToString());
+                }
+
+                return buildList;
             }
         }
+        
+        
+        
     }
 }

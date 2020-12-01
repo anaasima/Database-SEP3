@@ -15,13 +15,6 @@ namespace Database_SEP3.Persistence.Model.Build
         public int Id { get; set; }
         [JsonPropertyName("name")]
         public String Name { get; set; }
-        
-        [JsonPropertyName("userId")]
-        public int UserId { get; set; }
-        [NotMapped]
-        [JsonPropertyName("componentList")]
-        public ComponentList ComponentList { get; set; }
-        
         [JsonIgnore]
         public IList<BuildComponent> BuildComponents { get; set; }
         

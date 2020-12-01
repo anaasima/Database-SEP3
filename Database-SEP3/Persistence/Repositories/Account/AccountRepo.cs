@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Database_SEP3.Persistence.DataAccess;
@@ -41,23 +42,25 @@ namespace Database_SEP3.Persistence.Repositories.Account
             }
         }
 
-        public async Task AddBuilds(IList<BuildModel> builds, int userId) //Whats with this?
+        public async Task DeleteAccount(int userId)
         {
             await using (_context = new Sep3DBContext())
             {
-                AccountModel account = _context.Accounts.First(a => a.UserId ==
-                                             userId);
-                Console.WriteLine(account.Username);
-                foreach (var VARIABLE in builds)
-                {
-                    if (account.Builds == null)
-                    {
-                        account.Builds = new List<BuildModel>();
-                    }
-                    account.Builds.Add(VARIABLE);
-                }
+                AccountModel accountModel = await _context.Accounts
+                    .Include(a => a.Builds)
+                    .ThenInclude(b => b.BuildComponents)
+                    .Include(acc => acc.Posts)
+                    .FirstAsync(account => account.UserId == userId);
+                _context.Accounts.Remove(accountModel);
+                await _context.SaveChangesAsync();
+            }
+        }
 
-                _context.Accounts.Update(account);
+        public async Task UpdateAccount(AccountModel accountModel)
+        {
+            await using (_context = new Sep3DBContext())
+            {
+                _context.Accounts.Update(accountModel);
                 await _context.SaveChangesAsync();
             }
         }
