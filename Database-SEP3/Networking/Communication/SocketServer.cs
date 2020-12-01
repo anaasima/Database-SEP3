@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Database_SEP3.Networking.Account;
 using Database_SEP3.Networking.Build;
 using Database_SEP3.Networking.Component;
+using Database_SEP3.Networking.Forum;
 using Database_SEP3.Networking.Util;
 using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
@@ -28,6 +29,7 @@ namespace Database_SEP3.Networking        //TODO: here make the connection, chec
         private Server_ComponentHandler _componentHandler;
         private Server_BuildHandler _buildHandler;
         private Server_AccountHandler _accountHandler;
+        private Server_ForumHandler _forumHandler;
         
         public SocketServer()
         {
@@ -35,6 +37,7 @@ namespace Database_SEP3.Networking        //TODO: here make the connection, chec
             _componentHandler = new Server_ComponentHandler();
             _buildHandler = new Server_BuildHandler();
             _accountHandler = new Server_AccountHandler();
+            _forumHandler = new Server_ForumHandler();
         }
 
         public void StartServer()
@@ -85,7 +88,19 @@ namespace Database_SEP3.Networking        //TODO: here make the connection, chec
                             _accountHandler.GetMyAccount(stream, req1.Content);
                             break;
                         case "REGISTER":
-                            _accountHandler.Register(stream, req1.Content);
+                            _accountHandler.Register(req1.Content);
+                            break;
+                        case "DELETEACCOUNT":
+                            _accountHandler.Delete(req1.Content);
+                            break;
+                        case "EDITACCOUNT":
+                            _accountHandler.Edit(req1.Content);
+                            break;
+                        case "ADDNEWCOMPONENT":
+                            _componentHandler.Add(req1.Content);
+                            break;
+                        case "POSTS":
+                            _forumHandler.ReadAllPosts(stream);
                             break;
                         default: 
                             string reply = JsonSerializer.Serialize("conFromTier3");

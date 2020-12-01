@@ -26,42 +26,41 @@ namespace Database_SEP3
     {
         static async Task Main(string[] args)
         {
-            // SocketServer socketServer = new SocketServer();
-            // socketServer.StartServer();
-            
-            CommentRepo commentRepo = new CommentRepo();
-            PostRepo postRepo = new PostRepo();
-            AccountRepo accountRepo = new AccountRepo();
-            ComponentRepo componentRepo = new ComponentRepo();
-            BuildRepo buildRepo = new BuildRepo();
-            ComponentModel c1 = new ComponentModel  //TODO: this will later woosh
-            {
-                Id = 2,
-                Type = "CPU",
-                Name = "Intel i5",
-                Brand = "Gigabyte",
-                ReleaseYear = "2019",
-                AdditionalInfo = "sdf"
-            };
-            ComponentModel c2 = new ComponentModel  //TODO: this will later woosh
-            {
-                Id = 3,
-                Type = "BLABLA",
-                Name = "Intel i5",
-                Brand = "Gigabyte",
-                ReleaseYear = "2019",
-                AdditionalInfo = "sdf"
-            };
+            SocketServer socketServer = new SocketServer();
+            socketServer.StartServer();
+            // CommentRepo commentRepo = new CommentRepo();
+            // PostRepo postRepo = new PostRepo();
+            // AccountRepo accountRepo = new AccountRepo();
+            // ComponentRepo componentRepo = new ComponentRepo();
+            // BuildRepo buildRepo = new BuildRepo();
+            // ComponentModel c1 = new ComponentModel  //TODO: this will later woosh
+            // {
+            //     Id = 2,
+            //     Type = "CPU",
+            //     Name = "Intel i5",
+            //     Brand = "Gigabyte",
+            //     ReleaseYear = "2019",
+            //     AdditionalInfo = "sdf"
+            // };
+            // ComponentModel c2 = new ComponentModel  //TODO: this will later woosh
+            // {
+            //     Id = 3,
+            //     Type = "BLABLA",
+            //     Name = "Intel i5",
+            //     Brand = "Gigabyte",
+            //     ReleaseYear = "2019",
+            //     AdditionalInfo = "sdf"
+            // };
             // await componentRepo.CreateComponent(c1);
             // await componentRepo.CreateComponent(c2);
-            AccountModel accountModel = new AccountModel
-            {
-                UserId = 2,
-                Name = "bonk",
-                Password = "98765",
-                Username = "MiauMiau",
-            };
-            await accountRepo.UpdateAccount(accountModel);
+            // AccountModel accountModel = new AccountModel
+            // {
+            //     UserId = 2,
+            //     Name = "bonk",
+            //     Password = "98765",
+            //     Username = "MiauMiau",
+            // };
+            // await accountRepo.UpdateAccount(accountModel);
             // await accountRepo.CreateAccount(accountModel);
             
             // ComponentList componentList =new ComponentList();
@@ -77,27 +76,27 @@ namespace Database_SEP3
             // await buildRepo.GetBuildsFromAccount(1);
             // await accountRepo.DeleteAccount(1);
             // await accountRepo.CreateAccount(accountModel);
-
-            PostModel postModel = new PostModel
-            {
-                UpVote = 10,
-                DownVote = 3,
-                Content = "adasdasda"
-            };
+            //
+            // PostModel postModel = new PostModel
+            // {
+            //     UpVote = 10,
+            //     DownVote = 3,
+            //     Content = "adasdasda"
+            // };
             // await postRepo.CreatePost(postModel,2);
-
-            CommentModel com1 = new CommentModel
-            {
-                UpVote = 14,
-                DownVote = 1,
-                Content = "adasdasda"
-            };
-            CommentModel com2 = new CommentModel
-            {
-                UpVote = 8,
-                DownVote = 3,
-                Content = "adasdasda"
-            };
+            //
+            // CommentModel com1 = new CommentModel
+            // {
+            //     UpVote = 14,
+            //     DownVote = 1,
+            //     Content = "adasdasda"
+            // };
+            // CommentModel com2 = new CommentModel
+            // {
+            //     UpVote = 8,
+            //     DownVote = 3,
+            //     Content = "adasdasda"
+            // };
 
             // await commentRepo.GetCommentsFromPost(1);
 

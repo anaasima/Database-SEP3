@@ -11,8 +11,22 @@ namespace Database_SEP3.Persistence.Repositories.Post
 {
     public class PostRepo : IPostRepo
     {
-        
+        private PostList _postList;
         private Sep3DBContext _context;
+
+        public async Task<PostList> GetAllPosts()
+        {
+            _postList = new PostList();
+            await using (_context = new Sep3DBContext())
+            {
+                foreach (var variable in _context.Posts)
+                {
+                    _postList.AddPost(variable);
+                }
+            }
+
+            return _postList;
+        }
 
         public async Task<PostModel> GetPost(int postId)
         {

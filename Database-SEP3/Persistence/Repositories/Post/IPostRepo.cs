@@ -5,8 +5,9 @@ namespace Database_SEP3.Persistence.Repositories.Post
 {
     public interface IPostRepo
     {
-        public Task<PostModel> GetPost(int postId);
-        public Task<PostList> GetPostsFromAccount(int userId);
-        public Task CreatePost(PostModel postModel, int userid);
+        Task<PostList> GetAllPosts();
+         Task<PostModel> GetPost(int postId);
+         Task<PostList> GetPostsFromAccount(int userId);
+         Task CreatePost(PostModel postModel, int userid);
     }
 }

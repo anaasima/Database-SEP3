@@ -29,7 +29,7 @@ namespace Database_SEP3.Networking.Account
             stream.Write(bytesWrite, 0, bytesWrite.Length);
         }
 
-        public async void Register(NetworkStream stream, string content)
+        public async void Register(string content)
         {
             AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
             await _accountRepo.CreateAccount(dummy);
@@ -38,6 +38,18 @@ namespace Database_SEP3.Networking.Account
             // Console.WriteLine(reply);
             // byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
             // stream.Write(bytesWrite, 0, bytesWrite.Length);
+        }
+
+        public async void Edit(string content)
+        {
+            AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
+            await _accountRepo.UpdateAccount(dummy);
+        }
+        
+        public async void Delete(string content)
+        {
+            AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
+            await _accountRepo.DeleteAccount(dummy.UserId);
         }
     }
 }
