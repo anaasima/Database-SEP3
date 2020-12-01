@@ -13,7 +13,7 @@ namespace Database_SEP3.Networking.Component
     public class Server_ComponentHandler
     {
         private ComponentList _componentList;
-        private ComponentRepo _componentRepo;
+        private IComponentRepo _componentRepo;
 
         public Server_ComponentHandler()
         {
@@ -24,9 +24,7 @@ namespace Database_SEP3.Networking.Component
         public async void ReadAllComponents(NetworkStream stream)
         {
             _componentList = await _componentRepo.ReadComponents();
-            
             string reply = JsonSerializer.Serialize(_componentList);
-            Console.WriteLine(reply);
             byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
             stream.Write(bytesWrite, 0, bytesWrite.Length);
         }

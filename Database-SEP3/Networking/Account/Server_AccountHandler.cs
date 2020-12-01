@@ -10,7 +10,7 @@ namespace Database_SEP3.Networking.Account
     public class Server_AccountHandler
     {
         private AccountModel _account;
-        private AccountRepo _accountRepo;
+        private IAccountRepo _accountRepo;
 
         public Server_AccountHandler()
         {
@@ -24,20 +24,15 @@ namespace Database_SEP3.Networking.Account
             string username = dummy.Username;
             string password = dummy.Password;
             _account = await _accountRepo.ReadAccount(username, password);
-            
             string reply = JsonSerializer.Serialize(_account);
-            Console.WriteLine("AAAAAAAAAAAAAA" + reply);
             byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
             stream.Write(bytesWrite, 0, bytesWrite.Length);
         }
 
         public async void Register(NetworkStream stream, string content)
         {
-            Console.WriteLine("OBJ is: " + content);
             AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
-            
-            Console.WriteLine(dummy);
-                await _accountRepo.CreateAccount(dummy);
+            await _accountRepo.CreateAccount(dummy);
 
                 // string reply = JsonSerializer.Serialize("Your account has been created");
             // Console.WriteLine(reply);

@@ -10,11 +10,5 @@ namespace Database_SEP3.Networking.Util
         [JsonPropertyName("content")]
         public string Content { get; set; }
 
-        // public NetworkPackage(NetworkType type, Object content)
-        // {
-        //     NetworkType = type;
-        //     Content = content;
-        // }
-       
     }
 }

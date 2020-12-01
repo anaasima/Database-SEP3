@@ -10,7 +10,7 @@ namespace Database_SEP3.Persistence.Model.Account
     {
         [Key]
         [JsonPropertyName("id")]
-        public int UserId { get; set; }    //TODO: change name maybe
+        public int UserId { get; set; }  
         [Required]
         [JsonPropertyName("username")]
         public String Username { get; set; }
