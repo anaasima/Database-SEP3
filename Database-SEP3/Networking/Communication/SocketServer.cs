@@ -21,7 +21,7 @@ using Database_SEP3.Persistence.Repositories.Build;
 using Component = System.ComponentModel.Component;
 
 
-namespace Database_SEP3.Networking        //TODO: here make the connection, check enums, call handlers, in handlers you should have a switch case maybe
+namespace Database_SEP3.Networking       
 {
     public class SocketServer
     {

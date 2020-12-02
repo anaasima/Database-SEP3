@@ -23,7 +23,7 @@ namespace Database_SEP3.Persistence.Model.Account
         
         [JsonPropertyName("buildList")]
         public ICollection<BuildModel> Builds { get; set; }
-        
+        [JsonPropertyName("postList")]
         public ICollection<PostModel> Posts { get; set; }
 
         public override string ToString()

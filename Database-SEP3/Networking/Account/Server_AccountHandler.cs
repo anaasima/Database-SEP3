@@ -33,11 +33,6 @@ namespace Database_SEP3.Networking.Account
         {
             AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
             await _accountRepo.CreateAccount(dummy);
-
-                // string reply = JsonSerializer.Serialize("Your account has been created");
-            // Console.WriteLine(reply);
-            // byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
-            // stream.Write(bytesWrite, 0, bytesWrite.Length);
         }
 
         public async void Edit(string content)

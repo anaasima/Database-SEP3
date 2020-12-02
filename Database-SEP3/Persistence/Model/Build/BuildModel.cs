@@ -13,17 +13,18 @@ namespace Database_SEP3.Persistence.Model.Build
         [Key]
         [JsonPropertyName("id")]
         public int Id { get; set; }
+        
+        [JsonPropertyName("userId")]
+        public int AccountModelUserId { get; set; }
+        
         [JsonPropertyName("name")]
         public String Name { get; set; }
         [JsonIgnore]
         public IList<BuildComponent> BuildComponents { get; set; }
         
         [NotMapped]
-        
         public ComponentList ComponentList { get; set; }
-        [JsonPropertyName("userId")]
-        public int AccountModelUserId { get; set; }
-        
+
         public override string ToString()
         {
             return Id + " " + Name + " " + AccountModelUserId + " " + BuildComponents;
