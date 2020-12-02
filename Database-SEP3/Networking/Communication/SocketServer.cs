@@ -88,13 +88,13 @@ namespace Database_SEP3.Networking
                             _accountHandler.GetMyAccount(stream, req1.Content);
                             break;
                         case "REGISTER":
-                            _accountHandler.Register(req1.Content);
+                            _accountHandler.Register(stream, req1.Content);
                             break;
                         case "DELETEACCOUNT":
                             _accountHandler.Delete(req1.Content);
                             break;
                         case "EDITACCOUNT":
-                            _accountHandler.Edit(req1.Content);
+                            _accountHandler.Edit(stream, req1.Content);
                             break;
                         case "ADDNEWCOMPONENT":
                             _componentHandler.Add(req1.Content);

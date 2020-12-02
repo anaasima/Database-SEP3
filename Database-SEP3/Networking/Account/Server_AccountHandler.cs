@@ -29,22 +29,28 @@ namespace Database_SEP3.Networking.Account
             stream.Write(bytesWrite, 0, bytesWrite.Length);
         }
 
-        public async void Register(string content)
+        public async void Register(NetworkStream stream, string content)
         {
             AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
-            await _accountRepo.CreateAccount(dummy);
+            string input = await _accountRepo.CreateAccount(dummy);
+            string reply = JsonSerializer.Serialize(input);
+            byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
+            stream.Write(bytesWrite, 0, bytesWrite.Length);
         }
 
-        public async void Edit(string content)
+        public async void Edit(NetworkStream stream, string content)
         {
             AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
-            await _accountRepo.UpdateAccount(dummy);
+            String input = await _accountRepo.UpdateAccount(dummy);
+            string reply = JsonSerializer.Serialize(input);
+            byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
+            stream.Write(bytesWrite, 0, bytesWrite.Length);
         }
         
         public async void Delete(string content)
         {
-            AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
-            await _accountRepo.DeleteAccount(dummy.UserId);
+            Console.WriteLine(content);
+            await _accountRepo.DeleteAccount(Int32.Parse(content));
         }
     }
 }
