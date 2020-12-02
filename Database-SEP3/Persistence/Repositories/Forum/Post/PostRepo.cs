@@ -5,9 +5,10 @@ using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
 using Database_SEP3.Persistence.Model.Post;
+using Database_SEP3.Persistence.Repositories.Forum.Post;
 using Microsoft.EntityFrameworkCore;
 
-namespace Database_SEP3.Persistence.Repositories.Post
+namespace Database_SEP3.Persistence.Repositories.Forum.Post
 {
     public class PostRepo : IPostRepo
     {

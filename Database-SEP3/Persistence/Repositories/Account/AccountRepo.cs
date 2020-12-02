@@ -64,5 +64,13 @@ namespace Database_SEP3.Persistence.Repositories.Account
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<AccountModel> GetAccountByUsername(string username)
+        {
+            await using (_context = new Sep3DBContext())
+            {
+                return await _context.Accounts.FirstAsync(a => a.Username.Equals(username));
+            }
+        }
     }
 }

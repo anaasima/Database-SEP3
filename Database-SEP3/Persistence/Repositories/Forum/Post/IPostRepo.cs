@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Database_SEP3.Persistence.Model.Post;
 
-namespace Database_SEP3.Persistence.Repositories.Post
+namespace Database_SEP3.Persistence.Repositories.Forum.Post
 {
     public interface IPostRepo
     {

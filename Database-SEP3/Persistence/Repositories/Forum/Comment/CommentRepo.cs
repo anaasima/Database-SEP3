@@ -5,9 +5,10 @@ using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Comment;
 using Database_SEP3.Persistence.Model.Post;
+using Database_SEP3.Persistence.Repositories.Forum.Comment;
 using Microsoft.EntityFrameworkCore;
 
-namespace Database_SEP3.Persistence.Repositories.Comment
+namespace Database_SEP3.Persistence.Repositories.Forum.Comment
 {
     public class CommentRepo : ICommentRepo
     {

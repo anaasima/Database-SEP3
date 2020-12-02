@@ -11,5 +11,6 @@ namespace Database_SEP3.Persistence.Repositories.Account
         public Task<AccountModel> ReadAccount(string username, string password);
         public Task DeleteAccount(int userId);
         public Task UpdateAccount(AccountModel accountModel);
+        public Task<AccountModel> GetAccountByUsername(string username);
     }
 }

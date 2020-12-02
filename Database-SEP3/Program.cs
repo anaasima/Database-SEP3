@@ -15,9 +15,9 @@ using Database_SEP3.Persistence.Model.Post;
 using Database_SEP3.Persistence.Repositories;
 using Database_SEP3.Persistence.Repositories.Account;
 using Database_SEP3.Persistence.Repositories.Build;
-using Database_SEP3.Persistence.Repositories.Comment;
+using Database_SEP3.Persistence.Repositories.Forum.Comment;
 using Database_SEP3.Persistence.Repositories.Component;
-using Database_SEP3.Persistence.Repositories.Post;
+using Database_SEP3.Persistence.Repositories.Forum.Post;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database_SEP3

@@ -4,8 +4,8 @@ using System.Text;
 using System.Text.Json;
 using Database_SEP3.Persistence.Model.Comment;
 using Database_SEP3.Persistence.Model.Post;
-using Database_SEP3.Persistence.Repositories.Comment;
-using Database_SEP3.Persistence.Repositories.Post;
+using Database_SEP3.Persistence.Repositories.Forum.Comment;
+using Database_SEP3.Persistence.Repositories.Forum.Post;
 
 namespace Database_SEP3.Networking.Forum
 {
