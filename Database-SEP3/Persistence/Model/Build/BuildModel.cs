@@ -19,6 +19,7 @@ namespace Database_SEP3.Persistence.Model.Build
         
         [JsonPropertyName("name")]
         public String Name { get; set; }
+        
         [JsonIgnore]
         public IList<BuildComponent> BuildComponents { get; set; }
         

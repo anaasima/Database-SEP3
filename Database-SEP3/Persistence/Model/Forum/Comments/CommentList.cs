@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text.Json.Serialization;
 
 namespace Database_SEP3.Persistence.Model.Comment
 {
     public class CommentList
     {
-        public List<CommentModel> Comments { get; set; }
+        public IList<CommentModel> Comments { get; set; }
 
 
         public CommentList()

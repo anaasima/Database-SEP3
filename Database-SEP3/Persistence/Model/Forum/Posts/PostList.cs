@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Database_SEP3.Persistence.Model.Post
 {
     public class PostList
     {
-        public List<PostModel> Posts { get; set; }
+       
+        public IList<PostModel> Posts { get; set; }
 
         public PostList()
         {

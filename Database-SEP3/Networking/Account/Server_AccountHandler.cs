@@ -52,5 +52,18 @@ namespace Database_SEP3.Networking.Account
             Console.WriteLine(content);
             await _accountRepo.DeleteAccount(Int32.Parse(content));
         }
+
+        public async void GetAccountByUsername(NetworkStream stream, string content)
+        {
+            AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
+            string username = dummy.Username;
+            _account = await _accountRepo.GetAccountByUsername(username);
+            string reply = JsonSerializer.Serialize(_account);
+
+            Console.WriteLine("Other account: " + reply);
+            
+            byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
+            stream.Write(bytesWrite, 0, bytesWrite.Length);
+        }
     }
 }

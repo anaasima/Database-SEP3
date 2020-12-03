@@ -28,6 +28,44 @@ namespace Database_SEP3
         {
             SocketServer socketServer = new SocketServer();
             socketServer.StartServer();
+
+            // await using (Sep3DBContext context = new Sep3DBContext())
+            // {
+            //     CommentModel cm = await context.Comments.FirstAsync(c => c.Id == 1);
+            //     Console.WriteLine(cm.ToString());
+            //     PostModel pm = await context.Posts.FirstAsync(p => p.Id == 2);
+            //     Console.WriteLine(pm.CommentList.ToString());
+            //     if (pm.CommentList == null)
+            //     {
+            //         pm.CommentList = new CommentList();
+            //     }
+            //     pm.CommentList.AddComment(cm);
+            //     context.Posts.Update(pm);
+            //     await context.SaveChangesAsync();
+            // }
+            // ICommentRepo _commentRepo = new CommentRepo();
+            // CommentModel commentModel = new CommentModel
+            // {
+            //     Id = 0,
+            //     Content = "Yeet",
+            //     DownVote = 0,
+            //     UpVote = 0
+            // };
+            //
+            // await _commentRepo.CreateComment(commentModel, 2,1);
+
+
+            //
+            // IPostRepo postRepo = new PostRepo();
+            // PostModel postModel = new PostModel
+            // {
+            //     Content = "Ana are meme",
+            //     DownVote = 0,
+            //     UpVote = 0,
+            // };
+            //
+            // await postRepo.CreatePost(postModel, 3);
+
             // CommentRepo commentRepo = new CommentRepo();
             // PostRepo postRepo = new PostRepo();
             // AccountRepo accountRepo = new AccountRepo();
@@ -62,7 +100,7 @@ namespace Database_SEP3
             // };
             // await accountRepo.UpdateAccount(accountModel);
             // await accountRepo.CreateAccount(accountModel);
-            
+
             // ComponentList componentList =new ComponentList();
             // componentList.AddComponent(c1);
             // componentList.AddComponent(c2);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Database_SEP3.Persistence.Model.Build;
+using Database_SEP3.Persistence.Model.Comment;
 using Database_SEP3.Persistence.Model.Post;
 
 namespace Database_SEP3.Persistence.Model.Account
@@ -21,10 +22,13 @@ namespace Database_SEP3.Persistence.Model.Account
         [JsonPropertyName("name")]
         public String Name { get; set; }
         
-        [JsonPropertyName("buildList")]
+        [JsonPropertyName("builds")]
         public ICollection<BuildModel> Builds { get; set; }
-        [JsonPropertyName("postList")]
+        [JsonPropertyName("Posts")]
         public ICollection<PostModel> Posts { get; set; }
+        [JsonIgnore]
+        public ICollection<CommentModel> Comments { get; set; }
+
 
         public override string ToString()
         {

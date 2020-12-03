@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
+using Database_SEP3.Persistence.Model.Comment;
 using Database_SEP3.Persistence.Model.Post;
 using Database_SEP3.Persistence.Repositories.Forum.Post;
 using Microsoft.EntityFrameworkCore;
@@ -20,9 +22,16 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Post
             _postList = new PostList();
             await using (_context = new Sep3DBContext())
             {
-                foreach (var variable in _context.Posts)
+                List<PostModel> posts = await _context.Posts.Include(p => p.Comments).ToListAsync();
+                foreach (var variable in posts)
                 {
+                    variable.CommentList = new CommentList();
+                    foreach (var comment in variable.Comments)
+                    {
+                        variable.CommentList.AddComment(comment);
+                    }
                     _postList.AddPost(variable);
+                    Console.WriteLine("number of comments in post  " + variable.CommentList.Size());
                 }
             }
 
@@ -65,8 +74,10 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Post
                     .Include(acc => acc.Posts)
                     .FirstAsync(a => a.UserId == userid);
                 PostModel postDatabase = await _context.Posts.FirstAsync(p => p.Id == postModel.Id);
+                postDatabase.Username = accountModel.Username;
                 accountModel.Posts.Add(postDatabase);
                 _context.Accounts.Update(accountModel);
+                _context.Posts.Update(postDatabase);
                 await _context.SaveChangesAsync();
             }
         }

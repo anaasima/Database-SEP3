@@ -7,6 +7,6 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Comment
     public interface ICommentRepo
     {
         public Task<CommentList> GetCommentsFromPost(int postId);
-        public Task CreateComment(CommentModel commentModel, int postId);
+        public Task CreateComment(CommentModel commentModel, int postId, int userId);
     }
 }

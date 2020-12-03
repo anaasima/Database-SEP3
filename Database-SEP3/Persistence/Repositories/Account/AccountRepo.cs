@@ -71,19 +71,18 @@ namespace Database_SEP3.Persistence.Repositories.Account
         {
             await using (_context = new Sep3DBContext())
             {
-                foreach (var variable in _context.Accounts)
-                {
-                    if (variable.Username.Equals(accountModel.Username))
-                    {
-                        Console.WriteLine("Account already exists");
-                        return "Account already exists";
-                    }
-                }
+                // // foreach (var variable in _context.Accounts)
+                // // {
+                //     if (variable.Username.Equals(accountModel.Username))
+                //     {
+                //         Console.WriteLine("Account already exists");
+                //         return "Account already exists";
+                //     }
+                // // }
                 
                 _context.Accounts.Update(accountModel);
                 await _context.SaveChangesAsync();
             }
-
             return "Account updated";
         }
 
@@ -91,7 +90,7 @@ namespace Database_SEP3.Persistence.Repositories.Account
         {
             await using (_context = new Sep3DBContext())
             {
-                return await _context.Accounts.FirstAsync(a => a.Username.Equals(username));
+                return await _context.Accounts.Include(acc => acc.Posts).FirstAsync(a => a.Username.Equals(username));
             }
         }
     }

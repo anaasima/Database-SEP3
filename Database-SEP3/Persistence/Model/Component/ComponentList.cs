@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Database_SEP3.Persistence.Model.Component
 {
     public class ComponentList
     {
-        public List<ComponentModel> Components { get; set; }
+        public IList<ComponentModel> Components { get; set; }
 
 
         public ComponentList()

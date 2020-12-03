@@ -29,7 +29,7 @@ namespace Database_SEP3.Networking.Forum
             _postList = await _postRepo.GetAllPosts();
             string reply = JsonSerializer.Serialize(_postList);
 
-            Console.WriteLine(reply);
+            Console.WriteLine("This leaves from tier3" + reply);
             
             byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
             stream.Write(bytesWrite, 0, bytesWrite.Length);

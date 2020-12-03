@@ -102,9 +102,12 @@ namespace Database_SEP3.Networking
                         case "POSTS":
                             _forumHandler.ReadAllPosts(stream);
                             break;
+                        case "OTHERACCOUNT":
+                            _accountHandler.GetAccountByUsername(stream, req1.Content);
+                            break;
                         default: 
                             string reply = JsonSerializer.Serialize("conFromTier3");
-                            Console.WriteLine(reply);
+                            Console.WriteLine("What am i " + reply);
                             byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
                             stream.Write(bytesWrite, 0, bytesWrite.Length);
                             break;

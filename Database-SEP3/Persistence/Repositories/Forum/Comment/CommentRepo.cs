@@ -34,17 +34,19 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Comment
             }
         }
 
-        public async Task CreateComment(CommentModel commentModel, int postId)
+        public async Task CreateComment(CommentModel commentModel, int postId, int userId)
         {
             await using (_context = new Sep3DBContext())
             {
                 await _context.Comments.AddAsync(commentModel);
-                await _context.SaveChangesAsync();
+                AccountModel accountModel = await _context.Accounts.Include(acc => acc.Comments).FirstAsync(a => a.UserId == userId);
+                accountModel.Comments.Add(commentModel);
+                _context.Accounts.Update(accountModel);
                 PostModel postModel = await _context.Posts
                     .Include(p => p.Comments)
                     .FirstAsync(post => post.Id == postId);
-                CommentModel commentDatabase = await _context.Comments.FirstAsync(c => c.Id == commentModel.Id);
-                postModel.Comments.Add(commentDatabase);
+                postModel.Comments.Add(commentModel);
+                postModel.CommentList.AddComment(commentModel);
                 _context.Posts.Update(postModel);
                 await _context.SaveChangesAsync();
             }
