@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Database_SEP3.Persistence.DataAccess;
@@ -97,7 +98,48 @@ namespace Database_SEP3.Persistence.Repositories.Build
                 await _context.SaveChangesAsync();
             }
         }
-        
+
+        public async Task EditBuilds(BuildModel buildModel, ComponentList componentList)
+        {
+            await using (_context = new Sep3DBContext())
+            {
+                BuildModel buildModelDatabase = await _context.Builds
+                    .Include(b => b.BuildComponents)
+                    .FirstAsync(build => build.Id == buildModel.Id);
+                buildModelDatabase.Name = buildModel.Name;
+                buildModelDatabase.BuildComponents = new Collection<BuildComponent>();
+                for (int i = 0; i < componentList.Size(); i++)
+                {
+                    ComponentModel arg = await _context.Components
+                        .FirstAsync(c => c.Id == componentList.GetComponent(i).Id);
+                    BuildComponent buildComponent = new BuildComponent
+                    {
+                        BuildId = buildModelDatabase.Id,
+                        BuildModel = buildModelDatabase,
+                        ComponentId = arg.Id,
+                        ComponentModel = arg
+                    };
+                    buildModelDatabase.BuildComponents.Add(buildComponent);
+                }
+
+                _context.Update(buildModelDatabase);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteBuild(int buildId)
+        {
+            await using (_context = new Sep3DBContext())
+            {
+                BuildModel buildModel = await _context.Builds
+                    .Include(b => b.BuildComponents)
+                    .FirstAsync(build => build.Id == buildId);
+                buildModel.BuildComponents = new Collection<BuildComponent>();
+                _context.Builds.Remove(buildModel);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task<BuildList> GetBuildsFromAccount(int userId)
         {
             await using (_context = new Sep3DBContext())

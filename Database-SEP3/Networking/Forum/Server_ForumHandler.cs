@@ -28,11 +28,14 @@ namespace Database_SEP3.Networking.Forum
         {
             _postList = await _postRepo.GetAllPosts();
             string reply = JsonSerializer.Serialize(_postList);
-
-            Console.WriteLine("This leaves from tier3" + reply);
-            
             byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
             stream.Write(bytesWrite, 0, bytesWrite.Length);
+        }
+
+        public async void AddPost(string content)
+        {
+            PostModel postModel = JsonSerializer.Deserialize<PostModel>(content);
+            await _postRepo.CreatePost(postModel, postModel.AccountModelUserId);
         }
     }
 }

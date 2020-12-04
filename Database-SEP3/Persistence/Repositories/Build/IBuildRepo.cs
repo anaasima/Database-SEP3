@@ -12,5 +12,9 @@ namespace Database_SEP3.Persistence.Repositories.Build
         public Task CreateBuild(BuildModel buildModel, ComponentList componentModel, int userId);
         public Task<BuildList> GetBuildsFromAccount(int userId);
         public Task AddBuilds(IList<BuildModel> builds, int userId);
+
+        public Task EditBuilds(BuildModel buildModel, ComponentList componentList);
+
+        public Task DeleteBuild(int buildId);
     }
 }

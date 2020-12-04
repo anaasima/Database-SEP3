@@ -68,16 +68,17 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Post
         {
             await using (_context = new Sep3DBContext())
             {
-                await _context.Posts.AddAsync(postModel);
-                await _context.SaveChangesAsync();
                 AccountModel accountModel = await _context.Accounts
                     .Include(acc => acc.Posts)
                     .FirstAsync(a => a.UserId == userid);
-                PostModel postDatabase = await _context.Posts.FirstAsync(p => p.Id == postModel.Id);
-                postDatabase.Username = accountModel.Username;
-                accountModel.Posts.Add(postDatabase);
+                postModel.Username = accountModel.Username;
+                if (accountModel.Posts == null)
+                {
+                    accountModel.Posts = new List<PostModel>();
+                }
+                accountModel.Posts.Add(postModel);
                 _context.Accounts.Update(accountModel);
-                _context.Posts.Update(postDatabase);
+                await _context.Posts.AddAsync(postModel);
                 await _context.SaveChangesAsync();
             }
         }

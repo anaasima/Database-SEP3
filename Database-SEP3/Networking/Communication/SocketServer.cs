@@ -105,6 +105,18 @@ namespace Database_SEP3.Networking
                         case "OTHERACCOUNT":
                             _accountHandler.GetAccountByUsername(stream, req1.Content);
                             break;
+                        case "ADDPOST":
+                            _forumHandler.AddPost(req1.Content);
+                            break;
+                        case "ADDBUILD":
+                            _buildHandler.AddBuild(req1.Content);
+                            break;
+                        case "EDITBUILD":
+                            _buildHandler.EditBuild(req1.Content);
+                            break;
+                        case "DELETEBUILD":
+                            _buildHandler.DeleteBuild(req1.Content);
+                            break;
                         default: 
                             string reply = JsonSerializer.Serialize("conFromTier3");
                             Console.WriteLine("What am i " + reply);
