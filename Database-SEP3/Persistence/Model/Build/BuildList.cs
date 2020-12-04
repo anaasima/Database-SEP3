@@ -4,7 +4,8 @@ using System.Text.Json.Serialization;
 namespace Database_SEP3.Persistence.Model.Build
 {
     public class BuildList
-    {
+    {   
+        [JsonPropertyName("builds")]
         public IList<BuildModel> Builds { get; set; }
         
         public BuildList()

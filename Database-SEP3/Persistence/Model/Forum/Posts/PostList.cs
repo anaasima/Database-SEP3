@@ -5,7 +5,7 @@ namespace Database_SEP3.Persistence.Model.Post
 {
     public class PostList
     {
-       
+       [JsonPropertyName("posts")]
         public IList<PostModel> Posts { get; set; }
 
         public PostList()

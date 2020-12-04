@@ -24,6 +24,7 @@ namespace Database_SEP3.Persistence.Model.Build
         public IList<BuildComponent> BuildComponents { get; set; }
         
         [NotMapped]
+        [JsonPropertyName("componentList")]
         public ComponentList ComponentList { get; set; }
 
         public override string ToString()

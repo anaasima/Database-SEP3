@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using Database_SEP3.Persistence.Model.Build;
 using Database_SEP3.Persistence.Model.Comment;
@@ -21,11 +22,16 @@ namespace Database_SEP3.Persistence.Model.Account
         public String Password { get; set; }
         [JsonPropertyName("name")]
         public String Name { get; set; }
+        [NotMapped]
+        [JsonPropertyName("posts")]
+        public PostList PostList { get; set; }
         
-        [JsonPropertyName("builds")]
-        public ICollection<BuildModel> Builds { get; set; }
-        [JsonPropertyName("Posts")]
+        [JsonIgnore]
         public ICollection<PostModel> Posts { get; set; }
+        
+        [JsonIgnore]
+        public ICollection<BuildModel> Builds { get; set; }
+       
         [JsonIgnore]
         public ICollection<CommentModel> Comments { get; set; }
 

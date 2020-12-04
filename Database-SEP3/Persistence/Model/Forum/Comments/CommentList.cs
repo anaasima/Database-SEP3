@@ -6,6 +6,7 @@ namespace Database_SEP3.Persistence.Model.Comment
 {
     public class CommentList
     {
+        [JsonPropertyName("comments")]
         public IList<CommentModel> Comments { get; set; }
 
 

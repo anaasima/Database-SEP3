@@ -8,6 +8,7 @@ namespace Database_SEP3.Persistence.Model.Component
 {
     public class ComponentList
     {
+        [JsonPropertyName("components")]
         public IList<ComponentModel> Components { get; set; }
 
 

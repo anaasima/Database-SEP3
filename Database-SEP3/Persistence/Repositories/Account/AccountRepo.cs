@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
+using Database_SEP3.Persistence.Model.Comment;
+using Database_SEP3.Persistence.Model.Post;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Database_SEP3.Persistence.Repositories.Account
 {
@@ -90,7 +93,17 @@ namespace Database_SEP3.Persistence.Repositories.Account
         {
             await using (_context = new Sep3DBContext())
             {
-                return await _context.Accounts.Include(acc => acc.Posts).FirstAsync(a => a.Username.Equals(username));
+                AccountModel accountModel = await _context.Accounts
+                    .Include(acc => acc.Posts)
+                    .FirstAsync(a => a.Username.Equals(username));
+                accountModel.PostList = new PostList();
+                foreach (var post in accountModel.Posts)
+                {
+                    post.CommentList = new CommentList();
+                    accountModel.PostList.AddPost(post);
+                }
+
+                return accountModel;
             }
         }
     }
