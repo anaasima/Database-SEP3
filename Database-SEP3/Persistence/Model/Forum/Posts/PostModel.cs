@@ -30,7 +30,7 @@ namespace Database_SEP3.Persistence.Model.Post
         // [JsonPropertyName("commentList")]
         // public IList<CommentModel> CommentList { get; set; }
         
-        [JsonIgnore]
+        [JsonPropertyName("comments")]
         public ICollection<CommentModel> Comments { get; set; }
 
         public override string ToString()
