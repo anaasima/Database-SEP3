@@ -26,115 +26,115 @@ namespace Database_SEP3
     {
         static async Task Main(string[] args)
         {
-            // SocketServer socketServer = new SocketServer();
-            // socketServer.StartServer();
+            SocketServer socketServer = new SocketServer();
+            socketServer.StartServer();
 
             // AccountRepo accountRepo = new AccountRepo();
             // AccountModel accountModel = await accountRepo.GetAccountByUsername("MiauMiau");
             // Console.WriteLine(accountModel.ToString());
-            ComponentRepo componentRepo = new ComponentRepo();
-            
-            //procesoare
-            ComponentModel proc1 = new ComponentModel()
-            {
-                Name = "Ryzen 7 5800X",
-                Brand = "AMD",
-                ReleaseYear = "2020",
-                Type = "CPU",
-                SocketType = "AM4",
-                EnergyConsumption = 105,
-                AdditionalInfo = "3,8 GHz up to 4.7 GHz, 8 cores, 16 threads"
-
-            };
-            ComponentModel proc2 = new ComponentModel()
-            {
-                Name = "Ryzen 9 5950X",
-                Brand = "AMD",
-                ReleaseYear = "2020",
-                Type = "CPU",
-                SocketType = "AM4",
-                EnergyConsumption = 105,
-                AdditionalInfo = "3.4 GHz up to 4.9 GHz, 16 cores, 32 threads"
-
-            };
-            ComponentModel proc3 = new ComponentModel()
-            {
-                Name = "Ryzen 9 5900X",
-                Brand = "AMD",
-                ReleaseYear = "2020",
-                Type = "CPU",
-                SocketType = "AM4",
-                EnergyConsumption = 105,
-                AdditionalInfo = "3.7 GHz up to 4.8 GHz, 12 cores, 24 threads"
-
-            };
-            ComponentModel proc4 = new ComponentModel()
-            {
-                Name = "Ryzen 5 5600X",
-                Brand = "AMD",
-                ReleaseYear = "2020",
-                Type = "CPU",
-                SocketType = "AM4",
-                EnergyConsumption = 65,
-                AdditionalInfo = "3.7 GHz up to 4.6 GHz, 6 cores, 12 threads"
-
-            };
-            ComponentModel proc5 = new ComponentModel()
-            {
-                Name = "i9-10850K",
-                Brand = "Intel",
-                ReleaseYear = "2020",
-                Type = "CPU",
-                SocketType = "1200 LGA",
-                EnergyConsumption = 125,
-                AdditionalInfo = "3.6 GHz up to 5.2 GHz, 10 cores, 20 threads"
-
-            };
-            ComponentModel proc6 = new ComponentModel()
-            {
-                Name = "i9-10900T",
-                Brand = "Intel",
-                ReleaseYear = "2020",
-                Type = "CPU",
-                SocketType = "1200 LGA",
-                EnergyConsumption = 35,
-                AdditionalInfo = "1.9 GHz up to 4.6 GHz, 10 cores, 20 threads"
-
-            };
-            ComponentModel proc7 = new ComponentModel()
-            {
-                Name = "i9-10900",
-                Brand = "Intel",
-                ReleaseYear = "2020",
-                Type = "CPU",
-                SocketType = "1200 LGA",
-                EnergyConsumption = 65,
-                AdditionalInfo = "2.8 GHz up to 5.2 GHz, 10 cores, 20 threads"
-
-            };
-            ComponentModel proc8 = new ComponentModel()
-            {
-                Name = "i9-10900K",
-                Brand = "Intel",
-                ReleaseYear = "2020",
-                Type = "CPU",
-                SocketType = "1200 LGA",
-                EnergyConsumption = 125,
-                AdditionalInfo = "3.7 GHz up to 5.3 GHz, 10 cores, 20 threads"
-
-            };
-            ComponentModel proc9 = new ComponentModel()
-            {
-                Name = "i9-10980HK",
-                Brand = "Intel",
-                ReleaseYear = "2020",
-                Type = "CPU",
-                SocketType = "1440 BGA",
-                EnergyConsumption = 45,
-                AdditionalInfo = "2.4 GHz up to 5.3 GHz, 8 cores, 16 threads"
-
-            };
-            
+            // ComponentRepo componentRepo = new ComponentRepo();
+            //
+            // //procesoare
+            // ComponentModel proc1 = new ComponentModel()
+            // {
+            //     Name = "Ryzen 7 5800X",
+            //     Brand = "AMD",
+            //     ReleaseYear = "2020",
+            //     Type = "CPU",
+            //     SocketType = "AM4",
+            //     EnergyConsumption = 105,
+            //     AdditionalInfo = "3,8 GHz up to 4.7 GHz, 8 cores, 16 threads"
+            //
+            // };
+            // ComponentModel proc2 = new ComponentModel()
+            // {
+            //     Name = "Ryzen 9 5950X",
+            //     Brand = "AMD",
+            //     ReleaseYear = "2020",
+            //     Type = "CPU",
+            //     SocketType = "AM4",
+            //     EnergyConsumption = 105,
+            //     AdditionalInfo = "3.4 GHz up to 4.9 GHz, 16 cores, 32 threads"
+            //
+            // };
+            // ComponentModel proc3 = new ComponentModel()
+            // {
+            //     Name = "Ryzen 9 5900X",
+            //     Brand = "AMD",
+            //     ReleaseYear = "2020",
+            //     Type = "CPU",
+            //     SocketType = "AM4",
+            //     EnergyConsumption = 105,
+            //     AdditionalInfo = "3.7 GHz up to 4.8 GHz, 12 cores, 24 threads"
+            //
+            // };
+            // ComponentModel proc4 = new ComponentModel()
+            // {
+            //     Name = "Ryzen 5 5600X",
+            //     Brand = "AMD",
+            //     ReleaseYear = "2020",
+            //     Type = "CPU",
+            //     SocketType = "AM4",
+            //     EnergyConsumption = 65,
+            //     AdditionalInfo = "3.7 GHz up to 4.6 GHz, 6 cores, 12 threads"
+            //
+            // };
+            // ComponentModel proc5 = new ComponentModel()
+            // {
+            //     Name = "i9-10850K",
+            //     Brand = "Intel",
+            //     ReleaseYear = "2020",
+            //     Type = "CPU",
+            //     SocketType = "1200 LGA",
+            //     EnergyConsumption = 125,
+            //     AdditionalInfo = "3.6 GHz up to 5.2 GHz, 10 cores, 20 threads"
+            //
+            // };
+            // ComponentModel proc6 = new ComponentModel()
+            // {
+            //     Name = "i9-10900T",
+            //     Brand = "Intel",
+            //     ReleaseYear = "2020",
+            //     Type = "CPU",
+            //     SocketType = "1200 LGA",
+            //     EnergyConsumption = 35,
+            //     AdditionalInfo = "1.9 GHz up to 4.6 GHz, 10 cores, 20 threads"
+            //
+            // };
+            // ComponentModel proc7 = new ComponentModel()
+            // {
+            //     Name = "i9-10900",
+            //     Brand = "Intel",
+            //     ReleaseYear = "2020",
+            //     Type = "CPU",
+            //     SocketType = "1200 LGA",
+            //     EnergyConsumption = 65,
+            //     AdditionalInfo = "2.8 GHz up to 5.2 GHz, 10 cores, 20 threads"
+            //
+            // };
+            // ComponentModel proc8 = new ComponentModel()
+            // {
+            //     Name = "i9-10900K",
+            //     Brand = "Intel",
+            //     ReleaseYear = "2020",
+            //     Type = "CPU",
+            //     SocketType = "1200 LGA",
+            //     EnergyConsumption = 125,
+            //     AdditionalInfo = "3.7 GHz up to 5.3 GHz, 10 cores, 20 threads"
+            //
+            // };
+            // ComponentModel proc9 = new ComponentModel()
+            // {
+            //     Name = "i9-10980HK",
+            //     Brand = "Intel",
+            //     ReleaseYear = "2020",
+            //     Type = "CPU",
+            //     SocketType = "1440 BGA",
+            //     EnergyConsumption = 45,
+            //     AdditionalInfo = "2.4 GHz up to 5.3 GHz, 8 cores, 16 threads"
+            //
+            // };
+            //
             // await componentRepo.CreateComponent(proc1);
             // await componentRepo.CreateComponent(proc2);
             // await componentRepo.CreateComponent(proc3);
@@ -144,85 +144,85 @@ namespace Database_SEP3
             // await componentRepo.CreateComponent(proc7);
             // await componentRepo.CreateComponent(proc8);
             // await componentRepo.CreateComponent(proc9);
-            
-            // placi video
-            ComponentModel gpu1 = new ComponentModel()
-            {
-                Name = "Radeon RX 6800",
-                Brand = "AMD",
-                ReleaseYear = "2020",
-                Type = "GPU",
-                SocketType = "PCIe 4.0 x16",
-                EnergyConsumption = 250,
-                AdditionalInfo = "1815 MHz, 16 GB GDDR6, 256 bit"
-
-            };
-            ComponentModel gpu2 = new ComponentModel()
-            {
-                Name = "Radeon RX 6800 XT",
-                Brand = "AMD",
-                ReleaseYear = "2020",
-                Type = "GPU",
-                SocketType = "PCIe 4.0 x16",
-                EnergyConsumption = 300,
-                AdditionalInfo = "2015 MHz, 16 GB GDDR6, 256 bit"
-
-            };
-            ComponentModel gpu3 = new ComponentModel()
-            {
-                Name = "Radeon RX 6900 XT",
-                Brand = "AMD",
-                ReleaseYear = "2020",
-                Type = "GPU",
-                SocketType = "PCIe 4.0 x16",
-                EnergyConsumption = 300,
-                AdditionalInfo = "2015 MHz, 16 GB GDDR6, 256 bit"
-
-            };
-            ComponentModel gpu4 = new ComponentModel()
-            {
-                Name = "GeForce RTX 3090",
-                Brand = "NVIDIA",
-                ReleaseYear = "2020",
-                Type = "GPU",
-                SocketType = "PCIe 4.0 x16",
-                EnergyConsumption = 350,
-                AdditionalInfo = "1400 MHz, 24 GB GDDR6X, 384 bit"
-
-            };
-            ComponentModel gpu5 = new ComponentModel()
-            {
-                Name = "GeForce RTX 3080",
-                Brand = "NVIDIA",
-                ReleaseYear = "2020",
-                Type = "GPU",
-                SocketType = "PCIe 4.0 x16",
-                EnergyConsumption = 320,
-                AdditionalInfo = "1440 MHz, 10 GB GDDR6X, 320 bit"
-
-            };
-            ComponentModel gpu6 = new ComponentModel()
-            {
-                Name = "GeForce RTX 3070",
-                Brand = "NVIDIA",
-                ReleaseYear = "2020",
-                Type = "GPU",
-                SocketType = "PCIe 4.0 x16",
-                EnergyConsumption = 220,
-                AdditionalInfo = "1500 MHz, 8 GB GDDR6, 256 bit"
-
-            };
-            ComponentModel gpu7 = new ComponentModel()
-            {
-                Name = "GeForce RTX 3060 Ti",
-                Brand = "NVIDIA",
-                ReleaseYear = "2020",
-                Type = "GPU",
-                SocketType = "PCIe 4.0 x16",
-                EnergyConsumption = 200,
-                AdditionalInfo = "1500 MHz, 8 GB GDDR6, 256 bit"
-            };
-
+            //
+            // // placi video
+            // ComponentModel gpu1 = new ComponentModel()
+            // {
+            //     Name = "Radeon RX 6800",
+            //     Brand = "AMD",
+            //     ReleaseYear = "2020",
+            //     Type = "GPU",
+            //     SocketType = "PCIe 4.0 x16",
+            //     EnergyConsumption = 250,
+            //     AdditionalInfo = "1815 MHz, 16 GB GDDR6, 256 bit"
+            //
+            // };
+            // ComponentModel gpu2 = new ComponentModel()
+            // {
+            //     Name = "Radeon RX 6800 XT",
+            //     Brand = "AMD",
+            //     ReleaseYear = "2020",
+            //     Type = "GPU",
+            //     SocketType = "PCIe 4.0 x16",
+            //     EnergyConsumption = 300,
+            //     AdditionalInfo = "2015 MHz, 16 GB GDDR6, 256 bit"
+            //
+            // };
+            // ComponentModel gpu3 = new ComponentModel()
+            // {
+            //     Name = "Radeon RX 6900 XT",
+            //     Brand = "AMD",
+            //     ReleaseYear = "2020",
+            //     Type = "GPU",
+            //     SocketType = "PCIe 4.0 x16",
+            //     EnergyConsumption = 300,
+            //     AdditionalInfo = "2015 MHz, 16 GB GDDR6, 256 bit"
+            //
+            // };
+            // ComponentModel gpu4 = new ComponentModel()
+            // {
+            //     Name = "GeForce RTX 3090",
+            //     Brand = "NVIDIA",
+            //     ReleaseYear = "2020",
+            //     Type = "GPU",
+            //     SocketType = "PCIe 4.0 x16",
+            //     EnergyConsumption = 350,
+            //     AdditionalInfo = "1400 MHz, 24 GB GDDR6X, 384 bit"
+            //
+            // };
+            // ComponentModel gpu5 = new ComponentModel()
+            // {
+            //     Name = "GeForce RTX 3080",
+            //     Brand = "NVIDIA",
+            //     ReleaseYear = "2020",
+            //     Type = "GPU",
+            //     SocketType = "PCIe 4.0 x16",
+            //     EnergyConsumption = 320,
+            //     AdditionalInfo = "1440 MHz, 10 GB GDDR6X, 320 bit"
+            //
+            // };
+            // ComponentModel gpu6 = new ComponentModel()
+            // {
+            //     Name = "GeForce RTX 3070",
+            //     Brand = "NVIDIA",
+            //     ReleaseYear = "2020",
+            //     Type = "GPU",
+            //     SocketType = "PCIe 4.0 x16",
+            //     EnergyConsumption = 220,
+            //     AdditionalInfo = "1500 MHz, 8 GB GDDR6, 256 bit"
+            //
+            // };
+            // ComponentModel gpu7 = new ComponentModel()
+            // {
+            //     Name = "GeForce RTX 3060 Ti",
+            //     Brand = "NVIDIA",
+            //     ReleaseYear = "2020",
+            //     Type = "GPU",
+            //     SocketType = "PCIe 4.0 x16",
+            //     EnergyConsumption = 200,
+            //     AdditionalInfo = "1500 MHz, 8 GB GDDR6, 256 bit"
+            // };
+            //
             // await componentRepo.CreateComponent(gpu1);
             // await componentRepo.CreateComponent(gpu2);
             // await componentRepo.CreateComponent(gpu3);
@@ -230,99 +230,99 @@ namespace Database_SEP3
             // await componentRepo.CreateComponent(gpu5);
             // await componentRepo.CreateComponent(gpu6);
             // await componentRepo.CreateComponent(gpu7);
-
-            // memorie RAM
-            
-            ComponentModel ram1 = new ComponentModel()
-            {
-                Name = "ValueRam KVR13N9K2/16",
-                Brand = "Kingston",
-                ReleaseYear = "2015",
-                Type = "RAM",
-                SocketType = "DDR3",
-                EnergyConsumption = 0,
-                AdditionalInfo = "2x8GB kit, DDR3-1333 CL9"
-
-            };
-            ComponentModel ram2 = new ComponentModel()
-            {
-                Name = "VENGEANCE RGB PRO 16",
-                Brand = "Corsair",
-                ReleaseYear = "2018",
-                Type = "RAM",
-                SocketType = "DDR4",
-                EnergyConsumption = 0,
-                AdditionalInfo = "2x8GB kit, DDR4-3200 CL16"
-
-            };
-            ComponentModel ram3 = new ComponentModel()
-            {
-                Name = "VENGEANCE RGB PRO 16",
-                Brand = "Corsair",
-                ReleaseYear = "2018",
-                Type = "RAM",
-                SocketType = "DDR4",
-                EnergyConsumption = 0,
-                AdditionalInfo = "2x8GB kit, DDR4-3000 CL15"
-
-            };
-            ComponentModel ram4 = new ComponentModel()
-            {
-                Name = "ValueRam KVR16S11K2/16",
-                Brand = "Kingston",
-                ReleaseYear = "2015",
-                Type = "RAM",
-                SocketType = "DDR3",
-                EnergyConsumption = 0,
-                AdditionalInfo = "2x8GB kit, DDR3-1600 CL11"
-
-            };
-            ComponentModel ram5 = new ComponentModel()
-            {
-                Name = "Premier 16",
-                Brand = "ADATA",
-                ReleaseYear = "2016",
-                Type = "RAM",
-                SocketType = "DDR4",
-                EnergyConsumption = 0,
-                AdditionalInfo = "2x8GB kit, DDR4-2400 CL17"
-
-            };
-            ComponentModel ram6 = new ComponentModel()
-            {
-                Name = "XPG Gammix D10",
-                Brand = "ADATA",
-                ReleaseYear = "2018",
-                Type = "RAM",
-                SocketType = "DDR4",
-                EnergyConsumption = 0,
-                AdditionalInfo = "2x8GB kit, DDR4-3200 CL16"
-
-            };
-            ComponentModel ram7 = new ComponentModel()
-            {
-                Name = "Fury RGB",
-                Brand = "HyperX",
-                ReleaseYear = "2019",
-                Type = "RAM",
-                SocketType = "DDR4",
-                EnergyConsumption = 0,
-                AdditionalInfo = "2x16GB kit, DDR4-3200 CL16"
-
-            };
-            ComponentModel ram8 = new ComponentModel()
-            {
-                Name = "Viper 4",
-                Brand = "Patriot",
-                ReleaseYear = "2019",
-                Type = "RAM",
-                SocketType = "DDR4",
-                EnergyConsumption = 0,
-                AdditionalInfo = "2x16GB kit, DDR4-3000 CL16"
-
-            };
-
-            
+            //
+            // // memorie RAM
+            //
+            // ComponentModel ram1 = new ComponentModel()
+            // {
+            //     Name = "ValueRam KVR13N9K2/16",
+            //     Brand = "Kingston",
+            //     ReleaseYear = "2015",
+            //     Type = "RAM",
+            //     SocketType = "DDR3",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "2x8GB kit, DDR3-1333 CL9"
+            //
+            // };
+            // ComponentModel ram2 = new ComponentModel()
+            // {
+            //     Name = "VENGEANCE RGB PRO 16",
+            //     Brand = "Corsair",
+            //     ReleaseYear = "2018",
+            //     Type = "RAM",
+            //     SocketType = "DDR4",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "2x8GB kit, DDR4-3200 CL16"
+            //
+            // };
+            // ComponentModel ram3 = new ComponentModel()
+            // {
+            //     Name = "VENGEANCE RGB PRO 16",
+            //     Brand = "Corsair",
+            //     ReleaseYear = "2018",
+            //     Type = "RAM",
+            //     SocketType = "DDR4",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "2x8GB kit, DDR4-3000 CL15"
+            //
+            // };
+            // ComponentModel ram4 = new ComponentModel()
+            // {
+            //     Name = "ValueRam KVR16S11K2/16",
+            //     Brand = "Kingston",
+            //     ReleaseYear = "2015",
+            //     Type = "RAM",
+            //     SocketType = "DDR3",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "2x8GB kit, DDR3-1600 CL11"
+            //
+            // };
+            // ComponentModel ram5 = new ComponentModel()
+            // {
+            //     Name = "Premier 16",
+            //     Brand = "ADATA",
+            //     ReleaseYear = "2016",
+            //     Type = "RAM",
+            //     SocketType = "DDR4",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "2x8GB kit, DDR4-2400 CL17"
+            //
+            // };
+            // ComponentModel ram6 = new ComponentModel()
+            // {
+            //     Name = "XPG Gammix D10",
+            //     Brand = "ADATA",
+            //     ReleaseYear = "2018",
+            //     Type = "RAM",
+            //     SocketType = "DDR4",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "2x8GB kit, DDR4-3200 CL16"
+            //
+            // };
+            // ComponentModel ram7 = new ComponentModel()
+            // {
+            //     Name = "Fury RGB",
+            //     Brand = "HyperX",
+            //     ReleaseYear = "2019",
+            //     Type = "RAM",
+            //     SocketType = "DDR4",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "2x16GB kit, DDR4-3200 CL16"
+            //
+            // };
+            // ComponentModel ram8 = new ComponentModel()
+            // {
+            //     Name = "Viper 4",
+            //     Brand = "Patriot",
+            //     ReleaseYear = "2019",
+            //     Type = "RAM",
+            //     SocketType = "DDR4",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "2x16GB kit, DDR4-3000 CL16"
+            //
+            // };
+            //
+            //
             // await componentRepo.CreateComponent(ram1);
             // await componentRepo.CreateComponent(ram2);
             // await componentRepo.CreateComponent(ram3);
@@ -331,122 +331,122 @@ namespace Database_SEP3
             // await componentRepo.CreateComponent(ram6);
             // await componentRepo.CreateComponent(ram7);
             // await componentRepo.CreateComponent(ram8);
-            
-            //storage
-            ComponentModel stor1 = new ComponentModel()
-            {
-                Name = "BarraCuda HDD",
-                Brand = "Seagate",
-                ReleaseYear = "2018",
-                Type = "Storage",
-                SocketType = "SATA-III",
-                EnergyConsumption = 0,
-                AdditionalInfo = "1TB, 7200rpm, 3.5inch"
-
-            };
-            ComponentModel stor2 = new ComponentModel()
-            {
-                Name = "BarraCuda HDD",
-                Brand = "Seagate",
-                ReleaseYear = "2018",
-                Type = "Storage",
-                SocketType = "SATA-III",
-                EnergyConsumption = 0,
-                AdditionalInfo = "1TB, 7200 rpm, 64MB buffer, 3.5inch"
-
-            };
-            ComponentModel stor3 = new ComponentModel()
-            {
-                Name = "Blue HDD",
-                Brand = "WD",
-                ReleaseYear = "2019",
-                Type = "Storage",
-                SocketType = "SATA-III",
-                EnergyConsumption = 0,
-                AdditionalInfo = "1TB, 7200 rpm, 64MB buffer, 3.5inch"
-
-            };
-            ComponentModel stor4 = new ComponentModel()
-            {
-                Name = "P2 SSD",
-                Brand = "Crucial",
-                ReleaseYear = "2017",
-                Type = "Storage",
-                SocketType = "NVMe",    
-                EnergyConsumption = 0,
-                AdditionalInfo = "500GB, 940MB/s - 2300MB/s, M.2"
-
-            };
-            ComponentModel stor5 = new ComponentModel()
-            {
-                Name = "A400 SSD",
-                Brand = "Kingston",
-                ReleaseYear = "2018",
-                Type = "Storage",
-                SocketType = "SATA-III",
-                EnergyConsumption = 0,
-                AdditionalInfo = "240GB, 350MB/s - 500MB/s, 2.5inch"
-
-            };
-
+            //
+            // //storage
+            // ComponentModel stor1 = new ComponentModel()
+            // {
+            //     Name = "BarraCuda HDD",
+            //     Brand = "Seagate",
+            //     ReleaseYear = "2018",
+            //     Type = "Storage",
+            //     SocketType = "SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "1TB, 7200rpm, 3.5inch"
+            //
+            // };
+            // ComponentModel stor2 = new ComponentModel()
+            // {
+            //     Name = "BarraCuda HDD",
+            //     Brand = "Seagate",
+            //     ReleaseYear = "2018",
+            //     Type = "Storage",
+            //     SocketType = "SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "1TB, 7200 rpm, 64MB buffer, 3.5inch"
+            //
+            // };
+            // ComponentModel stor3 = new ComponentModel()
+            // {
+            //     Name = "Blue HDD",
+            //     Brand = "WD",
+            //     ReleaseYear = "2019",
+            //     Type = "Storage",
+            //     SocketType = "SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "1TB, 7200 rpm, 64MB buffer, 3.5inch"
+            //
+            // };
+            // ComponentModel stor4 = new ComponentModel()
+            // {
+            //     Name = "P2 SSD",
+            //     Brand = "Crucial",
+            //     ReleaseYear = "2017",
+            //     Type = "Storage",
+            //     SocketType = "NVMe",    
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "500GB, 940MB/s - 2300MB/s, M.2"
+            //
+            // };
+            // ComponentModel stor5 = new ComponentModel()
+            // {
+            //     Name = "A400 SSD",
+            //     Brand = "Kingston",
+            //     ReleaseYear = "2018",
+            //     Type = "Storage",
+            //     SocketType = "SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "240GB, 350MB/s - 500MB/s, 2.5inch"
+            //
+            // };
+            //
             // await componentRepo.CreateComponent(stor1);
             // await componentRepo.CreateComponent(stor2);
             // await componentRepo.CreateComponent(stor3);
             // await componentRepo.CreateComponent(stor4);
             // await componentRepo.CreateComponent(stor5);
-            
-            //power supply 
-            ComponentModel supply1 = new ComponentModel()
-            {
-                Name = "S12III-550",
-                Brand = "Seasonic",
-                ReleaseYear = "2018",
-                Type = "Power supply",
-                SocketType = "",
-                EnergyConsumption = 550,
-                AdditionalInfo = "85%, 80+ Bronze"
-            };
-            ComponentModel supply2 = new ComponentModel()
-            {
-                Name = "CV650",
-                Brand = "Corsair",
-                ReleaseYear = "2019",
-                Type = "Power supply",
-                SocketType = "",
-                EnergyConsumption = 650,
-                AdditionalInfo = "88%, 80+ Bronze"
-            };
-            
+            //
+            // //power supply 
+            // ComponentModel supply1 = new ComponentModel()
+            // {
+            //     Name = "S12III-550",
+            //     Brand = "Seasonic",
+            //     ReleaseYear = "2018",
+            //     Type = "Power supply",
+            //     SocketType = "",
+            //     EnergyConsumption = 550,
+            //     AdditionalInfo = "85%, 80+ Bronze"
+            // };
+            // ComponentModel supply2 = new ComponentModel()
+            // {
+            //     Name = "CV650",
+            //     Brand = "Corsair",
+            //     ReleaseYear = "2019",
+            //     Type = "Power supply",
+            //     SocketType = "",
+            //     EnergyConsumption = 650,
+            //     AdditionalInfo = "88%, 80+ Bronze"
+            // };
+            //
             // await componentRepo.CreateComponent(supply1);
             // await componentRepo.CreateComponent(supply2);
-            
-            
-            //placi de baza
-            ComponentModel mb1 = new ComponentModel()
-            {
-                Name = "B365M PRO-VH",
-                Brand = "MSI",
-                ReleaseYear = "2018",
-                Type = "Motherboard",
-                SocketType = "1151v2, PCIe 3.0 x16, DDR4, SATA-III",
-                EnergyConsumption = 0,
-                AdditionalInfo = "mATX"
-            };
-            ComponentModel mb2 = new ComponentModel()
-            {
-                Name = "PRIME B460-PLUS",
-                Brand = "ASUS",
-                ReleaseYear = "2020",
-                Type = "Motherboard",
-                SocketType = "1200 LGA, PCIe 4.0 x16, DDR4, SATA-III, NVMe",
-                EnergyConsumption = 0,
-                AdditionalInfo = "ATX"
-            };
+            //
+            //
+            // //placi de baza
+            // ComponentModel mb1 = new ComponentModel()
+            // {
+            //     Name = "B365M PRO-VH",
+            //     Brand = "MSI",
+            //     ReleaseYear = "2018",
+            //     Type = "Motherboard",
+            //     SocketType = "1151v2, PCIe 3.0 x16, DDR4, SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "mATX"
+            // };
+            // ComponentModel mb2 = new ComponentModel()
+            // {
+            //     Name = "PRIME B460-PLUS",
+            //     Brand = "ASUS",
+            //     ReleaseYear = "2020",
+            //     Type = "Motherboard",
+            //     SocketType = "1200 LGA, PCIe 4.0 x16, DDR4, SATA-III, NVMe",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "ATX"
+            // };
             // await componentRepo.CreateComponent(mb1);
             // await componentRepo.CreateComponent(mb2);
-            
-            
-            
+            //
+            //
+            //
             
             // ComponentModel c1 = new ComponentModel
             // {
