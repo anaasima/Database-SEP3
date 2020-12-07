@@ -13,5 +13,6 @@ namespace Database_SEP3.Persistence.Repositories.Component
         public Task<IList<ComponentModel>> GetComponentsFromBuild(int buildId);
         public Task AddComponentToBuild(int buildId, int componentId);
         public Task RemoveComponentFromBuild(int buildId, int componentId);
+        public Task<ComponentModel> GetComponentById(int componentId);
     }
 }

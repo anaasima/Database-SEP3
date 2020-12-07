@@ -104,7 +104,15 @@ public class ComponentRepo : IComponentRepo
             await _context.SaveChangesAsync();
         }
     }
-    
+
+    public async Task<ComponentModel> GetComponentById(int componentId)
+    {
+        await using (_context = new Sep3DBContext())
+        {
+            return await _context.Components.FirstAsync(c => c.Id == componentId);
+        }
+    }
+
     public async Task AddComponentToBuild(int buildId, int componentId)
     {
         await using (_context = new Sep3DBContext())

@@ -156,8 +156,32 @@ namespace Database_SEP3.Persistence.Repositories.Build
                 return buildList;
             }
         }
-        
-        
-        
+
+        public async Task EditBuild(BuildModel buildModel)
+        {
+            await using (_context = new Sep3DBContext())
+            {
+                BuildModel buildModelDatabase = await _context.Builds
+                    .Include(b => b.BuildComponents)
+                    .FirstAsync(bld => bld.Id == buildModel.Id);
+                buildModelDatabase.Name = buildModel.Name;
+                buildModelDatabase.BuildComponents = new Collection<BuildComponent>();
+                for(var i = 0; i < buildModel.ComponentList.Count(); i++)
+                {
+                    ComponentModel arg = await _context.Components
+                        .FirstAsync(c => c.Id == buildModel.ComponentList[i].Id);
+                    BuildComponent buildComponent = new BuildComponent
+                    {
+                        BuildId = buildModelDatabase.Id,
+                        BuildModel = buildModelDatabase,
+                        ComponentId = arg.Id,
+                        ComponentModel = arg
+                    };
+                    buildModelDatabase.BuildComponents.Add(buildComponent);
+                }
+                _context.Update(buildModelDatabase);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
