@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using Database_SEP3.Persistence.Model.Account;
-using Database_SEP3.Persistence.Model.Component;
+
 
 namespace Database_SEP3.Persistence.Model.Build
 {
@@ -25,7 +25,7 @@ namespace Database_SEP3.Persistence.Model.Build
         
         [NotMapped]
         [JsonPropertyName("componentList")]
-        public ComponentList ComponentList { get; set; }
+        public IList<ComponentModel> ComponentList { get; set; }
 
         public override string ToString()
         {

@@ -10,7 +10,7 @@ using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
 using Database_SEP3.Persistence.Model.Comment;
-using Database_SEP3.Persistence.Model.Component;
+
 using Database_SEP3.Persistence.Model.Post;
 using Database_SEP3.Persistence.Repositories;
 using Database_SEP3.Persistence.Repositories.Account;
@@ -28,6 +28,34 @@ namespace Database_SEP3
         {
             SocketServer socketServer = new SocketServer();
             socketServer.StartServer();
+            
+            // AccountRepo accountRepo = new AccountRepo();
+            // ComponentRepo componentRepo = new ComponentRepo();
+            // IList<ComponentModel> componentModels = await componentRepo.ReadComponents();
+            // BuildRepo buildRepo = new BuildRepo();
+            // BuildModel buildModel = new BuildModel
+            // {
+            //     AccountModelUserId = 6,
+            //     ComponentList = componentModels,
+            //     Name = "testDelete"
+            // };
+            // await buildRepo.CreateBuild(buildModel);
+            // PostRepo postRepo = new PostRepo();
+            // PostModel postModel = new PostModel
+            // {
+            //     AccountModelUserId = 6,
+            //     Content = "dsfsa"
+            // };
+            // await postRepo.CreatePost(postModel);
+            // CommentRepo commentRepo = new CommentRepo();
+            // CommentModel commentModel = new CommentModel
+            // {
+            //     AccountModelUserId = 1,
+            //     Content = "sadsadf",
+            //     PostModelId = 4
+            // };
+            // await commentRepo.CreateComment(commentModel);
+            // await accountRepo.DeleteAccount(6);
 
             // await using (Sep3DBContext context = new Sep3DBContext())
             // {

@@ -22,9 +22,9 @@ namespace Database_SEP3.Persistence.Model.Account
         public String Password { get; set; }
         [JsonPropertyName("name")]
         public String Name { get; set; }
-        [NotMapped]
-        [JsonPropertyName("posts")]
-        public PostList PostList { get; set; }
+        // [NotMapped]
+        // [JsonPropertyName("posts")]
+        // public IList<PostModel> PostList { get; set; }
         
         [JsonIgnore]
         public ICollection<PostModel> Posts { get; set; }

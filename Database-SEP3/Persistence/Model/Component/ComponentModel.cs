@@ -27,7 +27,10 @@ namespace Database_SEP3.Persistence.Model
         public String Brand { get; set; }
         [JsonPropertyName("additionalInformation")]
         public String AdditionalInfo { get; set; }
-        
+        [JsonPropertyName("socketType")]
+        public String SocketType { get; set; }
+        [JsonPropertyName("energyConsumption")]
+        public int EnergyConsumption { get; set; }
         [JsonIgnore]
         public IList<BuildComponent> BuildComponents { get; set; }
 

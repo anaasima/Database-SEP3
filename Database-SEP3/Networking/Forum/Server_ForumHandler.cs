@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -13,15 +14,15 @@ namespace Database_SEP3.Networking.Forum
     {
         private IPostRepo _postRepo;
         private ICommentRepo _commentRepo;
-        private PostList _postList;
-        private CommentList _commentList;
+        private IList<PostModel> _postList;
+        private IList<CommentModel> _commentList;
 
         public Server_ForumHandler()
         {
             _postRepo = new PostRepo();
             _commentRepo = new CommentRepo();
-            _postList = new PostList();
-            _commentList = new CommentList();
+            _postList = new List<PostModel>();
+            _commentList = new List<CommentModel>();
         }
 
         public async void ReadAllPosts(NetworkStream stream)
@@ -35,7 +36,7 @@ namespace Database_SEP3.Networking.Forum
         public async void AddPost(string content)
         {
             PostModel postModel = JsonSerializer.Deserialize<PostModel>(content);
-            await _postRepo.CreatePost(postModel, postModel.AccountModelUserId);
+            await _postRepo.CreatePost(postModel);
         }
     }
 }

@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Database_SEP3.Persistence.DataAccess;
+using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
 using Database_SEP3.Persistence.Model.Comment;
@@ -64,7 +66,19 @@ namespace Database_SEP3.Persistence.Repositories.Account
                     .Include(a => a.Builds)
                     .ThenInclude(b => b.BuildComponents)
                     .Include(acc => acc.Posts)
+                    .ThenInclude(p => p.Comments)
                     .FirstAsync(account => account.UserId == userId);
+                foreach (var build in accountModel.Builds)
+                {
+                    build.BuildComponents = new Collection<BuildComponent>();
+                }
+                foreach (var post in accountModel.Posts)
+                {
+                    post.Comments = new Collection<CommentModel>();
+                    // _context.Comments.RemoveRange(post.Comments);
+                }
+                accountModel.Builds = new Collection<BuildModel>();
+                accountModel.Posts = new Collection<PostModel>();
                 _context.Accounts.Remove(accountModel);
                 await _context.SaveChangesAsync();
             }
@@ -96,12 +110,12 @@ namespace Database_SEP3.Persistence.Repositories.Account
                 AccountModel accountModel = await _context.Accounts
                     .Include(acc => acc.Posts)
                     .FirstAsync(a => a.Username.Equals(username));
-                accountModel.PostList = new PostList();
-                foreach (var post in accountModel.Posts)
-                {
-                    post.CommentList = new CommentList();
-                    accountModel.PostList.AddPost(post);
-                }
+                // accountModel.PostList = new List<PostModel>();
+                // foreach (var post in accountModel.Posts)
+                // {
+                //     post.CommentList = new List<CommentModel>();
+                //     accountModel.PostList.Add(post);
+                // }
 
                 return accountModel;
             }

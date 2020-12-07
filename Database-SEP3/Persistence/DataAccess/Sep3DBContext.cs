@@ -3,7 +3,6 @@ using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
 using Database_SEP3.Persistence.Model.Comment;
-using Database_SEP3.Persistence.Model.Component;
 using Database_SEP3.Persistence.Model.Post;
 using Database_SEP3.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;

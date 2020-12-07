@@ -14,49 +14,48 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Post
 {
     public class PostRepo : IPostRepo
     {
-        private PostList _postList;
         private Sep3DBContext _context;
 
-        public async Task<PostList> GetAllPosts()
+        public async Task<IList<PostModel>> GetAllPosts()
         {
-            _postList = new PostList();
             await using (_context = new Sep3DBContext())
             {
                 List<PostModel> posts = await _context.Posts.Include(p => p.Comments).ToListAsync();
-                foreach (var variable in posts)
-                {
-                    variable.CommentList = new CommentList();
-                    foreach (var comment in variable.Comments)
-                    {
-                        variable.CommentList.AddComment(comment);
-                    }
-                    _postList.AddPost(variable);
-                    Console.WriteLine("number of comments in post  " + variable.CommentList.Size());
-                }
+                // foreach (var variable in posts)
+                // {
+                //     variable.CommentList = new List<CommentModel>();
+                //     foreach (var comment in variable.Comments)
+                //     {
+                //         variable.CommentList.Add(comment);
+                //     }
+                //     _postList.Add(variable);
+                //     Console.WriteLine("number of comments in post  " + variable.CommentList.Count());
+                // }
+                return posts;
             }
-
-            return _postList;
         }
 
         public async Task<PostModel> GetPost(int postId)
         {
             await using (_context = new Sep3DBContext())
             {
-                return await _context.Posts.FirstAsync(p => p.Id == postId);
+                return await _context.Posts
+                    .Include(post => post.Comments)
+                    .FirstAsync(p => p.Id == postId);
             }
         }
 
-        public async Task<PostList> GetPostsFromAccount(int userId)
+        public async Task<IList<PostModel>> GetPostsFromAccount(int userId)
         {
             await using (_context = new Sep3DBContext())
             {
                 AccountModel account = _context.Accounts.Include(acc => acc.Posts).First(a => a.UserId ==
                     userId);
                 Console.WriteLine(account.ToString() + " took from database to get posts from");
-                PostList postList = new PostList();
+                IList<PostModel> postList = new List<PostModel>();
                 foreach (var post in account.Posts)
                 {
-                    postList.AddPost(post);
+                    postList.Add(post);
                     Console.WriteLine(post.ToString());
                 }
 
@@ -64,13 +63,13 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Post
             }
         }
 
-        public async Task CreatePost(PostModel postModel, int userid)
+        public async Task CreatePost(PostModel postModel)
         {
             await using (_context = new Sep3DBContext())
             {
                 AccountModel accountModel = await _context.Accounts
                     .Include(acc => acc.Posts)
-                    .FirstAsync(a => a.UserId == userid);
+                    .FirstAsync(a => a.UserId == postModel.AccountModelUserId);
                 postModel.Username = accountModel.Username;
                 if (accountModel.Posts == null)
                 {

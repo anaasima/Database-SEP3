@@ -8,7 +8,7 @@ using Database_SEP3.Networking.Util;
 using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Build;
-using Database_SEP3.Persistence.Model.Component;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Database_SEP3.Persistence.Repositories.Component
@@ -16,12 +16,12 @@ namespace Database_SEP3.Persistence.Repositories.Component
 public class ComponentRepo : IComponentRepo
 {
     private Sep3DBContext _context;
-    private ComponentList _componentList;
+    private IList<ComponentModel> _componentList;
 
 
     public ComponentRepo()
     {
-        _componentList = new ComponentList();
+        _componentList = new List<ComponentModel>();
     }
     public async Task CreateComponent(ComponentModel componentModel)
     {
@@ -32,17 +32,16 @@ public class ComponentRepo : IComponentRepo
         }
     }
 
-    public async Task<ComponentList> ReadComponents()
+    public async Task<IList<ComponentModel>> ReadComponents()
     {
-        _componentList = new ComponentList();
         await using (_context = new Sep3DBContext())
         {
-            foreach (var variable in _context.Components)
-            {
-                _componentList.AddComponent(variable);
-            }
+            // foreach (var variable in _context.Components)
+            // {
+            //     _componentList.Add(variable);
+            // }
 
-            return _componentList;
+            return await _context.Components.ToListAsync();
         }
     }
 
@@ -65,9 +64,9 @@ public class ComponentRepo : IComponentRepo
         }
     }
 
-    public async Task<ComponentList> GetComponentsFromBuild(int buildId)
+    public async Task<IList<ComponentModel>> GetComponentsFromBuild(int buildId)
     {
-        _componentList = new ComponentList();
+        _componentList = new List<ComponentModel>();
         await using (_context = new Sep3DBContext())
         {
             BuildModel database = await _context.Builds
@@ -80,13 +79,13 @@ public class ComponentRepo : IComponentRepo
             {
                 int id = variable.ComponentModel.Id;
                 ComponentModel componentModel = await _context.Components.FirstAsync(c => c.Id == id);
-                _componentList.AddComponent(componentModel);
+                _componentList.Add(componentModel);
             }
 
-            for (int i = 0; i < _componentList.Size(); i++)
-            {
-                Console.WriteLine(_componentList.GetComponent(i));
-            }
+            // for (int i = 0; i < _componentList.Size(); i++)
+            // {
+            //     Console.WriteLine(_componentList.GetComponent(i));
+            // }
             
             return _componentList;
         }

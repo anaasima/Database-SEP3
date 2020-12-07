@@ -26,9 +26,9 @@ namespace Database_SEP3.Persistence.Model.Post
         public string Username { get; set; }
         
         
-        [NotMapped]
-        [JsonPropertyName("commentList")]
-        public CommentList CommentList { get; set; }
+        // [NotMapped]
+        // [JsonPropertyName("commentList")]
+        // public IList<CommentModel> CommentList { get; set; }
         
         [JsonIgnore]
         public ICollection<CommentModel> Comments { get; set; }

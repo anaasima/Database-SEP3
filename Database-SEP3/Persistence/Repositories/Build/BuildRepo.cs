@@ -8,7 +8,6 @@ using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
-using Database_SEP3.Persistence.Model.Component;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database_SEP3.Persistence.Repositories.Build
@@ -27,7 +26,7 @@ namespace Database_SEP3.Persistence.Repositories.Build
         }
         
         // parametri build model si lista cu componentele lui
-        public async Task CreateBuild(BuildModel buildModel, ComponentList componentModels, int userId)
+        public async Task CreateBuild(BuildModel buildModel)
         {
             await using (_context = new Sep3DBContext())
             {
@@ -37,7 +36,7 @@ namespace Database_SEP3.Persistence.Repositories.Build
                 // iau contul din database
                 AccountModel accountModel = await _context.Accounts
                     .Include(a => a.Builds)
-                    .FirstAsync(account => account.UserId == userId);
+                    .FirstAsync(account => account.UserId == buildModel.AccountModelUserId);
                 // iau buildu din database
 
                 BuildModel databaseBuild = await _context.Builds.OrderBy(b => b.Id).LastAsync();
@@ -52,15 +51,15 @@ namespace Database_SEP3.Persistence.Repositories.Build
                 _context.Update(accountModel);
                 Console.WriteLine("cont updatat");
                 //iau fiecare component din database si ii adaug buildului
-                Console.WriteLine(componentModels.Size());
+                Console.WriteLine(databaseBuild.ComponentList.Count);
                 if (databaseBuild.BuildComponents == null)
                 {
                     databaseBuild.BuildComponents = new List<BuildComponent>();
                     Console.WriteLine("initialized buildComponent list");
                 }
-                for(var i = 0; i < componentModels.Size(); i++)
+                for(var i = 0; i < databaseBuild.ComponentList.Count; i++)
                 {
-                    ComponentModel arg = await _context.Components.FirstAsync(c => c.Id == componentModels.GetComponent(i).Id);
+                    ComponentModel arg = await _context.Components.FirstAsync(c => c.Id == databaseBuild.ComponentList[i].Id);
                     Console.WriteLine("component luat din database");
                     BuildComponent buildComponent = new BuildComponent
                     {
@@ -99,7 +98,7 @@ namespace Database_SEP3.Persistence.Repositories.Build
             }
         }
 
-        public async Task EditBuilds(BuildModel buildModel, ComponentList componentList)
+        public async Task EditBuilds(BuildModel buildModel)
         {
             await using (_context = new Sep3DBContext())
             {
@@ -108,10 +107,10 @@ namespace Database_SEP3.Persistence.Repositories.Build
                     .FirstAsync(build => build.Id == buildModel.Id);
                 buildModelDatabase.Name = buildModel.Name;
                 buildModelDatabase.BuildComponents = new Collection<BuildComponent>();
-                for (int i = 0; i < componentList.Size(); i++)
+                for (int i = 0; i < buildModelDatabase.ComponentList.Count; i++)
                 {
                     ComponentModel arg = await _context.Components
-                        .FirstAsync(c => c.Id == componentList.GetComponent(i).Id);
+                        .FirstAsync(c => c.Id == buildModelDatabase.ComponentList[i].Id);
                     BuildComponent buildComponent = new BuildComponent
                     {
                         BuildId = buildModelDatabase.Id,
@@ -140,17 +139,17 @@ namespace Database_SEP3.Persistence.Repositories.Build
             }
         }
 
-        public async Task<BuildList> GetBuildsFromAccount(int userId)
+        public async Task<IList<BuildModel>> GetBuildsFromAccount(int userId)
         {
             await using (_context = new Sep3DBContext())
             {
                 AccountModel account = _context.Accounts.Include(acc => acc.Builds).First(a => a.UserId ==
                     userId);
                 Console.WriteLine(account.ToString() + " took from database to get builds from");
-                BuildList buildList = new BuildList();
+                IList<BuildModel> buildList = new List<BuildModel>();
                 foreach (var build in account.Builds)
                 {
-                    buildList.AddBuild(build);
+                    buildList.Add(build);
                     Console.WriteLine(build.ToString());
                 }
 
