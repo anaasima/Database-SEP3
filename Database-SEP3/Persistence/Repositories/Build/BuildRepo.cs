@@ -107,10 +107,10 @@ namespace Database_SEP3.Persistence.Repositories.Build
                     .FirstAsync(build => build.Id == buildModel.Id);
                 buildModelDatabase.Name = buildModel.Name;
                 buildModelDatabase.BuildComponents = new Collection<BuildComponent>();
-                for (int i = 0; i < buildModelDatabase.ComponentList.Count; i++)
+                for (int i = 0; i < buildModel.ComponentList.Count; i++)
                 {
                     ComponentModel arg = await _context.Components
-                        .FirstAsync(c => c.Id == buildModelDatabase.ComponentList[i].Id);
+                        .FirstAsync(c => c.Id == buildModel.ComponentList[i].Id);
                     BuildComponent buildComponent = new BuildComponent
                     {
                         BuildId = buildModelDatabase.Id,
