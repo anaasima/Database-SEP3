@@ -26,13 +26,13 @@ namespace Database_SEP3
     {
         static async Task Main(string[] args)
         {
-            SocketServer socketServer = new SocketServer();
-            socketServer.StartServer();
+            // SocketServer socketServer = new SocketServer();
+            // socketServer.StartServer();
 
             // AccountRepo accountRepo = new AccountRepo();
             // AccountModel accountModel = await accountRepo.GetAccountByUsername("MiauMiau");
             // Console.WriteLine(accountModel.ToString());
-            // ComponentRepo componentRepo = new ComponentRepo();
+            ComponentRepo componentRepo = new ComponentRepo();
             //
             // //procesoare
             // ComponentModel proc1 = new ComponentModel()
@@ -416,9 +416,52 @@ namespace Database_SEP3
             //     EnergyConsumption = 650,
             //     AdditionalInfo = "88%, 80+ Bronze"
             // };
-            //
+            ComponentModel supply3 = new ComponentModel()
+            {
+                Name = "System Power 9 500",
+                Brand = "bequiet!",
+                ReleaseYear = "2020",
+                Type = "Power supply",
+                SocketType = "",
+                EnergyConsumption = 500,
+                AdditionalInfo = "88%, 80+ Bronze"
+            };
+            ComponentModel supply4 = new ComponentModel()
+            {
+                Name = "Power Zone 850",
+                Brand = "bequiet!",
+                ReleaseYear = "2020",
+                Type = "Power supply",
+                SocketType = "",
+                EnergyConsumption = 850,
+                AdditionalInfo = "88%, 80+ Bronze"
+            };
+            ComponentModel supply5 = new ComponentModel()
+            {
+                Name = "MWE GOLD 650",
+                Brand = "Cooler Master",
+                ReleaseYear = "2019",
+                Type = "Power supply",
+                SocketType = "",
+                EnergyConsumption = 650,
+                AdditionalInfo = "90%, 80+ Gold, Modular"
+            };
+            ComponentModel supply6 = new ComponentModel()
+            {
+                Name = "C750",
+                Brand = "NZXT",
+                ReleaseYear = "2019",
+                Type = "Power supply",
+                SocketType = "",
+                EnergyConsumption = 750,
+                AdditionalInfo = "90%, 80+ Gold, Modular"
+            };
             // await componentRepo.CreateComponent(supply1);
             // await componentRepo.CreateComponent(supply2);
+            // await componentRepo.CreateComponent(supply3);
+            // await componentRepo.CreateComponent(supply4);
+            // await componentRepo.CreateComponent(supply5);
+            // await componentRepo.CreateComponent(supply6);
             //
             //
             // //placi de baza
@@ -442,8 +485,41 @@ namespace Database_SEP3
             //     EnergyConsumption = 0,
             //     AdditionalInfo = "ATX"
             // };
+            ComponentModel mb3 = new ComponentModel()
+            {
+                Name = "B450 AORUS ELITE",
+                Brand = "GIGABYTE",
+                ReleaseYear = "2019",
+                Type = "Motherboard",
+                SocketType = "AM4, PCIe 3.0 x16, DDR4, SATA-III",
+                EnergyConsumption = 0,
+                AdditionalInfo = "ATX"
+            };
+            ComponentModel mb4 = new ComponentModel()
+            {
+                Name = "X570-A PRO",
+                Brand = "MSI",
+                ReleaseYear = "2020",
+                Type = "Motherboard",
+                SocketType = "AM4, PCIe 4.0 x16, DDR4, SATA-III, NVMe",
+                EnergyConsumption = 0,
+                AdditionalInfo = "ATX"
+            };
+            ComponentModel mb5 = new ComponentModel()
+            {
+                Name = "Z490-A PRO",
+                Brand = "MSI",
+                ReleaseYear = "2018",
+                Type = "Motherboard",
+                SocketType = "1200 LGA, PCIe 3.0 x16, DDR4, SATA-III",
+                EnergyConsumption = 0,
+                AdditionalInfo = "ATX"
+            };
             // await componentRepo.CreateComponent(mb1);
             // await componentRepo.CreateComponent(mb2);
+            // await componentRepo.CreateComponent(mb3);
+            // await componentRepo.CreateComponent(mb4);
+            // await componentRepo.CreateComponent(mb5);
             //
             //
             //
