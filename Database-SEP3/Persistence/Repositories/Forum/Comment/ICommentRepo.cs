@@ -5,7 +5,7 @@ using Database_SEP3.Persistence.Model.Comment;
 
 namespace Database_SEP3.Persistence.Repositories.Forum.Comment
 {
-    public interface ICommentRepo
+    public interface ICommentRepo        //dunno why they gray
     {
         public Task<IList<CommentModel>> GetCommentsFromPost(int postId);
         public Task CreateComment(CommentModel commentModel);

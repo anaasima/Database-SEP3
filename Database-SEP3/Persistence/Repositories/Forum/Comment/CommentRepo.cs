@@ -23,14 +23,12 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Comment
                 PostModel post = await _context.Posts
                     .Include(p => p.Comments)
                     .FirstAsync(pst => pst.Id == postId);
-                Console.WriteLine(post.ToString() + " took post from database to get comments from");
+                Console.WriteLine(post + " took post from database to get comments from");
                 IList<CommentModel> commentList = new List<CommentModel>();
                 foreach (var comment in post.Comments)
                 {
                     commentList.Add(comment);
-                    Console.WriteLine(comment.ToString());
                 }
-
                 return commentList;
             }
         }
@@ -49,7 +47,6 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Comment
                     .Include(p => p.Comments)
                     .FirstAsync(post => post.Id == commentModel.PostModelId);
                 postModel.Comments.Add(commentModel);
-                // postModel.CommentList.Add(commentModel);
                 _context.Posts.Update(postModel);
                 await _context.SaveChangesAsync();
             }

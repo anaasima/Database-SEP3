@@ -18,7 +18,6 @@ public class ComponentRepo : IComponentRepo
     private Sep3DBContext _context;
     private IList<ComponentModel> _componentList;
 
-
     public ComponentRepo()
     {
         _componentList = new List<ComponentModel>();
@@ -36,11 +35,6 @@ public class ComponentRepo : IComponentRepo
     {
         await using (_context = new Sep3DBContext())
         {
-            // foreach (var variable in _context.Components)
-            // {
-            //     _componentList.Add(variable);
-            // }
-
             return await _context.Components.ToListAsync();
         }
     }
@@ -81,12 +75,6 @@ public class ComponentRepo : IComponentRepo
                 ComponentModel componentModel = await _context.Components.FirstAsync(c => c.Id == id);
                 _componentList.Add(componentModel);
             }
-
-            // for (int i = 0; i < _componentList.Size(); i++)
-            // {
-            //     Console.WriteLine(_componentList.GetComponent(i));
-            // }
-            
             return _componentList;
         }
     }
@@ -98,7 +86,7 @@ public class ComponentRepo : IComponentRepo
             BuildComponent buildComponent = _context.Builds
                 .Where(b => b.Id == buildId)
                 .SelectMany(build => build.BuildComponents)
-                .First(buildcomp => buildcomp.ComponentModel.Id == componentId);
+                .First(build => build.ComponentModel.Id == componentId);
             _context.Remove(buildComponent);
             Console.WriteLine("removed component");
             await _context.SaveChangesAsync();
@@ -138,11 +126,11 @@ public class ComponentRepo : IComponentRepo
                 Console.WriteLine("added from existed");
             }
 
-            foreach (var VARIABLE in buildModel.BuildComponents)
+            foreach (var variable in buildModel.BuildComponents)
             {
-                Console.WriteLine("buildId= " + VARIABLE.BuildId + "\n Build model= " + VARIABLE.BuildModel.ToString() + "componentId= " + VARIABLE.ComponentId + "\n Component model= " + VARIABLE.ComponentModel.ToString());
+                Console.WriteLine("buildId= " + variable.BuildId + "\n Build model= " + variable.BuildModel + "componentId= " + variable.ComponentId + 
+                                  "\n Component model= " + variable.ComponentModel);
             }
-                
             _context.Update(buildModel);
             await _context.SaveChangesAsync();
         }

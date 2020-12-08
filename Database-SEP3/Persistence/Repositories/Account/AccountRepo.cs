@@ -33,11 +33,9 @@ namespace Database_SEP3.Persistence.Repositories.Account
                     }
                 }
                 await _context.Accounts.AddAsync(accountModel);
-                Console.WriteLine(accountModel.Username);
                 Console.WriteLine("Account successfully created");
                 await _context.SaveChangesAsync();
             }
-
             return "Account successfully created";
         }
 
@@ -54,7 +52,6 @@ namespace Database_SEP3.Persistence.Repositories.Account
             {
                 Console.WriteLine("Account does not exist");
             }
-
             return null;
         }
 
@@ -75,7 +72,6 @@ namespace Database_SEP3.Persistence.Repositories.Account
                 foreach (var post in accountModel.Posts)
                 {
                     post.Comments = new Collection<CommentModel>();
-                    // _context.Comments.RemoveRange(post.Comments);
                 }
                 accountModel.Builds = new Collection<BuildModel>();
                 accountModel.Posts = new Collection<PostModel>();
@@ -88,15 +84,6 @@ namespace Database_SEP3.Persistence.Repositories.Account
         {
             await using (_context = new Sep3DBContext())
             {
-                // // foreach (var variable in _context.Accounts)
-                // // {
-                //     if (variable.Username.Equals(accountModel.Username))
-                //     {
-                //         Console.WriteLine("Account already exists");
-                //         return "Account already exists";
-                //     }
-                // // }
-                
                 _context.Accounts.Update(accountModel);
                 await _context.SaveChangesAsync();
             }
@@ -110,12 +97,6 @@ namespace Database_SEP3.Persistence.Repositories.Account
                 AccountModel accountModel = await _context.Accounts
                     .Include(acc => acc.Posts)
                     .FirstAsync(a => a.Username.Equals(username));
-                // accountModel.PostList = new List<PostModel>();
-                // foreach (var post in accountModel.Posts)
-                // {
-                //     post.CommentList = new List<CommentModel>();
-                //     accountModel.PostList.Add(post);
-                // }
 
                 return accountModel;
             }

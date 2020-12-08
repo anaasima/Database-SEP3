@@ -21,16 +21,6 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Post
             await using (_context = new Sep3DBContext())
             {
                 List<PostModel> posts = await _context.Posts.Include(p => p.Comments).ToListAsync();
-                // foreach (var variable in posts)
-                // {
-                //     variable.CommentList = new List<CommentModel>();
-                //     foreach (var comment in variable.Comments)
-                //     {
-                //         variable.CommentList.Add(comment);
-                //     }
-                //     _postList.Add(variable);
-                //     Console.WriteLine("number of comments in post  " + variable.CommentList.Count());
-                // }
                 return posts;
             }
         }
@@ -51,14 +41,13 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Post
             {
                 AccountModel account = _context.Accounts.Include(acc => acc.Posts).First(a => a.UserId ==
                     userId);
-                Console.WriteLine(account.ToString() + " took from database to get posts from");
+                Console.WriteLine(account + " took from database to get posts from");
                 IList<PostModel> postList = new List<PostModel>();
                 foreach (var post in account.Posts)
                 {
                     postList.Add(post);
                     Console.WriteLine(post.ToString());
                 }
-
                 return postList;
             }
         }

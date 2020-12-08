@@ -26,8 +26,8 @@ namespace Database_SEP3
     {
         static async Task Main(string[] args)
         {
-            // SocketServer socketServer = new SocketServer();
-            // socketServer.StartServer();
+            SocketServer socketServer = new SocketServer();
+            socketServer.StartServer();
 
             // AccountRepo accountRepo = new AccountRepo();
             // AccountModel accountModel = await accountRepo.GetAccountByUsername("MiauMiau");

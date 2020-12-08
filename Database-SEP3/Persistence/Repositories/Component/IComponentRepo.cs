@@ -4,7 +4,7 @@ using Database_SEP3.Persistence.Model;
 
 namespace Database_SEP3.Persistence.Repositories.Component
 {
-    public interface IComponentRepo
+    public interface IComponentRepo    //i guess gray methods are for testing
     {
         public Task CreateComponent(ComponentModel componentModel);
         public Task<IList<ComponentModel>> ReadComponents();

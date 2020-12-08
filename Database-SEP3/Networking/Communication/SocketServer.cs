@@ -25,7 +25,7 @@ namespace Database_SEP3.Networking
 {
     public class SocketServer
     {
-        private static List<TcpClient> connectedClients;
+        private static List<TcpClient> _connectedClients;
         private Server_ComponentHandler _componentHandler;
         private Server_BuildHandler _buildHandler;
         private Server_AccountHandler _accountHandler;
@@ -33,7 +33,7 @@ namespace Database_SEP3.Networking
         
         public SocketServer()
         {
-            connectedClients = new List<TcpClient>();
+            _connectedClients = new List<TcpClient>();
             _componentHandler = new Server_ComponentHandler();
             _buildHandler = new Server_BuildHandler();
             _accountHandler = new Server_AccountHandler();
@@ -51,15 +51,15 @@ namespace Database_SEP3.Networking
             while (true)
             {
                 TcpClient tcpClient = tcpListener.AcceptTcpClient();
-                connectedClients.Add(tcpClient);
+                _connectedClients.Add(tcpClient);
                 Console.WriteLine("Client connected");
 
                 new Thread(() => Handler(tcpClient)).Start();
             }
         }
-        
 
-        public void Handler(TcpClient tcpClient)
+
+        private void Handler(TcpClient tcpClient)
         {
             NetworkStream stream = tcpClient.GetStream();
 
@@ -70,11 +70,7 @@ namespace Database_SEP3.Networking
                     byte[] data = new byte[64 * 1024];
                     int bytesToRead = stream.Read(data, 0, data.Length);
                     string req = Encoding.ASCII.GetString(data, 0, bytesToRead);
-                    Console.WriteLine(req);
                     NetworkPackage req1 = JsonSerializer.Deserialize<NetworkPackage>(req);
-
-                    Console.WriteLine(req1.NetworkType);
-                    Console.WriteLine(req1.Content);
                     
                     switch (req1.NetworkType)
                     {
@@ -125,11 +121,11 @@ namespace Database_SEP3.Networking
                             break;
                     }
                     stream.Close();
-                    break; //TODO: will bite you in the ass later
+                    break; //will bite you in the ass later, maybe
                 }
                 catch (IOException e)
                 {
-                    connectedClients.Remove(tcpClient);
+                    _connectedClients.Remove(tcpClient);
                 }
             }
         }

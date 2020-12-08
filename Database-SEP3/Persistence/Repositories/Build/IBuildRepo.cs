@@ -8,7 +8,7 @@ namespace Database_SEP3.Persistence.Repositories.Build
 {
     public interface IBuildRepo
     {
-        public Task<BuildModel> ReadBuild(int buildId);
+        public Task<BuildModel> ReadBuild(int buildId); //?for testing?
         public Task CreateBuild(BuildModel buildModel);
         public Task<IList<BuildModel>> GetBuildsFromAccount(int userId);
         public Task AddBuilds(IList<BuildModel> builds, int userId); //for testing
