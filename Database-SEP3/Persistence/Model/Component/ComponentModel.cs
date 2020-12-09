@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Database_SEP3.Persistence.Model.Rating;
 
 namespace Database_SEP3.Persistence.Model
 {
@@ -33,6 +34,8 @@ namespace Database_SEP3.Persistence.Model
         public int EnergyConsumption { get; set; }
         [JsonIgnore]
         public IList<BuildComponent> BuildComponents { get; set; }
+        [JsonPropertyName("ratingComponents")]
+        public IList<RatingComponentModel> Ratings { get; set; }
 
         public override string ToString()
         {

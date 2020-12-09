@@ -23,6 +23,9 @@ namespace Database_SEP3.Persistence.Model.Account
         [JsonPropertyName("name")]
         public String Name { get; set; }
 
+        [JsonPropertyName("savedPosts")]
+        public IList<PostModel> SavedPosts { get; set; }
+        
         [JsonPropertyName("posts")]
         public ICollection<PostModel> Posts { get; set; }
         

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Comment;
+using Database_SEP3.Persistence.Model.Rating;
 
 namespace Database_SEP3.Persistence.Model.Post
 {
@@ -16,6 +18,8 @@ namespace Database_SEP3.Persistence.Model.Post
         [JsonPropertyName("userId")]
         public int AccountModelUserId { get; set; }
         
+        public AccountModel AccountModel { get; set; }
+        
         [JsonPropertyName("upVote")]
         public int UpVote { get; set; }
         [JsonPropertyName("downVote")]
@@ -27,6 +31,9 @@ namespace Database_SEP3.Persistence.Model.Post
         
         [JsonPropertyName("comments")]
         public ICollection<CommentModel> Comments { get; set; }
+
+        [JsonPropertyName("ratingPosts")]
+        public IList<RatingPostModel> Ratings { get; set; }
 
         public override string ToString()
         {

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using Database_SEP3.Persistence.Model.Account;
+using Database_SEP3.Persistence.Model.Rating;
 
 
 namespace Database_SEP3.Persistence.Model.Build
@@ -26,6 +27,9 @@ namespace Database_SEP3.Persistence.Model.Build
         [NotMapped]
         [JsonPropertyName("componentList")]
         public IList<ComponentModel> ComponentList { get; set; }
+        
+        [JsonPropertyName("ratingBuilds")]
+        public IList<RatingBuildModel> Ratings { get; set; }
 
         public override string ToString()
         {
