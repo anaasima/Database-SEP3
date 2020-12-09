@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using Database_SEP3.Persistence.Model.Build;
-
+using Database_SEP3.Persistence.Model.Rating;
 using Database_SEP3.Persistence.Repositories.Build;
 using Database_SEP3.Persistence.Repositories.Component;
 
@@ -55,6 +55,12 @@ namespace Database_SEP3.Networking.Build
         {
             int id = Int32.Parse(content);
             await _buildRepo.DeleteBuild(id);
+        }
+
+        public async void GiveRating(string content)
+        {
+            RatingBuildModel ratingBuildModel = JsonSerializer.Deserialize<RatingBuildModel>(content);
+            await _buildRepo.GiveRating(ratingBuildModel);
         }
     }
 }

@@ -115,6 +115,27 @@ namespace Database_SEP3.Networking
                         case "DELETEBUILD":
                             _buildHandler.DeleteBuild(req1.Content);
                             break;
+                        case "RATINGBUILDS":
+                            _buildHandler.RateBuild();
+                            break;
+                        case "RATINGCOMPONENTS":
+                            _componentHandler.RateComponent();
+                            break;
+                        case "RATINGPOSTS":
+                            _forumHandler.RatePost();
+                            break;
+                        case "POSTCOMMENT":
+                            _forumHandler.AddComment();
+                            break;
+                        case "SAVEPOST":
+                            _forumHandler.SavePost();
+                            break;
+                        case "DELETEPOST":
+                            _forumHandler.DeletePost();
+                            break;
+                        case "REPORT":
+                            _forumHandler.Report();
+                            break;
                         default: 
                             string reply = JsonSerializer.Serialize("conFromTier3");
                             Console.WriteLine("What am i " + reply);
