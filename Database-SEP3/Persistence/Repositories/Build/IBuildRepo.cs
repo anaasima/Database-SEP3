@@ -13,7 +13,7 @@ namespace Database_SEP3.Persistence.Repositories.Build
         public Task<IList<BuildModel>> GetBuildsFromAccount(int userId);
         public Task AddBuilds(IList<BuildModel> builds, int userId); //for testing
 
-        public Task EditBuilds(BuildModel buildModel);
+        public Task EditBuild(BuildModel buildModel);
 
         public Task DeleteBuild(int buildId);
     }

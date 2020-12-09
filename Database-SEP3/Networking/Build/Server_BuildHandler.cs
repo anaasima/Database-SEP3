@@ -48,7 +48,7 @@ namespace Database_SEP3.Networking.Build
         public async void EditBuild(string content)
         {
             BuildModel buildModel = JsonSerializer.Deserialize<BuildModel>(content);
-            await _buildRepo.EditBuilds(buildModel);
+            await _buildRepo.EditBuild(buildModel);
         }
 
         public async void DeleteBuild(string content)

@@ -13,4 +13,4 @@ namespace Database_SEP3.Persistence.Repositories.Account
         public Task<string> UpdateAccount(AccountModel accountModel);
         public Task<AccountModel> GetAccountByUsername(string username);
     }
-}
+}    
