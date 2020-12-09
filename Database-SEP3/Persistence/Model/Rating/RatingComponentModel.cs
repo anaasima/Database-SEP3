@@ -8,6 +8,10 @@ namespace Database_SEP3.Persistence.Model.Rating
         [Key]
         [JsonPropertyName("id")]
         public int Id { get; set; }
+        [JsonPropertyName("userId")]
+        public int AccountModelUserId { get; set; }
+        [JsonPropertyName("componentId")]
+        public int ComponentModelId { get; set; }
         [JsonPropertyName("score")]
         public int Score { get; set; }
     }

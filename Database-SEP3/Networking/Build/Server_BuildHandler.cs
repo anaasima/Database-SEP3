@@ -10,6 +10,7 @@ using Database_SEP3.Persistence.Model.Build;
 using Database_SEP3.Persistence.Model.Rating;
 using Database_SEP3.Persistence.Repositories.Build;
 using Database_SEP3.Persistence.Repositories.Component;
+using Database_SEP3.Persistence.Repositories.Rating;
 
 namespace Database_SEP3.Networking.Build
 {
@@ -18,12 +19,14 @@ namespace Database_SEP3.Networking.Build
         private IList<BuildModel> _buildList;
         private IBuildRepo _buildRepo;
         private ComponentRepo _componentRepo;
+        private IRatingRepo _ratingRepo;
 
         public Server_BuildHandler()
         {
             _buildList = new List<BuildModel>();
             _buildRepo = new BuildRepo();
             _componentRepo = new ComponentRepo();
+            _ratingRepo = new RatingRepo();
         }
 
         public async void ReadAllBuilds(NetworkStream stream, string content)
@@ -60,7 +63,7 @@ namespace Database_SEP3.Networking.Build
         public async void GiveRating(string content)
         {
             RatingBuildModel ratingBuildModel = JsonSerializer.Deserialize<RatingBuildModel>(content);
-            await _buildRepo.GiveRating(ratingBuildModel);
+            await _ratingRepo.CreateBuildRating(ratingBuildModel);
         }
     }
 }

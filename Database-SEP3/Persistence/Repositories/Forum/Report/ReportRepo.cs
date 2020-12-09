@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Database_SEP3.Persistence.DataAccess;
+using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Forum.Report;
 using Database_SEP3.Persistence.Model.Post;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +30,14 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Report
         {
             await using (_context = new Sep3DBContext())
             {
-                return await _context.Reports.ToListAsync();
+                List<ReportModel> reports = await _context.Reports.ToListAsync();
+                foreach (var report in reports)
+                {
+                    AccountModel accountModel = await _context.Accounts.FirstAsync(a => a.UserId == report.AccountModelId);
+                    report.Username = accountModel.Username;
+                    Console.WriteLine(report.Username);
+                }
+                return reports;
             }
         }
 

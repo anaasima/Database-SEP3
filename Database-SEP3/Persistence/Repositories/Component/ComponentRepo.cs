@@ -35,7 +35,10 @@ public class ComponentRepo : IComponentRepo
     {
         await using (_context = new Sep3DBContext())
         {
-            return await _context.Components.ToListAsync();
+            return await _context.Components
+                .Include(c => c.Ratings)
+                .ToListAsync();
+            
         }
     }
 

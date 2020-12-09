@@ -9,6 +9,7 @@ using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Rating;
 using Database_SEP3.Persistence.Repositories;
 using Database_SEP3.Persistence.Repositories.Component;
+using Database_SEP3.Persistence.Repositories.Rating;
 
 namespace Database_SEP3.Networking.Component
 {
@@ -16,11 +17,13 @@ namespace Database_SEP3.Networking.Component
     {
         private IList<ComponentModel> _componentList;
         private IComponentRepo _componentRepo;
+        private IRatingRepo _ratingRepo;
 
         public Server_ComponentHandler()
         {
             _componentList = new List<ComponentModel>();
             _componentRepo = new ComponentRepo();
+            _ratingRepo = new RatingRepo();
         }
 
         public async void ReadAllComponents(NetworkStream stream)
@@ -40,7 +43,7 @@ namespace Database_SEP3.Networking.Component
         public async void GiveRating(string content)
         {
             RatingComponentModel ratingComponentModel = JsonSerializer.Deserialize<RatingComponentModel>(content);
-            await _componentRepo.GiveRating(ratingComponentModel);
+            await _ratingRepo.CreateComponentRating(ratingComponentModel);
         }
     }
 }

@@ -116,25 +116,40 @@ namespace Database_SEP3.Networking
                             _buildHandler.DeleteBuild(req1.Content);
                             break;
                         case "RATINGBUILDS":
-                            _buildHandler.RateBuild();
+                            _buildHandler.GiveRating(req1.Content);
                             break;
                         case "RATINGCOMPONENTS":
-                            _componentHandler.RateComponent();
+                            _componentHandler.GiveRating(req1.Content);
                             break;
                         case "RATINGPOSTS":
-                            _forumHandler.RatePost();
+                            _forumHandler.GiveRating(req1.Content);
                             break;
                         case "POSTCOMMENT":
-                            _forumHandler.AddComment();
+                            _forumHandler.AddComment(req1.Content);
                             break;
                         case "SAVEPOST":
-                            _forumHandler.SavePost();
+                            _forumHandler.SavePost(req1.Content);
                             break;
                         case "DELETEPOST":
-                            _forumHandler.DeletePost();
+                            _forumHandler.DeletePost(req1.Content);
                             break;
                         case "REPORT":
-                            _forumHandler.Report();
+                            _forumHandler.Report(req1.Content);
+                            break;
+                        case "DELETEREPORT":
+                            _forumHandler.DeleteReport(req1.Content);
+                            break;
+                        case "REPORTS":
+                            _forumHandler.GetAllReports(stream);
+                            break;
+                        case "POSTRATINGS":
+                            _forumHandler.GetAllPostRatings(stream, req1.Content);
+                            break;
+                        case "BUILDRATINGS":
+                            _forumHandler.GetAllBuildRatings(stream, req1.Content);
+                            break; 
+                        case "COMPONENTRATINGS":
+                            _forumHandler.GetAllComponentRatings(stream, req1.Content);
                             break;
                         default: 
                             string reply = JsonSerializer.Serialize("conFromTier3");

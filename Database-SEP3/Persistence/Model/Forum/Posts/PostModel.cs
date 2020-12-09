@@ -39,7 +39,7 @@ namespace Database_SEP3.Persistence.Model.Post
         [JsonPropertyName("ratingPosts")]
         public IList<RatingPostModel> Ratings { get; set; }
         
-        [JsonPropertyName("reports")]
+        [JsonIgnore] //remember
         public ICollection<ReportModel> Reports { get; set; }
 
         public override string ToString()

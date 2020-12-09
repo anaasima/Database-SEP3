@@ -7,6 +7,7 @@ using Database_SEP3.Persistence.Model.Build;
 using Database_SEP3.Persistence.Model.Comment;
 using Database_SEP3.Persistence.Model.Forum.Report;
 using Database_SEP3.Persistence.Model.Post;
+using Database_SEP3.Persistence.Model.Rating;
 
 namespace Database_SEP3.Persistence.Model.Account
 {
@@ -27,7 +28,7 @@ namespace Database_SEP3.Persistence.Model.Account
         [JsonPropertyName("savedPosts")]
         public ICollection<AccountSavedPost> SavedPosts { get; set; }
         
-        [JsonPropertyName("reports")]
+        [JsonIgnore]    //remember
         public ICollection<ReportModel> Reports { get; set; }
         
         [JsonPropertyName("posts")]
@@ -39,6 +40,13 @@ namespace Database_SEP3.Persistence.Model.Account
        
         [JsonIgnore]
         public ICollection<CommentModel> Comments { get; set; }
+        [JsonIgnore]
+        public ICollection<RatingBuildModel> BuildRatings { get; set; }
+        [JsonIgnore]
+        public ICollection<RatingComponentModel> ComponentRatings { get; set; }
+        [JsonIgnore]
+        public ICollection<RatingPostModel> PostRatings { get; set; }
+        
 
 
         public override string ToString()
