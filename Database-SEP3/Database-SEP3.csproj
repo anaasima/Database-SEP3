@@ -15,8 +15,4 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Persistence\Repositories\Forum" />
-    </ItemGroup>
-
 </Project>

@@ -10,7 +10,7 @@ using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
 using Database_SEP3.Persistence.Model.Comment;
-
+using Database_SEP3.Persistence.Model.Forum.Report;
 using Database_SEP3.Persistence.Model.Post;
 using Database_SEP3.Persistence.Repositories;
 using Database_SEP3.Persistence.Repositories.Account;
@@ -18,6 +18,8 @@ using Database_SEP3.Persistence.Repositories.Build;
 using Database_SEP3.Persistence.Repositories.Forum.Comment;
 using Database_SEP3.Persistence.Repositories.Component;
 using Database_SEP3.Persistence.Repositories.Forum.Post;
+using Database_SEP3.Persistence.Repositories.Forum.Report;
+using Database_SEP3.Persistence.Repositories.Rating;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database_SEP3
@@ -29,6 +31,10 @@ namespace Database_SEP3
             SocketServer socketServer = new SocketServer();
             socketServer.StartServer();
 
+            ReportRepo reportRepo = new ReportRepo();
+            RatingRepo ratingRepo = new RatingRepo();
+            
+            
             // AccountRepo accountRepo = new AccountRepo();
             // AccountModel accountModel = await accountRepo.GetAccountByUsername("MiauMiau");
             // Console.WriteLine(accountModel.ToString());

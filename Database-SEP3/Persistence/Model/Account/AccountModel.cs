@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using Database_SEP3.Persistence.Model.Build;
 using Database_SEP3.Persistence.Model.Comment;
+using Database_SEP3.Persistence.Model.Forum.Report;
 using Database_SEP3.Persistence.Model.Post;
 
 namespace Database_SEP3.Persistence.Model.Account
@@ -24,7 +25,10 @@ namespace Database_SEP3.Persistence.Model.Account
         public String Name { get; set; }
 
         [JsonPropertyName("savedPosts")]
-        public IList<PostModel> SavedPosts { get; set; }
+        public ICollection<AccountSavedPost> SavedPosts { get; set; }
+        
+        [JsonPropertyName("reports")]
+        public ICollection<ReportModel> Reports { get; set; }
         
         [JsonPropertyName("posts")]
         public ICollection<PostModel> Posts { get; set; }

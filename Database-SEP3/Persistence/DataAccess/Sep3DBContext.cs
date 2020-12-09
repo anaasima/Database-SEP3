@@ -3,6 +3,7 @@ using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
 using Database_SEP3.Persistence.Model.Comment;
+using Database_SEP3.Persistence.Model.Forum.Report;
 using Database_SEP3.Persistence.Model.Post;
 using Database_SEP3.Persistence.Model.Rating;
 using Database_SEP3.Persistence.Repositories;
@@ -20,6 +21,7 @@ namespace Database_SEP3.Persistence.DataAccess
         public DbSet<RatingBuildModel> RatingBuild { get; set; }
         public DbSet<RatingComponentModel> RatingComponent { get; set; }
         public DbSet<RatingPostModel> RatingPost { get; set; }
+        public DbSet<ReportModel> Reports { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -52,26 +54,26 @@ namespace Database_SEP3.Persistence.DataAccess
                 .HasOne<AccountModel>(p => p.AccountModel)
                 .WithMany(a => a.Posts)
                 .HasForeignKey(a => a.AccountModelUserId);
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<AccountSavedPost>()
+                .HasKey(sc => 
+                    new
+                    {
+                        sc.AccountId, 
+                        sc.SavedPostId
+                    }
+                );
             
-            // base.OnModelCreating(modelBuilder);
-            // modelBuilder.Entity<AccountPost>()
-            //     .HasKey(sc => 
-            //         new
-            //         {
-            //             sc.BuildId, 
-            //             sc.ComponentId
-            //         }
-            //     );
-            //
-            // modelBuilder.Entity<BuildComponent>()
-            //     .HasOne(bc => bc.BuildModel)
-            //     .WithMany(build => build.BuildComponents)
-            //     .HasForeignKey(bc => bc.BuildId);
-            //
-            // modelBuilder.Entity<BuildComponent>()
-            //     .HasOne(bc => bc.ComponentModel)
-            //     .WithMany(component => component.BuildComponents)
-            //     .HasForeignKey(bc => bc.ComponentId);
+            modelBuilder.Entity<AccountSavedPost>()
+                .HasOne(asp => asp.AccountModel)
+                .WithMany(a => a.SavedPosts)
+                .HasForeignKey(aa => aa.AccountId);
+            
+            modelBuilder.Entity<AccountSavedPost>()
+                .HasOne(asp => asp.SavedPostModel)
+                .WithMany(p => p.SavedPosts)
+                .HasForeignKey(sa => sa.SavedPostId);
         }
     }
 }
