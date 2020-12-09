@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using Database_SEP3.Persistence.Model.Comment;
 using Database_SEP3.Persistence.Model.Post;
+using Database_SEP3.Persistence.Model.Rating;
 using Database_SEP3.Persistence.Repositories.Forum.Comment;
 using Database_SEP3.Persistence.Repositories.Forum.Post;
 
@@ -38,5 +39,35 @@ namespace Database_SEP3.Networking.Forum
             PostModel postModel = JsonSerializer.Deserialize<PostModel>(content);
             await _postRepo.CreatePost(postModel);
         }
-    }
+
+        public async void GiveRating(string content)
+        {
+            RatingPostModel ratingPostModel = JsonSerializer.Deserialize<RatingPostModel>(content);
+            await _postRepo.GiveRating(ratingPostModel);
+        }
+
+        public async void AddComment(string content)
+        {
+            CommentModel commentModel = JsonSerializer.Deserialize<CommentModel>(content);
+            await _postRepo.AddComent(commentModel);
+        }
+
+        public async void SavePost(string content)
+        {
+            PostModel postModel = JsonSerializer.Deserialize<PostModel>(content);
+            await _postRepo.SavePost(postModel);
+        }
+
+        public async void DeletePost(string content)
+        {
+            PostModel postModel = JsonSerializer.Deserialize<PostModel>(content);
+            await _postRepo.DeletePost(postModel);
+        }
+
+        public async void Report(string content)
+        {
+            ReportModel reportModel = JsonSerializer.Deserialize<ReportModel>(content);
+            await _postRepo.Report(reportModel);
+        }
+}
 }

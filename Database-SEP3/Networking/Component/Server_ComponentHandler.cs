@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
-
+using Database_SEP3.Persistence.Model.Rating;
 using Database_SEP3.Persistence.Repositories;
 using Database_SEP3.Persistence.Repositories.Component;
 
@@ -35,6 +35,12 @@ namespace Database_SEP3.Networking.Component
         {
             ComponentModel dummy = JsonSerializer.Deserialize<ComponentModel>(content);
             await _componentRepo.CreateComponent(dummy);
+        }
+
+        public async void GiveRating(string content)
+        {
+            RatingComponentModel ratingComponentModel = JsonSerializer.Deserialize<RatingComponentModel>(content);
+            await _componentRepo.GiveRating(ratingComponentModel);
         }
     }
 }
