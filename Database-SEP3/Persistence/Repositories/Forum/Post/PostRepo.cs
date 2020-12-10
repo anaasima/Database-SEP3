@@ -24,7 +24,9 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Post
         {
             await using (_context = new Sep3DBContext())
             {
-                List<PostModel> posts = await _context.Posts.Include(p => p.Comments).ToListAsync();
+                List<PostModel> posts = await _context.Posts
+                    .Include(p => p.Comments)
+                    .Include(post => post.Ratings).ToListAsync();
                 return posts;
             }
         }
@@ -68,6 +70,8 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Post
                 {
                     accountModel.Posts = new List<PostModel>();
                 }
+                postModel.Comments = new List<CommentModel>();
+                postModel.Ratings = new List<RatingPostModel>();
                 accountModel.Posts.Add(postModel);
                 _context.Accounts.Update(accountModel);
                 await _context.Posts.AddAsync(postModel);

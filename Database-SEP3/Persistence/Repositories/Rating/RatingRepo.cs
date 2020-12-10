@@ -58,17 +58,22 @@ namespace Database_SEP3.Persistence.Repositories.Rating
         {
             await using (_context = new Sep3DBContext())
             {
-                try
+                bool exists = await _context.RatingComponent.AnyAsync(r =>
+                    r.AccountModelUserId == ratingComponentModel.AccountModelUserId
+                    && r.ComponentModelId == ratingComponentModel.ComponentModelId);
+                if (exists)
                 {
-                    // RatingComponentModel databaseRating = await _context.RatingComponent
-                    //     .FirstAsync(r => r.Id == ratingComponentModel.Id);
-                    _context.RatingComponent.Update(ratingComponentModel);
+                    List<RatingComponentModel> list = await _context.RatingComponent
+                        .Where(r => r.ComponentModelId == ratingComponentModel.ComponentModelId &&
+                                    r.AccountModelUserId == ratingComponentModel.AccountModelUserId).ToListAsync();
+                    RatingComponentModel rating = list[0];
+                    rating.Score = ratingComponentModel.Score;
+                    _context.RatingComponent.Update(rating);
                     await _context.SaveChangesAsync();
-
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine("rating nu exista  " + ratingComponentModel.Id);
+                    Console.WriteLine("rating nu exista  ");
                     await _context.RatingComponent.AddAsync(ratingComponentModel);
                     await _context.SaveChangesAsync();
                 }

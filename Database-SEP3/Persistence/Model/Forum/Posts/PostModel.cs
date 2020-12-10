@@ -19,6 +19,7 @@ namespace Database_SEP3.Persistence.Model.Post
         [JsonPropertyName("userId")]
         public int AccountModelUserId { get; set; }
         
+        [JsonIgnore]
         public AccountModel AccountModel { get; set; }
         
         [JsonPropertyName("upVote")]
@@ -30,7 +31,7 @@ namespace Database_SEP3.Persistence.Model.Post
         [JsonPropertyName("username")]
         public string Username { get; set; }
         
-        [JsonPropertyName("savedPosts")]
+        [JsonIgnore]
         public ICollection<AccountSavedPost> SavedPosts { get; set; }
         
         [JsonPropertyName("comments")]

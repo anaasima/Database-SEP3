@@ -11,6 +11,7 @@ using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
 using Database_SEP3.Persistence.Model.Comment;
 using Database_SEP3.Persistence.Model.Post;
+using Database_SEP3.Persistence.Model.Rating;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -32,6 +33,12 @@ namespace Database_SEP3.Persistence.Repositories.Account
                         return "Account already exists";
                     }
                 }
+                accountModel.Builds = new List<BuildModel>();
+                accountModel.Comments = new List<CommentModel>();
+                accountModel.Posts = new List<PostModel>();
+                accountModel.BuildRatings = new List<RatingBuildModel>();
+                accountModel.PostRatings = new List<RatingPostModel>();
+                accountModel.SavedPosts = new List<AccountSavedPost>();
                 await _context.Accounts.AddAsync(accountModel);
                 Console.WriteLine("Account successfully created");
                 await _context.SaveChangesAsync();
@@ -84,7 +91,17 @@ namespace Database_SEP3.Persistence.Repositories.Account
         {
             await using (_context = new Sep3DBContext())
             {
-                _context.Accounts.Update(accountModel);
+                AccountModel accountModelDatabase = await _context.Accounts
+                    .Include(a => a.Posts)
+                    .FirstAsync(acc => acc.UserId == accountModel.UserId);
+                accountModelDatabase.Username = accountModel.Username;
+                accountModelDatabase.Password = accountModel.Password;
+                accountModelDatabase.Name = accountModel.Name;
+                foreach (var post in accountModelDatabase.Posts)
+                {
+                    post.Username = accountModel.Username;
+                }
+                _context.Accounts.Update(accountModelDatabase);
                 await _context.SaveChangesAsync();
             }
             return "Account updated";
