@@ -45,5 +45,16 @@ namespace Database_SEP3.Networking.Component
             RatingComponentModel ratingComponentModel = JsonSerializer.Deserialize<RatingComponentModel>(content);
             await _ratingRepo.CreateComponentRating(ratingComponentModel);
         }
+
+        public async void GetFilteredList(NetworkStream stream, string req1Content)
+        {
+            IList<ComponentModel> componentModels = await _componentRepo.GetFilteredList(req1Content);
+            string reply = JsonSerializer.Serialize(componentModels);
+
+            Console.WriteLine(reply);
+            
+            byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
+            stream.Write(bytesWrite, 0, bytesWrite.Length);
+        }
     }
 }

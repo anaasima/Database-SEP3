@@ -151,6 +151,30 @@ namespace Database_SEP3.Networking
                         case "COMPONENTRATINGS":
                             _forumHandler.GetAllComponentRatings(stream, req1.Content);
                             break;
+                        case "FOLLOWEDACCOUNTS":
+                            _accountHandler.GetFollowedAccounts(stream, req1.Content);
+                            break;
+                        case "FOLLOW":
+                            _accountHandler.Follow(req1.Content);
+                            break;
+                        case "UNFOLLOW":
+                            _accountHandler.Unfollow(req1.Content);
+                            break;
+                        case "GETUSERBYID":
+                            _accountHandler.GetUserById(stream, req1.Content);
+                            break;
+                        case "FILTERLIST":
+                            _componentHandler.GetFilteredList(stream, req1.Content);
+                            break;
+                        case "EDITPOST":
+                            _forumHandler.EditPost(req1.Content);
+                            break;
+                        case "GETPOSTSBYUSERID":
+                            _forumHandler.GetPostsByUserId(stream, req1.Content);
+                            break;
+                        case "GETSAVEDPOSTS":
+                            _forumHandler.GetSavedPosts(stream, req1.Content);
+                            break;
                         default: 
                             string reply = JsonSerializer.Serialize("conFromTier3");
                             Console.WriteLine("What am i " + reply);

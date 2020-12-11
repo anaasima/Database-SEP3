@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -58,6 +59,39 @@ namespace Database_SEP3.Networking.Account
             string username = dummy.Username;
             _account = await _accountRepo.GetAccountByUsername(username);
             string reply = JsonSerializer.Serialize(_account);
+            byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
+            stream.Write(bytesWrite, 0, bytesWrite.Length);
+        }
+
+        public async void GetFollowedAccounts(NetworkStream stream, string req1Content)
+        {
+            IList<AccountModel> accountModels = await _accountRepo.GetFollowedAccounts(Int32.Parse(req1Content));
+            string reply = JsonSerializer.Serialize(accountModels);
+            byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
+            stream.Write(bytesWrite, 0, bytesWrite.Length);
+        }
+
+        public async void Follow(string content)
+        {
+            string[] substrings = content.Split('*');
+            int userId = Int32.Parse(substrings[0]);
+            int userToFollow = Int32.Parse(substrings[1]);
+            await _accountRepo.FollowAccount(userId, userToFollow);
+        }
+
+
+        public async void Unfollow(string content)
+        {
+            string[] substrings = content.Split('*');
+            int userId = Int32.Parse(substrings[0]);
+            int userToUnfollow = Int32.Parse(substrings[1]);
+            await _accountRepo.UnfollowAccount(userId, userToUnfollow);
+        }
+
+        public async void GetUserById(NetworkStream stream, string req1Content)
+        {
+            AccountModel accountModel = await _accountRepo.GetAccountById(Int32.Parse(req1Content));
+            string reply = JsonSerializer.Serialize(accountModel);
             byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
             stream.Write(bytesWrite, 0, bytesWrite.Length);
         }

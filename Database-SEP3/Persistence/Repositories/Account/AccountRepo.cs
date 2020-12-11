@@ -40,7 +40,7 @@ namespace Database_SEP3.Persistence.Repositories.Account
                 accountModel.BuildRatings = new List<RatingBuildModel>();
                 accountModel.PostRatings = new List<RatingPostModel>();
                 accountModel.SavedPosts = new List<AccountSavedPost>();
-                accountModel.FollowedUsers = new List<AccountModel>();
+                accountModel.AccountFollowedAccounts = new List<AccountFollowedAccount>();
                 await _context.Accounts.AddAsync(accountModel);
                 Console.WriteLine("Account successfully created");
                 await _context.SaveChangesAsync();
@@ -74,6 +74,7 @@ namespace Database_SEP3.Persistence.Repositories.Account
                     .ThenInclude(b => b.BuildComponents)
                     .Include(acc => acc.Posts)
                     .ThenInclude(p => p.Comments)
+                    .Include(a => a.AccountFollowedAccounts)
                     .FirstAsync(account => account.UserId == userId);
                 foreach (var build in accountModel.Builds)
                 {
@@ -128,12 +129,14 @@ namespace Database_SEP3.Persistence.Repositories.Account
             {
                 AccountModel accountModel = await _context.Accounts
                     .Include(acc => acc.Posts)
+                    .ThenInclude(p => p.Ratings)
+                    .Include(acc => acc.Posts)
                     .ThenInclude(p => p.Comments)
                     .Include(a => a.Builds)
                     .Include(a => a.Comments)
                     .Include(a => a.Reports)
                     .Include(a => a.SavedPosts)
-                    .Include(a => a.FollowedUsers)
+                    .Include(a => a.AccountFollowedAccounts)
                     .FirstAsync(a => a.UserId == userId);
 
                 return accountModel;
@@ -145,10 +148,18 @@ namespace Database_SEP3.Persistence.Repositories.Account
             await using (_context = new Sep3DBContext())
             {
                 AccountModel accountModel = await _context.Accounts
-                    .Include(acc => acc.FollowedUsers)
+                    .Include(acc => acc.AccountFollowedAccounts)
+                    .ThenInclude(a => a.FollowedAccountModel)
                     .FirstAsync(a => a.UserId == userId);
 
-                return accountModel.FollowedUsers.ToList();
+                IList<AccountModel> list = new List<AccountModel>();
+                foreach (var variable in accountModel.AccountFollowedAccounts)
+                {
+                    Console.WriteLine(variable.FollowedAccountId);
+                    list.Add(variable.FollowedAccountModel);
+                }
+
+                return list;
             }
         }
 
@@ -157,12 +168,20 @@ namespace Database_SEP3.Persistence.Repositories.Account
             await using (_context = new Sep3DBContext())
             {
                 AccountModel accountModel = await _context.Accounts
-                    .Include(acc => acc.FollowedUsers)
+                    .Include(acc => acc.AccountFollowedAccounts)
+                    .ThenInclude(a => a.FollowedAccountModel)
                     .FirstAsync(a => a.UserId == userId);
 
                 AccountModel follow = await _context.Accounts
                     .FirstAsync(a => a.UserId == followId);
-                accountModel.FollowedUsers.Add(follow);
+                AccountFollowedAccount fol = new AccountFollowedAccount()
+                {
+                    AccountId = userId,
+                    AccountModel = accountModel,
+                    FollowedAccountId = followId,
+                    FollowedAccountModel = follow
+                };
+                accountModel.AccountFollowedAccounts.Add(fol);
                 _context.Update(accountModel);
                 await _context.SaveChangesAsync();
             }
@@ -173,12 +192,12 @@ namespace Database_SEP3.Persistence.Repositories.Account
             await using (_context = new Sep3DBContext())
             {
                 AccountModel accountModel = await _context.Accounts
-                    .Include(acc => acc.FollowedUsers)
+                    .Include(acc => acc.AccountFollowedAccounts)
                     .FirstAsync(a => a.UserId == userId);
 
-                accountModel.FollowedUsers
-                    .Remove(accountModel.FollowedUsers
-                        .First(a => a.UserId == followId));
+                accountModel.AccountFollowedAccounts
+                    .Remove(accountModel.AccountFollowedAccounts
+                        .First(a => a.FollowedAccountId == followId));
                 
                 _context.Update(accountModel);
                 await _context.SaveChangesAsync();

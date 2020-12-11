@@ -120,5 +120,27 @@ namespace Database_SEP3.Networking.Forum
             byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
             stream.Write(bytesWrite, 0, bytesWrite.Length);
         }
-}
+
+        public async void EditPost(string req1Content)
+        {
+            PostModel postModel = JsonSerializer.Deserialize<PostModel>(req1Content);
+            await _postRepo.EditPost(postModel);
+        }
+
+        public async void GetPostsByUserId(NetworkStream stream, string req1Content)
+        {
+            IList<PostModel> postModels = await _postRepo.GetPostsFromAccount(Int32.Parse(req1Content));
+            string reply = JsonSerializer.Serialize(postModels);
+            byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
+            stream.Write(bytesWrite, 0, bytesWrite.Length);
+        }
+
+        public async void GetSavedPosts(NetworkStream stream, string req1Content)
+        {
+            IList<PostModel> postModels = await _postRepo.GetSavedPosts(Int32.Parse(req1Content));
+            string reply = JsonSerializer.Serialize(postModels);
+            byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
+            stream.Write(bytesWrite, 0, bytesWrite.Length);
+        }
+    }
 }
