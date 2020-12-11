@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ using Database_SEP3.Networking.Util;
 using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Build;
-
+using Database_SEP3.Persistence.Model.Rating;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database_SEP3.Persistence.Repositories.Component
@@ -26,6 +27,7 @@ public class ComponentRepo : IComponentRepo
     {
         await using (_context = new Sep3DBContext())
         {
+            componentModel.Ratings = new Collection<RatingComponentModel>();
             await _context.Components.AddAsync(componentModel);
             await _context.SaveChangesAsync();
         }
@@ -55,7 +57,10 @@ public class ComponentRepo : IComponentRepo
     {
         await using (_context = new Sep3DBContext())
         {
-            ComponentModel component = await _context.Components.FirstAsync(c => c.Id == componentId);
+            ComponentModel component = await _context.Components
+                .Include(c => c.Ratings)
+                .Include(c => c.BuildComponents)
+                .FirstAsync(c => c.Id == componentId);
             _context.Components.Remove(component);
             await _context.SaveChangesAsync();
         }
@@ -75,7 +80,9 @@ public class ComponentRepo : IComponentRepo
             foreach (var variable in buildComponents)
             {
                 int id = variable.ComponentModel.Id;
-                ComponentModel componentModel = await _context.Components.FirstAsync(c => c.Id == id);
+                ComponentModel componentModel = await _context.Components
+                    .Include(c => c.Ratings)
+                    .FirstAsync(c => c.Id == id);
                 _componentList.Add(componentModel);
             }
             return _componentList;
@@ -100,7 +107,19 @@ public class ComponentRepo : IComponentRepo
     {
         await using (_context = new Sep3DBContext())
         {
-            return await _context.Components.FirstAsync(c => c.Id == componentId);
+            return await _context.Components
+                .Include(c => c.Ratings)
+                .FirstAsync(c => c.Id == componentId);
+        }
+    }
+
+    public async Task<IList<ComponentModel>> GetFilteredList(string type)
+    {
+        await using (_context = new Sep3DBContext())
+        {
+            return await _context.Components
+                .Include(c => c.Ratings)
+                .Where(c => c.Type.Equals(type)).ToListAsync();
         }
     }
 
@@ -109,7 +128,9 @@ public class ComponentRepo : IComponentRepo
         await using (_context = new Sep3DBContext())
         {
             BuildModel buildModel = await _context.Builds.FirstAsync(b => b.Id == buildId);
-            ComponentModel componentModel = await _context.Components.FirstAsync(c => c.Id == componentId);
+            ComponentModel componentModel = await _context.Components
+                .Include(c => c.Ratings)
+                .FirstAsync(c => c.Id == componentId);
             BuildComponent buildComponent = new BuildComponent
             {
                 BuildId = buildModel.Id,

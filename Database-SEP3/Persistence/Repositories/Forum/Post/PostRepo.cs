@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model;
@@ -45,8 +47,9 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Post
         {
             await using (_context = new Sep3DBContext())
             {
-                AccountModel account = _context.Accounts.Include(acc => acc.Posts).First(a => a.UserId ==
-                    userId);
+                AccountModel account = _context.Accounts
+                    .Include(acc => acc.Posts)
+                    .First(a => a.UserId == userId);
                 Console.WriteLine(account + " took from database to get posts from");
                 IList<PostModel> postList = new List<PostModel>();
                 foreach (var post in account.Posts)
@@ -122,6 +125,36 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Post
                 postModel.Ratings = new Collection<RatingPostModel>();
                 postModel.Reports = new List<ReportModel>();
                 _context.Posts.Remove(postModel);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<IList<PostModel>> GetSavedPosts(int userId)
+        {
+            await using (_context = new Sep3DBContext())
+            {
+                AccountModel accountModel = await _context.Accounts
+                    .Include(ac => ac.SavedPosts)
+                    .FirstAsync(a => a.UserId == userId);
+                IList<PostModel> list = new List<PostModel>();
+                foreach (var variable in accountModel.SavedPosts)
+                {
+                    PostModel post = await _context.Posts
+                        .Include(p => p.Comments)
+                        .Include(p => p.Ratings)
+                        .FirstAsync(p => p.Id == variable.SavedPostId);
+                    list.Add(post);
+                }
+
+                return list;
+            }
+        }
+
+        public async Task EditPost(PostModel postModel)
+        {
+            await using (_context = new Sep3DBContext())
+            {
+                _context.Posts.Update(postModel);
                 await _context.SaveChangesAsync();
             }
         }

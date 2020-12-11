@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model;
@@ -39,6 +40,7 @@ namespace Database_SEP3.Persistence.Repositories.Account
                 accountModel.BuildRatings = new List<RatingBuildModel>();
                 accountModel.PostRatings = new List<RatingPostModel>();
                 accountModel.SavedPosts = new List<AccountSavedPost>();
+                accountModel.FollowedUsers = new List<AccountModel>();
                 await _context.Accounts.AddAsync(accountModel);
                 Console.WriteLine("Account successfully created");
                 await _context.SaveChangesAsync();
@@ -52,7 +54,8 @@ namespace Database_SEP3.Persistence.Repositories.Account
             {
                 await using (_context = new Sep3DBContext())
                 {
-                    return _context.Accounts.First(a => a.Username.Equals(username) && a.Password.Equals(password));
+                    return _context.Accounts
+                        .First(a => a.Username.Equals(username) && a.Password.Equals(password));
                 }
             }
             catch (Exception e)
@@ -116,6 +119,69 @@ namespace Database_SEP3.Persistence.Repositories.Account
                     .FirstAsync(a => a.Username.Equals(username));
 
                 return accountModel;
+            }
+        }
+
+        public async Task<AccountModel> GetAccountById(int userId)
+        {
+            await using (_context = new Sep3DBContext())
+            {
+                AccountModel accountModel = await _context.Accounts
+                    .Include(acc => acc.Posts)
+                    .ThenInclude(p => p.Comments)
+                    .Include(a => a.Builds)
+                    .Include(a => a.Comments)
+                    .Include(a => a.Reports)
+                    .Include(a => a.SavedPosts)
+                    .Include(a => a.FollowedUsers)
+                    .FirstAsync(a => a.UserId == userId);
+
+                return accountModel;
+            }
+        }
+
+        public async Task<IList<AccountModel>> GetFollowedAccounts(int userId)
+        {
+            await using (_context = new Sep3DBContext())
+            {
+                AccountModel accountModel = await _context.Accounts
+                    .Include(acc => acc.FollowedUsers)
+                    .FirstAsync(a => a.UserId == userId);
+
+                return accountModel.FollowedUsers.ToList();
+            }
+        }
+
+        public async Task FollowAccount(int userId, int followId)
+        {
+            await using (_context = new Sep3DBContext())
+            {
+                AccountModel accountModel = await _context.Accounts
+                    .Include(acc => acc.FollowedUsers)
+                    .FirstAsync(a => a.UserId == userId);
+
+                AccountModel follow = await _context.Accounts
+                    .FirstAsync(a => a.UserId == followId);
+                accountModel.FollowedUsers.Add(follow);
+                _context.Update(accountModel);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task UnfollowAccount(int userId, int followId)
+        {
+            await using (_context = new Sep3DBContext())
+            {
+                AccountModel accountModel = await _context.Accounts
+                    .Include(acc => acc.FollowedUsers)
+                    .FirstAsync(a => a.UserId == userId);
+
+                accountModel.FollowedUsers
+                    .Remove(accountModel.FollowedUsers
+                        .First(a => a.UserId == followId));
+                
+                _context.Update(accountModel);
+                await _context.SaveChangesAsync();
             }
         }
     }

@@ -7,7 +7,7 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Comment
 {
     public interface ICommentRepo        //dunno why they gray
     {
-        public Task<IList<CommentModel>> GetCommentsFromPost(int postId);
-        public Task CreateComment(CommentModel commentModel);
+        Task<IList<CommentModel>> GetCommentsFromPost(int postId);
+        Task CreateComment(CommentModel commentModel);
     }
 }

@@ -8,6 +8,7 @@ using Database_SEP3.Persistence.DataAccess;
 using Database_SEP3.Persistence.Model;
 using Database_SEP3.Persistence.Model.Account;
 using Database_SEP3.Persistence.Model.Build;
+using Database_SEP3.Persistence.Model.Rating;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database_SEP3.Persistence.Repositories.Build
@@ -20,8 +21,12 @@ namespace Database_SEP3.Persistence.Repositories.Build
         {
             await using (_context = new Sep3DBContext())
             {
-                return await _context.Builds.Include(b => b.BuildComponents)
-                    .ThenInclude(bld => bld.ComponentModel).FirstAsync(build => build.Id == buildId);
+                return await _context.Builds
+                    .Include(b => b.BuildComponents)
+                    .ThenInclude(bld => bld.ComponentModel)
+                    .Include(c => c.Ratings)
+                    .Include(r => r.Ratings)
+                    .FirstAsync(build => build.Id == buildId);
             }
         }
         
@@ -31,6 +36,7 @@ namespace Database_SEP3.Persistence.Repositories.Build
             await using (_context = new Sep3DBContext())
             {
                 //adaug buildu in database
+                buildModel.Ratings = new List<RatingBuildModel>();
                 await _context.Builds.AddAsync(buildModel);
                 await _context.SaveChangesAsync();
                 // iau contul din database
@@ -98,40 +104,13 @@ namespace Database_SEP3.Persistence.Repositories.Build
             }
         }
 
-        public async Task EditBuilds(BuildModel buildModel)
-        {
-            await using (_context = new Sep3DBContext())
-            {
-                BuildModel buildModelDatabase = await _context.Builds
-                    .Include(b => b.BuildComponents)
-                    .FirstAsync(build => build.Id == buildModel.Id);
-                buildModelDatabase.Name = buildModel.Name;
-                buildModelDatabase.BuildComponents = new Collection<BuildComponent>();
-                for (int i = 0; i < buildModel.ComponentList.Count; i++)
-                {
-                    ComponentModel arg = await _context.Components
-                        .FirstAsync(c => c.Id == buildModel.ComponentList[i].Id);
-                    BuildComponent buildComponent = new BuildComponent
-                    {
-                        BuildId = buildModelDatabase.Id,
-                        BuildModel = buildModelDatabase,
-                        ComponentId = arg.Id,
-                        ComponentModel = arg
-                    };
-                    buildModelDatabase.BuildComponents.Add(buildComponent);
-                }
-
-                _context.Update(buildModelDatabase);
-                await _context.SaveChangesAsync();
-            }
-        }
-
         public async Task DeleteBuild(int buildId)
         {
             await using (_context = new Sep3DBContext())
             {
                 BuildModel buildModel = await _context.Builds
                     .Include(b => b.BuildComponents)
+                    .Include(r => r.Ratings)
                     .FirstAsync(build => build.Id == buildId);
                 buildModel.BuildComponents = new Collection<BuildComponent>();
                 _context.Builds.Remove(buildModel);
@@ -143,8 +122,10 @@ namespace Database_SEP3.Persistence.Repositories.Build
         {
             await using (_context = new Sep3DBContext())
             {
-                AccountModel account = _context.Accounts.Include(acc => acc.Builds).First(a => a.UserId ==
-                    userId);
+                AccountModel account = _context.Accounts
+                    .Include(acc => acc.Builds)
+                    .ThenInclude(r => r.Ratings)
+                    .First(a => a.UserId == userId);
                 Console.WriteLine(account.ToString() + " took from database to get builds from");
                 IList<BuildModel> buildList = new List<BuildModel>();
                 foreach (var build in account.Builds)

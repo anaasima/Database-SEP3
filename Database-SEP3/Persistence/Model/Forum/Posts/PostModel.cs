@@ -22,10 +22,6 @@ namespace Database_SEP3.Persistence.Model.Post
         [JsonIgnore]
         public AccountModel AccountModel { get; set; }
         
-        [JsonPropertyName("upVote")]
-        public int UpVote { get; set; }
-        [JsonPropertyName("downVote")]
-        public int DownVote { get; set; }
         [JsonPropertyName("content")]
         public string Content { get; set; }
         [JsonPropertyName("username")]
@@ -45,7 +41,7 @@ namespace Database_SEP3.Persistence.Model.Post
 
         public override string ToString()
         {
-            return Id + ", " + UpVote + ", " + DownVote;
+            return Id + ", " + Content;
         }
     }
 }

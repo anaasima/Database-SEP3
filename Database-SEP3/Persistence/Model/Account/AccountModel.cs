@@ -47,6 +47,9 @@ namespace Database_SEP3.Persistence.Model.Account
         [JsonIgnore]
         public ICollection<RatingPostModel> PostRatings { get; set; }
         
+        [JsonPropertyName("followedAccounts")]
+        public ICollection<AccountModel> FollowedUsers { get; set; }
+        
 
 
         public override string ToString()

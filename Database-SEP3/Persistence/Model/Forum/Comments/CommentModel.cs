@@ -12,16 +12,12 @@ namespace Database_SEP3.Persistence.Model.Comment
         public int AccountModelUserId { get; set; }
         [JsonPropertyName("postId")]
         public int PostModelId { get; set; }
-        [JsonPropertyName("upVote")]
-        public int UpVote { get; set; }
-        [JsonPropertyName("downVote")]
-        public int DownVote { get; set; }
         [JsonPropertyName("content")]
         public string Content { get; set; }
 
         public override string ToString()
         {
-            return Id + ", " + UpVote + ", " + DownVote;
+            return Id + ", " + Content;
         }
     }
 }

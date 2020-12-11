@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
@@ -28,17 +29,342 @@ namespace Database_SEP3
     {
         static async Task Main(string[] args)
         {
-            SocketServer socketServer = new SocketServer();
-            socketServer.StartServer();
+            // SocketServer socketServer = new SocketServer();
+            // socketServer.StartServer();
 
-            ReportRepo reportRepo = new ReportRepo();
-            RatingRepo ratingRepo = new RatingRepo();
+
+            // admin
+            // AccountRepo accountRepo = new AccountRepo();
+            // AccountModel admin = new AccountModel()
+            // {
+            //     Username = "ADMIN",
+            //     Password = "0000",
+            //     Name = "boss"
+            // };
+            // await accountRepo.CreateAccount(admin);
+            // ComponentRepo componentRepo = new ComponentRepo();
+            // BuildRepo buildRepo = new BuildRepo();
+            //prebuilds
+            //p1
+            // ComponentModel pb1c1 = new ComponentModel()
+            // {
+            //     Name = "i3-9100",
+            //     Brand = "Intel",
+            //     ReleaseYear = "2019",
+            //     Type = "CPU",
+            //     SocketType = "1151v2",
+            //     EnergyConsumption = 65,
+            //     AdditionalInfo = "3.6 GHz up to 4.2 GHz, 4 cores, 4 threads"
+            // };
+            // ComponentModel pb1c2 = new ComponentModel()
+            // {
+            //     Name = "H310M PRO-M2 PLUS",
+            //     Brand = "MSI",
+            //     ReleaseYear = "2019",
+            //     Type = "Motherboard",
+            //     SocketType = "1151v2, PCIe 3.0 x16, DDR4, SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "mATX"
+            // };
+            // ComponentModel pb1c3 = new ComponentModel()
+            // {
+            //     Name = "Fury Black",
+            //     Brand = "HyperX",
+            //     ReleaseYear = "2018",
+            //     Type = "RAM",
+            //     SocketType = "DDR4",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "2x8GB kit, DDR4-2400 CL15"
+            // };
+            // ComponentModel pb1c4 = new ComponentModel()
+            // {
+            //     Name = "High Performance SSD",
+            //     Brand = "Intenso",
+            //     ReleaseYear = "2018",
+            //     Type = "Storage",
+            //     SocketType = "SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "480GB, 520MB/s - 500MB/s, 2.5inch"
+            // };
+            // ComponentModel pb1c5 = new ComponentModel()
+            // {
+            //     Name = "FL500-12",
+            //     Brand = "Floston",
+            //     ReleaseYear = "2015",
+            //     Type = "Power supply",
+            //     SocketType = "",
+            //     EnergyConsumption = 500,
+            //     AdditionalInfo = "Not certified"
+            // };
+            // await componentRepo.CreateComponent(pb1c1);
+            // await componentRepo.CreateComponent(pb1c2);
+            // await componentRepo.CreateComponent(pb1c3);
+            // await componentRepo.CreateComponent(pb1c4);
+            // await componentRepo.CreateComponent(pb1c5);
+            // IList<ComponentModel> list1 = new Collection<ComponentModel>();
+            // list1.Add(await componentRepo.GetComponentById(41));
+            // list1.Add(await componentRepo.GetComponentById(42));
+            // list1.Add(await componentRepo.GetComponentById(43));
+            // list1.Add(await componentRepo.GetComponentById(44));
+            // list1.Add(await componentRepo.GetComponentById(45));
+            // BuildModel pre1 = new BuildModel()
+            // {
+            //     AccountModelUserId = 3,
+            //     Name = "Office Computer",
+            //     ComponentList = list1
+            // };
+            // await buildRepo.CreateBuild(pre1);
             
+             //p2
+            // ComponentModel pb2c1 = new ComponentModel()
+            // {
+            //     Name = "i3-9100",
+            //     Brand = "Intel",
+            //     ReleaseYear = "2019",
+            //     Type = "CPU",
+            //     SocketType = "1151v2",
+            //     EnergyConsumption = 65,
+            //     AdditionalInfo = "3.6 GHz up to 4.2 GHz, 4 cores, 4 threads"
+            // };
+            // ComponentModel pb2c2 = new ComponentModel()
+            // {
+            //     Name = "H310M PRO-M2 PLUS",
+            //     Brand = "MSI",
+            //     ReleaseYear = "2019",
+            //     Type = "Motherboard",
+            //     SocketType = "1151v2, PCIe 3.0 x16, DDR4, SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "mATX"
+            // };
+            // ComponentModel pb2c3 = new ComponentModel()
+            // {
+            //     Name = "Fury Black",
+            //     Brand = "HyperX",
+            //     ReleaseYear = "2018",
+            //     Type = "RAM",
+            //     SocketType = "DDR4",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "2x8GB kit, DDR4-2400 CL15"
+            // };
+            // ComponentModel pb2c4 = new ComponentModel()
+            // {
+            //     Name = "Red Pro HDD",
+            //     Brand = "WD",
+            //     ReleaseYear = "2019",
+            //     Type = "Storage",
+            //     SocketType = "SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "4TB, 7200 rpm, 256MB buffer, 3.5inch"
+            // };
+            // ComponentModel pb2c5 = new ComponentModel()
+            // {
+            //     Name = "FL500-12",
+            //     Brand = "Floston",
+            //     ReleaseYear = "2015",
+            //     Type = "Power supply",
+            //     SocketType = "",
+            //     EnergyConsumption = 500,
+            //     AdditionalInfo = "Not certified"
+            // };
+            // await componentRepo.CreateComponent(pb1c1);
+            // await componentRepo.CreateComponent(pb1c2);
+            // await componentRepo.CreateComponent(pb1c3);
+            // await componentRepo.CreateComponent(pb2c4);
+            // await componentRepo.CreateComponent(pb1c5);
+            // IList<ComponentModel> list2 = new Collection<ComponentModel>();
+            // list2.Add(await componentRepo.GetComponentById(6)); //5800x
+            // list2.Add(await componentRepo.GetComponentById(15)); //6800
+            // list2.Add(await componentRepo.GetComponentById(44)); //msi x570
+            // list2.Add(await componentRepo.GetComponentById(29)); //patriot
+            // list2.Add(await componentRepo.GetComponentById(36));//corsair
+            // list2.Add(await componentRepo.GetComponentById(51));//wd 4tb
+            // BuildModel pre2 = new BuildModel()
+            // {
+            //     AccountModelUserId = 3,
+            //     Name = "Workstation Computer",
+            //     ComponentList = list2
+            // };
+            // await buildRepo.CreateBuild(pre2);
+            
+             //p3
+            // ComponentModel pb3c1 = new ComponentModel()
+            // {
+            //     Name = "i3-9100",
+            //     Brand = "Intel",
+            //     ReleaseYear = "2019",
+            //     Type = "CPU",
+            //     SocketType = "1151v2",
+            //     EnergyConsumption = 65,
+            //     AdditionalInfo = "3.6 GHz up to 4.2 GHz, 4 cores, 4 threads"
+            // };
+            // ComponentModel pb3c2 = new ComponentModel()
+            // {
+            //     Name = "H310M PRO-M2 PLUS",
+            //     Brand = "MSI",
+            //     ReleaseYear = "2019",
+            //     Type = "Motherboard",
+            //     SocketType = "1151v2, PCIe 3.0 x16, DDR4, SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "mATX"
+            // };
+            // ComponentModel pb3c3 = new ComponentModel()
+            // {
+            //     Name = "Fury Black",
+            //     Brand = "HyperX",
+            //     ReleaseYear = "2018",
+            //     Type = "RAM",
+            //     SocketType = "DDR4",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "2x8GB kit, DDR4-2400 CL15"
+            // };
+            // ComponentModel pb3c4 = new ComponentModel()
+            // {
+            //     Name = "Red Pro HDD",
+            //     Brand = "WD",
+            //     ReleaseYear = "2019",
+            //     Type = "Storage",
+            //     SocketType = "SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "4TB, 7200 rpm, 256MB buffer, 3.5inch"
+            // };
+            // ComponentModel pb3c5 = new ComponentModel()
+            // {
+            //     Name = "FL500-12",
+            //     Brand = "Floston",
+            //     ReleaseYear = "2015",
+            //     Type = "Power supply",
+            //     SocketType = "",
+            //     EnergyConsumption = 500,
+            //     AdditionalInfo = "Not certified"
+            // };
+            // await componentRepo.CreateComponent(pb1c1);
+            // await componentRepo.CreateComponent(pb1c2);
+            // await componentRepo.CreateComponent(pb1c3);
+            // await componentRepo.CreateComponent(pb2c4);
+            // await componentRepo.CreateComponent(pb1c5);
+            // IList<ComponentModel> list3 = new Collection<ComponentModel>();
+            // list3.Add(await componentRepo.GetComponentById(13)); //10900k
+            // list3.Add(await componentRepo.GetComponentById(18)); //3090
+            // list3.Add(await componentRepo.GetComponentById(38)); //asus b460
+            // list3.Add(await componentRepo.GetComponentById(28)); //hyperx rgb
+            // list3.Add(await componentRepo.GetComponentById(32)); //wd blue
+            // list3.Add(await componentRepo.GetComponentById(42)); //nzxt
+            // BuildModel pre3 = new BuildModel()
+            // {
+            //     AccountModelUserId = 3,
+            //     Name = "Gaming Computer",
+            //     ComponentList = list3
+            // };
+            // await buildRepo.CreateBuild(pre3);
+            
+            //gpu pcie 3
+            // ComponentModel pcie1 = new ComponentModel()
+            // {
+            //     Name = "GeForce GTX 1650",
+            //     Brand = "NVIDIA",
+            //     ReleaseYear = "2019",
+            //     Type = "GPU",
+            //     SocketType = "PCIe 3.0 x16",
+            //     EnergyConsumption = 75,
+            //     AdditionalInfo = "1485 MHz, 4 GB GDDR5, 128 bit"
+            // };
+            // ComponentModel pcie2 = new ComponentModel()
+            // {
+            //     Name = "GeForce RTX 2060",
+            //     Brand = "NVIDIA",
+            //     ReleaseYear = "2018",
+            //     Type = "GPU",
+            //     SocketType = "PCIe 3.0 x16",
+            //     EnergyConsumption = 160,
+            //     AdditionalInfo = "1365 MHz, 6 GB GDDR6, 192 bit"
+            // };
+            // await componentRepo.CreateComponent(pcie1);
+            // await componentRepo.CreateComponent(pcie2);
+            
+            //cpu 1151v2
+            // ComponentModel cpuaa = new ComponentModel()
+            // {
+            //     Name = "i5-9600K",
+            //     Brand = "Intel",
+            //     ReleaseYear = "2018",
+            //     Type = "CPU",
+            //     SocketType = "1151v2",
+            //     EnergyConsumption = 95,
+            //     AdditionalInfo = "3.7 GHz up to 4.6 GHz, 6 cores, 6 threads"
+            // };
+            // ComponentModel cpubb = new ComponentModel()
+            // {
+            //     Name = "i7-9700K",
+            //     Brand = "Intel",
+            //     ReleaseYear = "2018",
+            //     Type = "CPU",
+            //     SocketType = "1151v2",
+            //     EnergyConsumption = 95,
+            //     AdditionalInfo = "3.6 GHz up to 4.9 GHz, 8 cores, 8 threads"
+            // };
+            // await componentRepo.CreateComponent(cpuaa);
+            // await componentRepo.CreateComponent(cpubb);
+            
+            
+            //accounts
+            // AccountModel dummy1 = new AccountModel()
+            // {
+            //     Username = "dummy1",
+            //     Password = "12345",
+            //     Name = "test1"
+            // };
+            // AccountModel dummy2 = new AccountModel()
+            // {
+            //     Username = "dummy2",
+            //     Password = "55555",
+            //     Name = "test2"
+            // };
+            // await accountRepo.CreateAccount(dummy1);
+            // await accountRepo.CreateAccount(dummy2);
+            
+            
+            //posts
+            // PostRepo postRepo = new PostRepo();
+            // PostModel p1 = new PostModel()
+            // {
+            //     AccountModelUserId = 4,
+            //     Content = "The United States Declaration of Independence (formally The unanimous Declaration of the thirteen united States of America) is the pronouncement adopted by the Second Continental Congress meeting in Philadelphia, Pennsylvania, on July 4, 1776.",
+            // };
+            // PostModel p2 = new PostModel()
+            // {
+            //     AccountModelUserId = 4,
+            //     Content = "During his youth, Alexander was tutored by Aristotle until age 16. After Philip's assassination in 336 BC, he succeeded his father to the throne and inherited a strong kingdom and an experienced army."
+            // };
+            // PostModel p3 = new PostModel()
+            // {
+            //     AccountModelUserId = 5,
+            //     Content = "Night City is an American megacity in the Free State of North California, controlled by corporations and unassailed by the laws of both country and state. It sees conflict from rampant gang wars and its ruling entities contending for dominance."
+            // };
+            // await postRepo.CreatePost(p1);
+            // await postRepo.CreatePost(p2);
+            // await postRepo.CreatePost(p3);
+            
+            //comments
+            // CommentRepo commentRepo = new CommentRepo();
+            // CommentModel c1 = new CommentModel()
+            // {
+            //     AccountModelUserId = 4,
+            //     Content = "The most famous Egyptian pyramids are those found at Giza, on the outskirts of Cairo. Several of the Giza pyramids are counted among the largest structures ever built. The Pyramid of Khufu is the largest Egyptian pyramid.",
+            //     PostModelId = 4
+            // };
+            // CommentModel c2 = new CommentModel()
+            // {
+            //     AccountModelUserId = 5,
+            //     Content = "As the tanuki, the animal has been significant in Japanese folklore since ancient times. The legendary tanuki is reputed to be mischievous and jolly, a master of disguise and shapeshifting, but somewhat gullible and absentminded.",
+            //     PostModelId = 3
+            // };
+            // await commentRepo.CreateComment(c1);
+            // await commentRepo.CreateComment(c2);
             
             // AccountRepo accountRepo = new AccountRepo();
             // AccountModel accountModel = await accountRepo.GetAccountByUsername("MiauMiau");
             // Console.WriteLine(accountModel.ToString());
-            ComponentRepo componentRepo = new ComponentRepo();
+            // ComponentRepo componentRepo = new ComponentRepo();
             //
             // //procesoare
             // ComponentModel proc1 = new ComponentModel()
@@ -422,46 +748,46 @@ namespace Database_SEP3
             //     EnergyConsumption = 650,
             //     AdditionalInfo = "88%, 80+ Bronze"
             // };
-            ComponentModel supply3 = new ComponentModel()
-            {
-                Name = "System Power 9 500",
-                Brand = "bequiet!",
-                ReleaseYear = "2020",
-                Type = "Power supply",
-                SocketType = "",
-                EnergyConsumption = 500,
-                AdditionalInfo = "88%, 80+ Bronze"
-            };
-            ComponentModel supply4 = new ComponentModel()
-            {
-                Name = "Power Zone 850",
-                Brand = "bequiet!",
-                ReleaseYear = "2020",
-                Type = "Power supply",
-                SocketType = "",
-                EnergyConsumption = 850,
-                AdditionalInfo = "88%, 80+ Bronze"
-            };
-            ComponentModel supply5 = new ComponentModel()
-            {
-                Name = "MWE GOLD 650",
-                Brand = "Cooler Master",
-                ReleaseYear = "2019",
-                Type = "Power supply",
-                SocketType = "",
-                EnergyConsumption = 650,
-                AdditionalInfo = "90%, 80+ Gold, Modular"
-            };
-            ComponentModel supply6 = new ComponentModel()
-            {
-                Name = "C750",
-                Brand = "NZXT",
-                ReleaseYear = "2019",
-                Type = "Power supply",
-                SocketType = "",
-                EnergyConsumption = 750,
-                AdditionalInfo = "90%, 80+ Gold, Modular"
-            };
+            // ComponentModel supply3 = new ComponentModel()
+            // {
+            //     Name = "System Power 9 500",
+            //     Brand = "bequiet!",
+            //     ReleaseYear = "2020",
+            //     Type = "Power supply",
+            //     SocketType = "",
+            //     EnergyConsumption = 500,
+            //     AdditionalInfo = "88%, 80+ Bronze"
+            // };
+            // ComponentModel supply4 = new ComponentModel()
+            // {
+            //     Name = "Power Zone 850",
+            //     Brand = "bequiet!",
+            //     ReleaseYear = "2020",
+            //     Type = "Power supply",
+            //     SocketType = "",
+            //     EnergyConsumption = 850,
+            //     AdditionalInfo = "88%, 80+ Bronze"
+            // };
+            // ComponentModel supply5 = new ComponentModel()
+            // {
+            //     Name = "MWE GOLD 650",
+            //     Brand = "Cooler Master",
+            //     ReleaseYear = "2019",
+            //     Type = "Power supply",
+            //     SocketType = "",
+            //     EnergyConsumption = 650,
+            //     AdditionalInfo = "90%, 80+ Gold, Modular"
+            // };
+            // ComponentModel supply6 = new ComponentModel()
+            // {
+            //     Name = "C750",
+            //     Brand = "NZXT",
+            //     ReleaseYear = "2019",
+            //     Type = "Power supply",
+            //     SocketType = "",
+            //     EnergyConsumption = 750,
+            //     AdditionalInfo = "90%, 80+ Gold, Modular"
+            // };
             // await componentRepo.CreateComponent(supply1);
             // await componentRepo.CreateComponent(supply2);
             // await componentRepo.CreateComponent(supply3);
@@ -491,36 +817,36 @@ namespace Database_SEP3
             //     EnergyConsumption = 0,
             //     AdditionalInfo = "ATX"
             // };
-            ComponentModel mb3 = new ComponentModel()
-            {
-                Name = "B450 AORUS ELITE",
-                Brand = "GIGABYTE",
-                ReleaseYear = "2019",
-                Type = "Motherboard",
-                SocketType = "AM4, PCIe 3.0 x16, DDR4, SATA-III",
-                EnergyConsumption = 0,
-                AdditionalInfo = "ATX"
-            };
-            ComponentModel mb4 = new ComponentModel()
-            {
-                Name = "X570-A PRO",
-                Brand = "MSI",
-                ReleaseYear = "2020",
-                Type = "Motherboard",
-                SocketType = "AM4, PCIe 4.0 x16, DDR4, SATA-III, NVMe",
-                EnergyConsumption = 0,
-                AdditionalInfo = "ATX"
-            };
-            ComponentModel mb5 = new ComponentModel()
-            {
-                Name = "Z490-A PRO",
-                Brand = "MSI",
-                ReleaseYear = "2018",
-                Type = "Motherboard",
-                SocketType = "1200 LGA, PCIe 3.0 x16, DDR4, SATA-III",
-                EnergyConsumption = 0,
-                AdditionalInfo = "ATX"
-            };
+            // ComponentModel mb3 = new ComponentModel()
+            // {
+            //     Name = "B450 AORUS ELITE",
+            //     Brand = "GIGABYTE",
+            //     ReleaseYear = "2019",
+            //     Type = "Motherboard",
+            //     SocketType = "AM4, PCIe 3.0 x16, DDR4, SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "ATX"
+            // };
+            // ComponentModel mb4 = new ComponentModel()
+            // {
+            //     Name = "X570-A PRO",
+            //     Brand = "MSI",
+            //     ReleaseYear = "2020",
+            //     Type = "Motherboard",
+            //     SocketType = "AM4, PCIe 4.0 x16, DDR4, SATA-III, NVMe",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "ATX"
+            // };
+            // ComponentModel mb5 = new ComponentModel()
+            // {
+            //     Name = "Z490-A PRO",
+            //     Brand = "MSI",
+            //     ReleaseYear = "2018",
+            //     Type = "Motherboard",
+            //     SocketType = "1200 LGA, PCIe 3.0 x16, DDR4, SATA-III",
+            //     EnergyConsumption = 0,
+            //     AdditionalInfo = "ATX"
+            // };
             // await componentRepo.CreateComponent(mb1);
             // await componentRepo.CreateComponent(mb2);
             // await componentRepo.CreateComponent(mb3);
