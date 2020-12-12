@@ -39,6 +39,7 @@ namespace Database_SEP3.Persistence.Repositories.Account
                 accountModel.Posts = new List<PostModel>();
                 accountModel.BuildRatings = new List<RatingBuildModel>();
                 accountModel.PostRatings = new List<RatingPostModel>();
+                accountModel.ComponentRatings = new List<RatingComponentModel>();
                 accountModel.SavedPosts = new List<AccountSavedPost>();
                 accountModel.FollowedAccounts = new List<AccountModel>();
                 await _context.Accounts.AddAsync(accountModel);
@@ -48,7 +49,7 @@ namespace Database_SEP3.Persistence.Repositories.Account
             return "Account successfully created";
         }
 
-        public async Task<AccountModel> ReadAccount(string username, string password)
+        public async Task<AccountModel> GetAccount(string username, string password)
         {
             try
             {
@@ -97,7 +98,7 @@ namespace Database_SEP3.Persistence.Repositories.Account
             }
         }
 
-        public async Task<string> UpdateAccount(AccountModel accountModel)
+        public async Task<string> EditAccount(AccountModel accountModel)
         {
             await using (_context = new Sep3DBContext())
             {

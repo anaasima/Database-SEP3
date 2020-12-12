@@ -17,5 +17,10 @@ namespace Database_SEP3.Persistence.Model.Forum.Report
         public string Username { get; set; }
         [JsonPropertyName("userId")]
         public int AccountModelId { get; set; }
+
+        public override string ToString()
+        {
+            return Id + ", " + PostModelId + ", " + AccountModelId;
+        }
     }
 }

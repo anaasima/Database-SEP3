@@ -33,7 +33,7 @@ public class ComponentRepo : IComponentRepo
         }
     }
 
-    public async Task<IList<ComponentModel>> ReadComponents()
+    public async Task<IList<ComponentModel>> GetComponents()
     {
         await using (_context = new Sep3DBContext())
         {
@@ -44,7 +44,7 @@ public class ComponentRepo : IComponentRepo
         }
     }
 
-    public async Task UpdateComponent(ComponentModel componentModel)
+    public async Task EditComponent(ComponentModel componentModel)
     {
         await using (_context = new Sep3DBContext())
         {

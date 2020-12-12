@@ -34,7 +34,7 @@ namespace Database_SEP3.Persistence.Model.Post
         public ICollection<CommentModel> Comments { get; set; }
 
         [JsonPropertyName("ratingPosts")]
-        public IList<RatingPostModel> Ratings { get; set; }
+        public ICollection<RatingPostModel> Ratings { get; set; }
         
         [JsonIgnore] //remember
         public ICollection<ReportModel> Reports { get; set; }

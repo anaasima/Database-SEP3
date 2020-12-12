@@ -29,10 +29,10 @@ namespace Database_SEP3
     {
         static async Task Main(string[] args)
         {
-            // await PopulateDatabase();
+            await PopulateDatabase();
             
-            // SocketServer socketServer = new SocketServer();
-            // socketServer.StartServer();
+            SocketServer socketServer = new SocketServer();
+            socketServer.StartServer();
 
         }
 

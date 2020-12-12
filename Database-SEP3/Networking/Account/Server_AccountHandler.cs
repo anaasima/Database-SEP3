@@ -24,7 +24,7 @@ namespace Database_SEP3.Networking.Account
             AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
             string username = dummy.Username;
             string password = dummy.Password;
-            _account = await _accountRepo.ReadAccount(username, password);
+            _account = await _accountRepo.GetAccount(username, password);
             string reply = JsonSerializer.Serialize(_account);
             byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
             stream.Write(bytesWrite, 0, bytesWrite.Length);
@@ -42,7 +42,7 @@ namespace Database_SEP3.Networking.Account
         public async void Edit(NetworkStream stream, string content)
         {
             AccountModel dummy = JsonSerializer.Deserialize<AccountModel>(content);
-            String input = await _accountRepo.UpdateAccount(dummy);
+            String input = await _accountRepo.EditAccount(dummy);
             string reply = JsonSerializer.Serialize(input);
             byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
             stream.Write(bytesWrite, 0, bytesWrite.Length);

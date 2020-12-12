@@ -15,5 +15,10 @@ namespace Database_SEP3.Persistence.Model.Rating
         [JsonPropertyName("score")]
         public int Score { get; set; }
         
+        public override string ToString()
+        {
+            return Id + ", " + Score;
+        }
+        
     }
 }

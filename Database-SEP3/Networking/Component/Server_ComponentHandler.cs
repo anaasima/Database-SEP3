@@ -28,7 +28,7 @@ namespace Database_SEP3.Networking.Component
 
         public async void ReadAllComponents(NetworkStream stream)
         {
-            _componentList = await _componentRepo.ReadComponents();
+            _componentList = await _componentRepo.GetComponents();
             string reply = JsonSerializer.Serialize(_componentList);
             byte[] bytesWrite = Encoding.ASCII.GetBytes(reply);
             stream.Write(bytesWrite, 0, bytesWrite.Length);

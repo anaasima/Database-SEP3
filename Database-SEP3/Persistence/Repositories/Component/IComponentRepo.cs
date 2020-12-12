@@ -7,14 +7,14 @@ namespace Database_SEP3.Persistence.Repositories.Component
     public interface IComponentRepo    //i guess gray methods are for testing
     {
         Task CreateComponent(ComponentModel componentModel);
-        Task<IList<ComponentModel>> ReadComponents();
-        Task UpdateComponent(ComponentModel componentModel);
+        Task<IList<ComponentModel>> GetComponents();
+        Task EditComponent(ComponentModel componentModel);
         Task DeleteComponent(int componentId);
-        Task<IList<ComponentModel>> GetComponentsFromBuild(int buildId);
-        Task AddComponentToBuild(int buildId, int componentId);
-        Task RemoveComponentFromBuild(int buildId, int componentId);
-        Task<ComponentModel> GetComponentById(int componentId);
+        Task<IList<ComponentModel>> GetComponentsFromBuild(int buildId);//is used
+        Task AddComponentToBuild(int buildId, int componentId);//testing
+        Task RemoveComponentFromBuild(int buildId, int componentId);//testing
+        Task<ComponentModel> GetComponentById(int componentId);//testing
         Task<IList<ComponentModel>> GetFilteredList(string type);
-        Task<ComponentModel> GetComponentByName(string name);
+        Task<ComponentModel> GetComponentByName(string name);//testing
     }
 }

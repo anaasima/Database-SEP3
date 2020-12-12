@@ -8,9 +8,9 @@ namespace Database_SEP3.Persistence.Repositories.Account
     public interface IAccountRepo
     {
         Task<string> CreateAccount(AccountModel accountModel);
-        Task<AccountModel> ReadAccount(string username, string password);
+        Task<AccountModel> GetAccount(string username, string password);
         Task DeleteAccount(int userId);
-        Task<string> UpdateAccount(AccountModel accountModel);
+        Task<string> EditAccount(AccountModel accountModel);
         Task<AccountModel> GetAccountByUsername(string username);
         Task<AccountModel> GetAccountById(int userId);
         Task<IList<AccountModel>> GetFollowedAccounts(int userId);

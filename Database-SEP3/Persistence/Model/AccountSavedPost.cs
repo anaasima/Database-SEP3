@@ -10,4 +10,4 @@ namespace Database_SEP3.Persistence.Model
         public int SavedPostId { get; set; }
         public PostModel SavedPostModel { get; set; }
     }
-}
+}    

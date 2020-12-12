@@ -40,7 +40,7 @@ namespace Database_SEP3.Persistence.Model.Account
         public ICollection<BuildModel> Builds { get; set; }
        
         [JsonIgnore]
-        public ICollection<CommentModel> Comments { get; set; }
+        public ICollection<CommentModel> Comments { get; set; }    
         [JsonIgnore]
         public ICollection<RatingBuildModel> BuildRatings { get; set; }
         [JsonIgnore]
