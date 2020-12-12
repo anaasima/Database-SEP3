@@ -40,7 +40,7 @@ namespace Database_SEP3.Persistence.Repositories.Account
                 accountModel.BuildRatings = new List<RatingBuildModel>();
                 accountModel.PostRatings = new List<RatingPostModel>();
                 accountModel.SavedPosts = new List<AccountSavedPost>();
-                accountModel.AccountFollowedAccounts = new List<AccountFollowedAccount>();
+                accountModel.FollowedAccounts = new List<AccountModel>();
                 await _context.Accounts.AddAsync(accountModel);
                 Console.WriteLine("Account successfully created");
                 await _context.SaveChangesAsync();
@@ -74,7 +74,6 @@ namespace Database_SEP3.Persistence.Repositories.Account
                     .ThenInclude(b => b.BuildComponents)
                     .Include(acc => acc.Posts)
                     .ThenInclude(p => p.Comments)
-                    .Include(a => a.AccountFollowedAccounts)
                     .FirstAsync(account => account.UserId == userId);
                 foreach (var build in accountModel.Builds)
                 {
@@ -83,6 +82,13 @@ namespace Database_SEP3.Persistence.Repositories.Account
                 foreach (var post in accountModel.Posts)
                 {
                     post.Comments = new Collection<CommentModel>();
+                }
+                foreach (var variable in _context.AccountFollowedAccounts)
+                {
+                    if (variable.AccountModelUserId == userId)
+                    {
+                        _context.AccountFollowedAccounts.Remove(variable);
+                    }
                 }
                 accountModel.Builds = new Collection<BuildModel>();
                 accountModel.Posts = new Collection<PostModel>();
@@ -136,9 +142,15 @@ namespace Database_SEP3.Persistence.Repositories.Account
                     .Include(a => a.Comments)
                     .Include(a => a.Reports)
                     .Include(a => a.SavedPosts)
-                    .Include(a => a.AccountFollowedAccounts)
                     .FirstAsync(a => a.UserId == userId);
 
+                foreach (var user in _context.AccountFollowedAccounts)
+                {
+                    if (user.AccountModelUserId == userId)
+                    {
+                        accountModel.FollowedAccounts.Add(user.FollowedAccountModel);
+                    }
+                }
                 return accountModel;
             }
         }
@@ -147,18 +159,16 @@ namespace Database_SEP3.Persistence.Repositories.Account
         {
             await using (_context = new Sep3DBContext())
             {
-                AccountModel accountModel = await _context.Accounts
-                    .Include(acc => acc.AccountFollowedAccounts)
-                    .ThenInclude(a => a.FollowedAccountModel)
-                    .FirstAsync(a => a.UserId == userId);
-
                 IList<AccountModel> list = new List<AccountModel>();
-                foreach (var variable in accountModel.AccountFollowedAccounts)
+                foreach (var relation in _context.AccountFollowedAccounts)
                 {
-                    Console.WriteLine(variable.FollowedAccountId);
-                    list.Add(variable.FollowedAccountModel);
+                    if (relation.AccountModelUserId == userId)
+                    {
+                        AccountModel followedAccount = await _context.Accounts
+                            .FirstAsync(a => a.UserId == relation.FollowedAccountModelUserId);
+                        list.Add(followedAccount);
+                    }
                 }
-
                 return list;
             }
         }
@@ -168,21 +178,18 @@ namespace Database_SEP3.Persistence.Repositories.Account
             await using (_context = new Sep3DBContext())
             {
                 AccountModel accountModel = await _context.Accounts
-                    .Include(acc => acc.AccountFollowedAccounts)
-                    .ThenInclude(a => a.FollowedAccountModel)
                     .FirstAsync(a => a.UserId == userId);
 
                 AccountModel follow = await _context.Accounts
                     .FirstAsync(a => a.UserId == followId);
                 AccountFollowedAccount fol = new AccountFollowedAccount()
                 {
-                    AccountId = userId,
+                    AccountModelUserId = userId,
                     AccountModel = accountModel,
-                    FollowedAccountId = followId,
+                    FollowedAccountModelUserId = followId,
                     FollowedAccountModel = follow
                 };
-                accountModel.AccountFollowedAccounts.Add(fol);
-                _context.Update(accountModel);
+                await _context.AccountFollowedAccounts.AddAsync(fol);
                 await _context.SaveChangesAsync();
             }
         }
@@ -192,15 +199,21 @@ namespace Database_SEP3.Persistence.Repositories.Account
             await using (_context = new Sep3DBContext())
             {
                 AccountModel accountModel = await _context.Accounts
-                    .Include(acc => acc.AccountFollowedAccounts)
                     .FirstAsync(a => a.UserId == userId);
 
-                accountModel.AccountFollowedAccounts
-                    .Remove(accountModel.AccountFollowedAccounts
-                        .First(a => a.FollowedAccountId == followId));
-                
-                _context.Update(accountModel);
-                await _context.SaveChangesAsync();
+                AccountModel follow = await _context.Accounts
+                    .FirstAsync(a => a.UserId == followId);
+
+                foreach (var variable in _context.AccountFollowedAccounts)
+                {
+                    if (variable.AccountModelUserId == userId &&
+                        variable.FollowedAccountModelUserId == followId)
+                    {
+                        _context.AccountFollowedAccounts.Remove(variable);
+                        await _context.SaveChangesAsync();
+                        return;
+                    }
+                }
             }
         }
     }

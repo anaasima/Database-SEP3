@@ -123,6 +123,15 @@ public class ComponentRepo : IComponentRepo
         }
     }
 
+    public async Task<ComponentModel> GetComponentByName(string name)
+    {
+        await using (_context = new Sep3DBContext())
+        {
+            return await _context.Components
+                .FirstAsync(c => c.Name == name);
+        }
+    }
+
     public async Task AddComponentToBuild(int buildId, int componentId)
     {
         await using (_context = new Sep3DBContext())

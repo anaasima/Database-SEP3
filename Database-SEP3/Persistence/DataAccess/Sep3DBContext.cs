@@ -22,10 +22,11 @@ namespace Database_SEP3.Persistence.DataAccess
         public DbSet<RatingComponentModel> RatingComponent { get; set; }
         public DbSet<RatingPostModel> RatingPost { get; set; }
         public DbSet<ReportModel> Reports { get; set; }
+        public DbSet<AccountFollowedAccount> AccountFollowedAccounts { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source = C:\University\DNP\Database-SEP3\Database-SEP3\luckyDatabaseTier3");
+            optionsBuilder.UseSqlite(@"Data Source = C:\Users\ajurj\RiderProjects\Database-SEP3\Database-SEP3\SEP3DatabaseV2");
         }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -54,8 +55,7 @@ namespace Database_SEP3.Persistence.DataAccess
                 .HasOne<AccountModel>(p => p.AccountModel)
                 .WithMany(a => a.Posts)
                 .HasForeignKey(a => a.AccountModelUserId);
-
-            base.OnModelCreating(modelBuilder);
+            
             modelBuilder.Entity<AccountSavedPost>()
                 .HasKey(sc => 
                     new
@@ -75,25 +75,22 @@ namespace Database_SEP3.Persistence.DataAccess
                 .WithMany(p => p.SavedPosts)
                 .HasForeignKey(sa => sa.SavedPostId);
             
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<AccountFollowedAccount>()
                 .HasKey(sc => 
                     new
                     {
-                        sc.AccountId, 
-                        sc.FollowedAccountId
+                        sc.AccountModelUserId, 
+                        sc.FollowedAccountModelUserId
                     }
                 );
 
             modelBuilder.Entity<AccountFollowedAccount>()
-                .HasOne(bc => bc.AccountModel)
-                .WithMany(build => build.AccountFollowedAccounts)
-                .HasForeignKey(bc => bc.AccountId);
+                .HasOne(afa => afa.AccountModel)
+                .WithMany();
             
             modelBuilder.Entity<AccountFollowedAccount>()
-                .HasOne(bc => bc.FollowedAccountModel)
-                .WithMany(component => component.AccountFollowedAccounts)
-                .HasForeignKey(bc => bc.FollowedAccountId);
+                .HasOne(afa => afa.FollowedAccountModel)
+                .WithMany();
         }
     }
 }

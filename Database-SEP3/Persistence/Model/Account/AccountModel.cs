@@ -15,15 +15,8 @@ namespace Database_SEP3.Persistence.Model.Account
     {
         [Key]
         [JsonPropertyName("id")]
-        public int UserId { get; set; }  
-        
-        [JsonPropertyName("followedAccounts")]
-        public ICollection<AccountFollowedAccount> AccountFollowedAccounts { get; set; }
-        
-        
-        
-        
-        
+        public int UserId { get; set; }
+
         [Required]
         [JsonPropertyName("username")]
         public String Username { get; set; }
@@ -54,6 +47,10 @@ namespace Database_SEP3.Persistence.Model.Account
         public ICollection<RatingComponentModel> ComponentRatings { get; set; }
         [JsonIgnore]
         public ICollection<RatingPostModel> PostRatings { get; set; }
+        
+        [NotMapped]
+        [JsonPropertyName("followedAccounts")]
+        public ICollection<AccountModel> FollowedAccounts { get; set; }
 
 
 

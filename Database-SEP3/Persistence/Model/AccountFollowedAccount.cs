@@ -4,9 +4,9 @@ namespace Database_SEP3.Persistence.Model
 {
     public class AccountFollowedAccount
     {
-        public int AccountId { get; set; }
+        public int AccountModelUserId { get; set; }
         public AccountModel AccountModel { get; set; }
-        public int FollowedAccountId { get; set; }
+        public int FollowedAccountModelUserId { get; set; }
         public AccountModel FollowedAccountModel { get; set; }
     }
 }

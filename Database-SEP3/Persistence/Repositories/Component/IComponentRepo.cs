@@ -15,5 +15,6 @@ namespace Database_SEP3.Persistence.Repositories.Component
         Task RemoveComponentFromBuild(int buildId, int componentId);
         Task<ComponentModel> GetComponentById(int componentId);
         Task<IList<ComponentModel>> GetFilteredList(string type);
+        Task<ComponentModel> GetComponentByName(string name);
     }
 }
