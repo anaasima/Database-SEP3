@@ -16,17 +16,22 @@ namespace Database_SEP3.Persistence.Repositories.Rating
         {
             await using (_context = new Sep3DBContext())
             {
-                try
+                bool exists = await _context.RatingBuild.AnyAsync(r =>
+                    r.AccountModelUserId == ratingBuildModel.AccountModelUserId
+                    && r.BuildModelId == ratingBuildModel.BuildModelId);
+                if (exists)
                 {
-                    // RatingBuildModel databaseRating = await _context.RatingBuild
-                    //     .FirstAsync(r => r.Id == ratingBuildModel.Id);
-                    _context.RatingBuild.Update(ratingBuildModel);
+                    List<RatingBuildModel> list = await _context.RatingBuild
+                        .Where(r => r.BuildModelId == ratingBuildModel.BuildModelId &&
+                                    r.AccountModelUserId == ratingBuildModel.AccountModelUserId).ToListAsync();
+                    RatingBuildModel rating = list[0];
+                    rating.Score = ratingBuildModel.Score;
+                    _context.RatingBuild.Update(rating);
                     await _context.SaveChangesAsync();
-
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine("rating nu exista  " + ratingBuildModel.Id);
+                    Console.WriteLine("rating nu exista  ");
                     await _context.RatingBuild.AddAsync(ratingBuildModel);
                     await _context.SaveChangesAsync();
                 }
@@ -37,17 +42,22 @@ namespace Database_SEP3.Persistence.Repositories.Rating
         {
             await using (_context = new Sep3DBContext())
             {
-                try
+                bool exists = await _context.RatingPost.AnyAsync(r =>
+                    r.AccountModelUserId == ratingPostModel.AccountModelUserId
+                    && r.PostModelId == ratingPostModel.PostModelId);
+                if (exists)
                 {
-                    // RatingPostModel databaseRating = await _context.RatingPost
-                    //     .FirstAsync(r => r.Id == ratingPostModel.Id);
-                    _context.RatingPost.Update(ratingPostModel);
+                    List<RatingPostModel> list = await _context.RatingPost
+                        .Where(r => r.PostModelId == ratingPostModel.PostModelId &&
+                                    r.AccountModelUserId == ratingPostModel.AccountModelUserId).ToListAsync();
+                    RatingPostModel rating = list[0];
+                    rating.Score = ratingPostModel.Score;
+                    _context.RatingPost.Update(rating);
                     await _context.SaveChangesAsync();
-
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine("rating nu exista  " + ratingPostModel.Id);
+                    Console.WriteLine("rating nu exista  ");
                     await _context.RatingPost.AddAsync(ratingPostModel);
                     await _context.SaveChangesAsync();
                 }
