@@ -14,6 +14,8 @@ namespace Database_SEP3.Persistence.Model.Comment
         public int PostModelId { get; set; }
         [JsonPropertyName("content")]
         public string Content { get; set; }
+        [JsonPropertyName("username")]
+        public string Username { get; set; }
 
         public override string ToString()
         {

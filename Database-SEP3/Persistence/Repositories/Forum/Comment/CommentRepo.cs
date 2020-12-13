@@ -37,10 +37,11 @@ namespace Database_SEP3.Persistence.Repositories.Forum.Comment
         {
             await using (_context = new Sep3DBContext())
             {
-                await _context.Comments.AddAsync(commentModel);
                 AccountModel accountModel = await _context.Accounts
                     .Include(acc => acc.Comments)
                     .FirstAsync(a => a.UserId == commentModel.AccountModelUserId);
+                commentModel.Username = accountModel.Username;
+                await _context.Comments.AddAsync(commentModel);
                 accountModel.Comments.Add(commentModel);
                 _context.Accounts.Update(accountModel);
                 PostModel postModel = await _context.Posts

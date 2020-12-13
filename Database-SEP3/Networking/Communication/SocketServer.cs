@@ -67,7 +67,7 @@ namespace Database_SEP3.Networking
             {
                 try
                 {
-                    byte[] data = new byte[64 * 1024];
+                    byte[] data = new byte[1024 * 1024];
                     int bytesToRead = stream.Read(data, 0, data.Length);
                     string req = Encoding.ASCII.GetString(data, 0, bytesToRead);
                     NetworkPackage req1 = JsonSerializer.Deserialize<NetworkPackage>(req);

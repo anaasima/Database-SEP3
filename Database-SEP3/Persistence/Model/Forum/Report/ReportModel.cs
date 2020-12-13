@@ -12,7 +12,6 @@ namespace Database_SEP3.Persistence.Model.Forum.Report
         public int Id { get; set; }
         [JsonPropertyName("postId")]
         public int PostModelId { get; set; }
-        [NotMapped]
         [JsonPropertyName("username")]
         public string Username { get; set; }
         [JsonPropertyName("userId")]
